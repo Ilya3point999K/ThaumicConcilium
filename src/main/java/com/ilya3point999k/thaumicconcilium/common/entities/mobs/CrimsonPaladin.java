@@ -153,5 +153,8 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
     public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
         super.readEntityFromNBT(p_70037_1_);
     }
+    public void addEquipment(){
+        this.addRandomArmor();
+    }
 
 }

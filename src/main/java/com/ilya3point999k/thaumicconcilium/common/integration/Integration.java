@@ -41,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 import org.apache.logging.log4j.Level;
 import tb.api.ITobacco;
+import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.StaffRod;
@@ -275,7 +276,7 @@ public class Integration {
             ChestGenHooks.addItem("strongholdCorridor", new WeightedRandomChestContent(is, 1, 1, 4));
             ChestGenHooks.addItem("strongholdCrossing", new WeightedRandomChestContent(is, 1, 1, 4));
             ChestGenHooks.addItem("strongholdLibrary", new WeightedRandomChestContent(is, 1, 1, 10));
-
+            ThaumcraftApi.addLootBagItem(is, 30, 2);
             Item i = GameRegistry.findItem("TaintedMagic", "ItemCrystalDagger");
             if (i == null) {
                 i = GameRegistry.findItem("TaintedMagic", "ItemHollowDagger");

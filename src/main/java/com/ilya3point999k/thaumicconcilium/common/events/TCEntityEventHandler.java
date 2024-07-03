@@ -6,6 +6,7 @@ import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonPaladin;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.Dissolved;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.MadThaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.golems.ValetGolemCore;
@@ -67,6 +68,7 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.entities.golems.EntityGolemBase;
 import thaumcraft.common.entities.monster.EntityBrainyZombie;
 import thaumcraft.common.entities.monster.EntityCultist;
+import thaumcraft.common.entities.monster.EntityCultistKnight;
 import thaumcraft.common.entities.monster.EntityGiantBrainyZombie;
 import thaumcraft.common.items.ItemWispEssence;
 import thaumcraft.common.items.wands.ItemWandCasting;
@@ -335,6 +337,17 @@ public class TCEntityEventHandler {
                     event.entity.setDead();
                     event.world.spawnEntityInWorld(madThaumaturge);
                     madThaumaturge.addEquipment();
+                }
+            }
+        }
+        if (event.entity instanceof EntityCultistKnight){
+            if (event.world.rand.nextInt(100) > 80) {
+                if (!event.world.isRemote) {
+                    CrimsonPaladin paladin = new CrimsonPaladin(event.world);
+                    paladin.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);
+                    event.entity.setDead();
+                    event.world.spawnEntityInWorld(paladin);
+                    paladin.addEquipment();
                 }
             }
         }
