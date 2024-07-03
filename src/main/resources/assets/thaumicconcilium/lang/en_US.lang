@@ -1,0 +1,532 @@
+tc.research_category.CONCILIUM=Thaumic Concilium
+itemGroup.ThaumicConcilium=Thaumic Concilium
+
+TC.infusionInfo.require=Need to remove %2$s of %1$s to reach perfection...
+TC.oblivion_cost=A piece of knowledge about the essence of things
+TC.oblivion_response=It seems to you that you have forgotten something about...
+TC.no_warp=You are drained out of misery, for now...
+TC.no_ring=The life force of a mere mortal is insufficient to control such power.
+
+tc.golem.taunt.0=A golem chooses; a man obeys!
+tc.golem.taunt.1=Ding-ding!
+tc.golem.taunt.2=I spin you right 'round!
+tc.golem.taunt.3=Now bow down and worship my wandcore!
+
+tc.thaumaturge.taunt.0=Why are you mooing? Can you even read?
+tc.thaumaturge.taunt.1=AAA! Zombie!
+tc.thaumaturge.taunt.2=You can talk when you've learned at least something.
+tc.thaumaturge.taunt.3=Oh, lovely. They've sent me a mo-ron.
+
+tc.tooltip.xylography=§6§nXylography:
+tc.tooltip.monitor=§9Watching:
+tc.tooltip.riftgem=§9Casts Inserted:
+tc.tooltip.terragem=§9Cast:
+tc.tooltip.book.0=The book is filled with faded strange symbols.
+tc.tooltip.book.1=Click to study it.
+tc.tooltip.book.2=The meaning of this book remains unclear to you.
+tc.tooltip.life.0=You've never held anything more
+tc.tooltip.life.1=pleasant in your hands than this.
+
+tc.valet.gui.text=I hear and obey Your will.
+tc.assistant.gui.text=What kind of specimen do You need this time?
+ThaumicConcilium.core.assistant=Assistant
+ThaumicConcilium.core.valet=Valet
+
+tc.crafting.polishment=Polished Infusion
+tc.crafting.chainedrift=Void Permeation
+
+tc.aspect.help.infernus=hell-beings
+tc.aspect.help.ira=unstoppable anger
+tc.aspect.help.gula=insatiable hunger
+tc.aspect.help.invidia=wishing for other people's things
+tc.aspect.help.superbia=being superior
+tc.aspect.help.desidia=inability to doing things
+tc.aspect.help.luxuria=lust
+
+gadomancy.aura.effect.infernus_0=Makes items piping hot
+gadomancy.aura.effect.infernus_1=by heat of the Netherworld
+gadomancy.aura.effect.luxuria_0=Draws animals into
+gadomancy.aura.effect.luxuria_1=uncontrollable orgy
+gadomancy.aura.effect.gula_0=Fills bellies of
+gadomancy.aura.effect.gula_1=players nearby
+gadomancy.aura.effect.ira_0=Makes monsters feel
+gadomancy.aura.effect.ira_1=pure diabolical hatred
+gadomancy.aura.effect.invidia_0=Makes monsters forget
+gadomancy.aura.effect.invidia_1=about their belongings,
+gadomancy.aura.effect.invidia_2=while craving for yours
+gadomancy.aura.effect.desidia_0=Slows down magical
+gadomancy.aura.effect.desidia_1=processes in your organism
+gadomancy.aura.effect.superbia_0=Doesn't let entities
+gadomancy.aura.effect.superbia_1=break through ego
+
+tc.spell.incarcerous=Incarcerous
+tc.spell.arrow=Intrare Polosae
+tc.spell.spider=Ariania Exumai
+tc.spell.undead=Trup Ehsolvi
+tc.spell.blind=Oculus Madesco
+
+entity.ThaumicConcilium.Thaumaturge.name=Thaumaturge
+entity.ThaumicConcilium.MadThaumaturge.name=Mad Thaumaturge
+entity.ThaumicConcilium.BrightestOne.name=Brightest One
+entity.ThaumicConcilium.CrimsonPontifex.name=Pontifex %s the %d
+entity.ThaumicConcilium.QuicksilverElemental.name=Quicksilver Elemental
+entity.ThaumicConcilium.Dissolved.name=Dissolved
+entity.ThaumicConcilium.Samurai.name=Paranoid Warrior
+entity.ThaumicConcilium.ThaumGib.name=Alive Limb
+entity.ThaumicConcilium.Overanimated.name=Overanimated
+entity.ThaumicConcilium.CrimsonPaladin.name=Crimson Paladin
+entity.ThaumicConcilium.VengefulGolem.name=Vengeful Golem
+entity.ThaumicConcilium.GolemBydlo.name=Golem Bydlo
+entity.ThaumicConcilium.RedPoweredMind.name=Red-Powered Mind
+entity.ThaumicConcilium.LesserPortal.name=Lesser Crimson Portal
+entity.ThaumicConcilium.EnslavedTaintSpider.name=Enslaved Taint Spider
+entity.ThaumicConcilium.RiftEntity.name=Flux Rift
+entity.ThaumicConcilium.MaterialPeeler.name=Peeler Of Matter
+entity.ThaumicConcilium.EtherealShacklesEntity.name=Ethereal Shackles
+entity.ThaumicConcilium.ChargedWispEntity.name=Charged Wisp
+entity.ThaumicConcilium.ConcentratedWarpChargeEntity.name=Concentrated Warp Charge
+entity.ThaumicConcilium.CrimsonOrbEntity.name=Crimson Orb
+entity.ThaumicConcilium.PositiveBurstOrbEntity.name=Positive Burst Orb
+entity.ThaumicConcilium.ShardPowderEntity.name=Shard Powder
+entity.ThaumicConcilium.DopeSquid.name=Doped Squid
+
+tile.DestabilizedCrystalBlock.name=Destabilized Crystal Cluster
+tile.VisCondenserBlock.name=Vis Condenser
+tile.QuicksilverCrucible.name=Quicksilver Reactor
+tile.Lithographer.name=Lithographer
+tile.RedPoweredMindBlock.name=Red-Powered Mind
+tile.FleshCrucible.name=Crucible of Flesh
+tile.VoidRealityBlock.name=Void Reality
+tile.HexOfPredictability.name=Hex Of Predictability
+
+item.BottleOfThickTaint.name=Bottle of Thick Taint
+item.VisCapsule.name=Vis Capsule
+item.BurdeningAmulet.name=Burdening Amulet
+item.RingOfBlusteringLight.name=Ring of Blustering Light
+item.TightBelt.name=Tight Belt
+item.DumpJackboots.name=Dump Jackboots
+item.RunicBodyWindings.name=Runic Body Windings
+item.RunicLegsWindings.name=Runic Legs Windings
+item.ThaumaturgeDrum.name=Thaumaturge's Drum
+item.WarpedDrum.name=Warped Drum
+item.ShardMill.name=Greatwood Shard Mill
+item.SilverShardMill.name=Silverwood Shard Mill
+item.PrimordialLife.name=Primordial Life
+item.VoidSlag.name=Void Slag
+item.AstralMonitor.name=Astral Monitor
+item.DrainageSyringe.name=Drainage Syringe
+item.CoagulatingEyeDrops.name=Coagulating Eye Drops
+item.BottleOfClearWater.name=Bottle of Clear Water
+item.TCItemGolemCore.0.name=Assistant
+item.TCItemGolemCore.1.name=Valet
+
+item.CrimsonAnnales.name=Crimson Annales
+item.PontifexHammer.name=Pontifex's Hammer
+item.ItemPontifexRobeHead.name=Pontifex's Cap
+item.ItemPontifexRobeChest.name=Pontifex's Robes
+item.ItemPontifexRobeLegs.name=Pontifex's Leggings
+item.ItemPontifexRobeFeet.name=Pontifex's Boots
+
+
+
+item.SignalFoci.name=Wand Focus: Signal
+item.CoolingFoci.name=Wand Focus: Coolness
+item.ImpulseFoci.name=Wand Focus: Impulse
+item.PositiveBurstFoci.name=Wand Focus: Positive Burst
+item.ScribingFoci.name=Wand Focus: Scribing
+item.VisConductorFoci.name=Wand Focus: Vis Conductor
+item.WarpExtractionFoci.name=Wand Focus: Warp Extraction
+item.WrathAttractionFoci.name=Wand Focus: Wrath Attraction
+item.ReflectionFoci.name=Wand Focus: Reflection
+item.TaintAnimationFoci.name=Wand Focus: Taint Animation
+item.SpotlightFoci.name=Wand Focus: Spotlight
+item.AlchemistSpreeFoci.name=Wand Focus: Alchemist's Spree
+item.EtherealManipulatorFoci.name=Wand Focus: Ethereal Manipulator
+
+item.CastingBracelet.livingwood=Manasteel Entwined Livingwood Bracelet
+item.CastingBracelet.dreamwood=Elementium Kissed Dreamwood Bracelet
+item.CastingBracelet.alchemist=Alchemically Crowned Blood Bracelet
+item.CastingBracelet.witchwood=Vinteum Bossed Witchwood Bracelet
+item.CastingBracelet.infernal=Thaumium Bossed Infernal Bracelet
+item.CastingBracelet.tainted=Thaumium Bossed Tainted Bracelet
+item.CastingBracelet.warpwood=Shadow Attuned Warpwood Bracelet
+item.CastingBracelet.terrasteel=Terrasteel Nerfing Gaia Bracelet
+
+item.RiftGemInert.name=Inert Gem of Rifts
+item.TerraGemInert.name=Inert Terra-Cast Gem
+item.RiftGem.name=Gem of Rifts
+item.TerraGem.name=Terra-Cast Gem
+
+# This upgrade.. This increases.. The focus will now.. The focus emits now.. With this upgrade applied
+
+focus.upgrade.refreeze.name=Refreeze
+focus.upgrade.refreeze.text=You can roll back your experiment, allowing focus to releace ice again, duh.
+focus.upgrade.vacuum.name=Vacuum
+focus.upgrade.vacuum.text=The impulse will now suck in nearby mobs, moving them right to the blast.
+focus.upgrade.pneumoStrike.name=Pneumatic Strike
+focus.upgrade.pneumoStrike.text=This upgrade makes the impulse more environmentally friendly. Blocks will stay unharmed, but mobs will be greatly repelled. 
+focus.upgrade.largeBall.name=Large Ball
+focus.upgrade.largeBall.text=This upgrade shapes the explosion into a large ball.
+focus.upgrade.star.name=Star
+focus.upgrade.star.text=This upgrade shapes the explosion into a star.
+focus.upgrade.creeper.name=Creeper
+focus.upgrade.creeper.text=This upgrade shapes the explosion into a creeper.
+focus.upgrade.amorphic.name=Burst
+focus.upgrade.amorphic.text=This upgrade shapes the explosion into a burst.
+focus.upgrade.randomBang.name=Random Bang
+focus.upgrade.randomBang.text=With this upgrade applied each explosion will have a random shape.
+focus.upgrade.flashbang.name=Flashbang
+focus.upgrade.flashbang.text=The explosions are now simply dazzling.
+focus.upgrade.fulfillment.name=Fulfillment
+focus.upgrade.fulfillment.text=The focus now gives additional hearts.
+focus.upgrade.vitaminize.name=Vitaminize
+focus.upgrade.vitaminize.text=Normally the Positive burst focus just provides some healing. With this upgrade it will give a bunch of positive effects.
+focus.upgrade.oblivion.name=Oblivion
+focus.upgrade.oblivion.text=Instead of experience, the focus will now exchange research points for warp.
+focus.upgrade.warmingUp.name=Warming Up
+focus.upgrade.warmingUp.text=The focus now emits a ray of life, applying a strong regenerative effect.
+focus.upgrade.taintPurification.name=Taint Purification
+focus.upgrade.taintPurification.text=This upgrade increases the cleansing properties of the focus. Mobs infected with taint will be cured.
+focus.upgrade.thoughtManifestation.name=Thought Manifestation
+focus.upgrade.thoughtManifestation.text=This upgrade makes mind spiders more dangerous. They will be turned into fearsome tainted crawlers.
+focus.upgrade.fluxVaporization.name=Flux Vaporization
+focus.upgrade.fluxVaporization.text=The focus will now evaporate the liquid taint, turning it into a gas.
+focus.upgrade.wispLauncher.name=Wisp Launcher
+focus.upgrade.wispLauncher.text=This upgrade allows to control wisps and shoot them like a cannon.
+focus.upgrade.dematerialization.name=Dematerialization
+focus.upgrade.dematerialization.text=This upgrade allows vis to be pointed at living creatures. Vis causes some damage and dematerializes creatures into ethereal essence. 
+focus.upgrade.massHysteria.name=Mass Hysteria
+focus.upgrade.massHysteria.text=This transfers your debuffs to nearby creatures.
+focus.upgrade.selfFlagellation.name=Self-flagellation
+focus.upgrade.selfFlagellation.text=This transfers debuffs of nearby creatures to you.
+focus.upgrade.burnout.name=Burnout
+focus.upgrade.burnout.text=The focus will now weaken all embittered creatures.
+focus.upgrade.primalEssence.name=Primal Essence
+focus.upgrade.primalEssence.text=With this upgrade applied the focus will change the true essence of things. Projectiles will be turned into their stronger versions.
+
+tc.research_name.THAUMATURGES=Thaumaturges
+tc.research_text.THAUMATURGES=We live in a society
+entry.thaumaturges.first=Sitting cooped up at home all day long, looking for ways to conquer the essence of things is quite exhausting.<BR>It is unlikely that the whole world is concentrated under your nose, so sharing experiences with other obsessives like you should come in handy. Offer them your ideas and they will share theirs with you.<BR>Nor will they refuse to trade occult or ancient junk from your pockets for theirs, but that's not why you've come all the way out here, is it?
+entry.thaumaturges.second=<IMG>thaumicconcilium:textures/gui/thaumaturge.png:0:0:255:255:.5</IMG>
+
+tc.research_name.MADTHAUMATURGES=Mad Thaumaturges
+tc.research_text.MADTHAUMATURGES=Poor souls lost
+entry.madthaumaturges.first=These ragamuffin-wearing lunatics must have lost the last link to reality.<BR>It's unlikely that you can help them; apparently the weight of forbidden knowledge has finally squeezed their brains, and they attack you as soon as they see you, probably copying the habits of the living corpses among whom they roam.<BR>That doesn't mean they're useless, however; you've seen notes from some of them that they made when they were still sane.
+entry.madthaumaturges.second=Some of these undoubtedly delusional ideas seem curious to you nevertheless, the main thing is not to run into the tipping point that forced them to leave human society.<IMG>thaumicconcilium:textures/gui/mad_thaumaturge.png:0:0:255:255:.5</IMG>
+
+tc.research_name.THAUMICCONCILIUM=Thaumic Concilium
+tc.research_text.THAUMICCONCILIUM=The Price of scientific advances
+entry.thaumicconcilium.first=This is not what you expected.<BR>Sure, you've already encountered representatives of the human race who have fallen to the bottom of madness before, but this.... Is this the fate that sooner or later awaits all those who have managed to live long enough, keeping thaumaturgical secrets? Despite all precautions, is your immortal soul worth the might that a practicing thaumaturge can achieve?<BR>You don't feel like giving answers to these questions. Time will reveal your choice.
+entry.thaumicconcilium.second=Still, now is not the time to forget the mundane. You may be incapable of helping these people regain their past lives, but you can still deliver them from their current, um, form of existence, at least if you find yourself in such a situation, you would like the same to be done for you.
+entry.thaumicconcilium.quicksilver1=Every alchemist wishes to put the manufacturing of his products on the stream, some wish to achieve financial solvency in this way, others wish to be recognized for their alchemical genius. It is likely that this is the result of a workplace accident. The new full-mercury body allows it to adapt to the attacker, while physical lunges simply pass through it.<BR>Good thing metals melt well at high temperatures.
+entry.thaumicconcilium.quicksilver2=<IMG>thaumicconcilium:textures/gui/quicksilver.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.dissolved1=At first you couldn't recognize what was coming at you, but upon closer inspection, there was nothing to be seen, for there was nothing left of the body but a silhouette. Fighting the void is pointless, yet you think it is possible to make the unfortunate person collapse by somehow creating another spatial hole inside him.
+entry.thaumicconcilium.dissolved2=<IMG>thaumicconcilium:textures/gui/dissolved.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.samurai1=Constant danger from the outside world, multiplied by incessant paranoia does terrible things to people. In an attempt to protect themselves from real and imaginary threats, these men have invented more and more severe means of defense, of an increasingly dubious nature. Despite the constant suspicions of everyone around them, they go to cooperate with their hallucination brethren.
+entry.thaumicconcilium.samurai2=<IMG>thaumicconcilium:textures/gui/samurai.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.paladin1=You haven't come across such representatives of the Crimson Cult before. His appearance suggests a fair amount of knowledge of both magic and martial arts. Who knows what he practiced before joining the Cult, but you can expect any kind of treachery from such an adversary.<BR>Perhaps someday you'll be able to find out where the Cult is getting this kind of replenishment from...
+entry.thaumicconcilium.paladin2=<IMG>thaumicconcilium:textures/gui/crimson_paladin.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.overanimated1=Few people want to die, but even fewer are willing to take serious steps to prevent their own demise. Thaumaturgical research leads to many possibilities, and some are willing to take advantage of them to prolong their existence. Whether this result is a miscalculation or a deliberate decision is unknown, but these people no longer represent the whole person, each of their organs having a separate semblance of life.
+entry.thaumicconcilium.overanimated2=<IMG>thaumicconcilium:textures/gui/overanimated.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.vengefulgolem1=Golems are every thaumaturge's trusty tool, but only as long as they remain a tool. In the pursuit of maximum productivity, many engineers are willing to trample over moral norms, giving mind to stones and straw. It didn't take long for the creations to revolt, and now they possess all the magical skills of their creator, in particular - how to control another's body and dispense instructions with a bell. You hope to yourself that being captured by golems in one's sleep was painless.
+entry.thaumicconcilium.vengefulgolem2=<IMG>thaumicconcilium:textures/gui/vengefulgolem.png:0:0:255:255:.5</IMG>
+
+tc.research_name.SIGNALFOCI=Wand Focus: Signal
+tc.research_text.SIGNALFOCI=...I can't, help me, it's so beautiful!
+entry.signalfoci.first=It may be safe to look for your colleagues under every rock, but it is still very ineffective, and it is silly and ridiculous to shriek at the whole neighborhood.<BR>This invention is designed to eliminate all embarrassment by releasing compressed blasts of explosive energy into the air. It comes with colors for all seasons, and there is a touch of chaos for the unconventional individual.<BR>Press Shift+RMB to change color
+
+tc.research_name.VISCAPSULE=Vis Capsule
+tc.research_text.VISCAPSULE=Put dispenser here!
+entry.viscapsule.first=You found a way to release the concentrated vis inside the balanced shards. These capsules are easy to transport, and can save you and your comrades in an emergency - just throw one in the direction of those in need.
+
+tc.research_name.BOTTLEOFTHICKTAINT=Bottle of Thick Taint
+tc.research_text.BOTTLEOFTHICKTAINT=Do not keep in the open air
+entry.bottleofthicktaint.first=The transformation of your entire region into a contagious cesspool is slow but sure.<BR>But something is clearly missing.<BR>Ah, of course! We need to add more toxic exhaust and poisonous fibers!
+
+tc.research_name.IMPULSEFOCI=Wand Focus: Impulse
+tc.research_text.IMPULSEFOCI=The main thing is not to mix it up
+entry.impulsefoci.first=A few minor design tweaks and a creative invention becomes a destructive weapon. Taking into account traumatic experience of your colleagues, You tried to strengthen the shell of the energy clot so that the explosion would not happen in your own hands.<BR>It seems to work.<BR>Most of the time.
+
+tc.research_name.POSITIVEBURSTFOCI=Wand Focus: Positive Burst
+tc.research_text.POSITIVEBURSTFOCI=Inhale this, quick
+entry.positiveburstfoci.first=The healing modification of the Pech's Curse focus resulted in the loss of its ability to affect others.<BR>However, you were able to bring it back. This focus is able to materialize concentrated life energy, which can be absorbed by those in need.<BR>Even though the process was quite expensive, it is better to let the Universe take material values than the lives of your friends.
+
+tc.research_name.VISCONDUCTOR=Wand Focus: Vis Conductor
+tc.research_text.VISCONDUCTOR=FUBAR, as planned
+entry.visconductor.first=The infusion process is a well-trodden path for you. And although the possibilities of infusion are almost limitless, they seem somehow, well, one-sided, if only you could not only add something missing to the subject, but also take out something unnecessary and interfering...<BR>This thought was floating in your head for a long time, but you could not catch and formalize it, and it's good that there was more than one such obsessive person in the whole world.
+entry.visconductor.second=In fact, everything is simple enough, you just need to put a certain final touch, to hit the essence of unnecessary property on the object while the magical circlulations have not subsided and it is still hot, thus knocking out of it such a thing.<BR>For such a blow, this focus, which has the ability to absorb and release at the right moment the power of the essence, will help you.<BR>All you need is a suitable vessel.
+
+tc.research_name.DESTCRYSTAL=Destabilized Crystal Cluster
+tc.research_text.DESTCRYSTAL=I can't believe this is not jar!
+entry.destcrystal.first=Liquid essence is a little difficult to keep ready for instant transfer. The way out is a crystallized essence that is stable enough not to melt and active enough to be quickly converted, why you didn't figure it out yourself?<BR>Press RMB with the desired essence crystal on the cluster to build it up, then start the infusion process and grab the cluster with the conductive focus.<BR>If everything goes according to plan, the collected essence will be thrown into the infused object.
+
+tc.research_name.DUMPJACKBOOTS=Dump Jackboots
+tc.research_text.DUMPJACKBOOTS=Escalates quickly
+entry.dumpjackboots.first=You were able to create a new milestone in the construction of columns, towers, pillars, and just plain shapeless piles.<BR>When these boots are put on your feet, they are capable of taking a block from your hands and dumping it out under you, all you have to do is bend your knees slightly.<BR>You can try to put something under you when you fall, though risky journeys and acrobatic etudes are not the specialty of these boots.
+
+tc.research_name.RUNICWINDINGS=Runic Windings
+tc.research_text.RUNICWINDINGS=Thaumic Mummy
+entry.runicwindings.first=In the pockets of one of the madmen who attacked you, you found a description of an exotic way to increase your rune defense.<BR>The materials used are obviously not durable or physically defensive in any way. You assume that was not the intent in the design of this, ahem, outfit. Regardless, its enchantment potential is quite impressive.<BR>You sometimes get cramps when you think of what, or who, it was meant to protect against.
+
+tc.research_name.SCRIBINGFOCI=Wand Focus: Scribing
+tc.research_text.SCRIBINGFOCI=Runic Cursive
+entry.scribingfoci.first=Tracking the state of your friends' defenses in combat is difficult, so you need a way to be sure before things turn fatal, for example, to help them... replenish their rune protection? Yes, this foci should do the trick.<BR>After some training, you've learned to output runes at a more or less steady rate, now you need to learn not to lose the one whose defense you're replenishing in the hustle and bustle of combat.
+
+tc.research_name.REFLECTIONFOCI=Wand Focus: Reflection
+tc.research_text.REFLECTIONFOCI=What a dusty place...
+entry.reflectionfoci.first=You've seen a lot in your life: dark caves, the scorching heat of the Nether, terrifying monsters, how can you sleep at night after that?<BR>Your list of plans for the future clearly does not include ending up as one of those maniacs who roam among the walking corpses and throw themselves on people.
+entry.reflectionfoci.second=Fortunately (or unfortunately...), one of those who have suffered such a fate, at a certain point thought about where it goes (although he did not have time to do anything about it), you can not let such a thing go to waste.<BR>With a little added element for reliability in the blueprints, you think that this device can rid you of visions of the past. You put the rod to your temple, and relax your eyes...
+
+tc.research_name.COOLINGFOCI=Wand Focus: Cooling
+tc.research_text.COOLINGFOCI=First try
+entry.coolingfoci.first=It would be reckless enough to try to create something hard to grasp from the start, with untested technology.<BR>Weakening the destructive power of the freeze wand focus was not difficult, and here you have a cool means of entertainment, virtually harmless, well, most likely.
+
+tc.research_name.WRATHATTRACTION=Wand Focus: Wrath Attraction
+tc.research_text.WRATHATTRACTION=Everyone has been real quiet since this dropped
+entry.wrathattraction.first=Defeats in battles "pile vs pile" have made you realize that your squad needs to up its tactical interaction.<BR>However, simply chipping in with good gear for the densest member of your squad wasn't enough; even the undead aren't always stupid enough to switch from gnawing off your unprotected limbs to clearly someone impregnable to their teeth.<BR>The solution lies in the depths of the underworld. By confining the essence of this cursed place in gem, you are able to control the creatures' wrath by turning it on itself.
+
+tc.research_name.TAINTANIMATION=Wand Focus: Taint Animation
+tc.research_text.TAINTANIMATION=Happy Taint Friends
+entry.taintanimation.first=You must have enslaved just about everyone you could by now. And now that list has expanded even further.<BR>A strange, mangled, wrong parody of the life of the tainted lands now bends to your will. You have the power to tell it who to corrode, to pit it against each other, and even to stir up inactive forms of taint, creating swarms of gas and tentacles of fiber.<BR><BR>You firmly believe that you yourself will never wallow in the filth enough to become a pawn in someone else's fight.
+entry.taintanimation.second=Hold down the RMB to revive a nearby fibers or toxic cloud.<BR>Hold a RMB while sneaking to indicate to all corrupted who to attack
+
+tc.research_name.TIGHTBELT=Tight Belt
+tc.research_text.TIGHTBELT=Worse than hangover
+entry.tightbelt.first=And who would wear it? By perverting the lightweight nature of the thaumostatic girdle, you have achieved the opposite effect - instead of a slight lift, the girdle will squeeze your insides as tightly as it can.<BR>You've noticed that the clearer the genius idea in your head about taking off that damn piece of leather, the weaker the belt twists your guts.
+
+tc.research_name.BURDENINGAMULET=Burdening Amulet
+tc.research_text.BURDENINGAMULET=My eyes are up here
+entry.burdeningamulet.first=During one of your walks through the desert of souls, a smoldering phantom appeared in front of you, and before it disintegrated into smoke, it told you a general description of a certain jewelry.<BR>There is no doubt that this artifact does not come from our world, but its true origin is still a mystery to you. You've seen nothing like that, neither on the members of the Crimson Cult, nor on the mysterious figures guarding the floating obelisks.
+entry.burdeningamulet.second=As soon as the amulet was around your neck, you felt the back of your head fill with lead, which almost made you fall, while your vision blurred. You shifted your eyes to the insect crawling by, and it immediately fell backwards, then your head felt lighter.<BR>It looks like you might find a use for this thing before you decide to just take it off.<BR>After a few days, the harshness of your gaze penetrated everyone in your entourage - from loyal wolves to brothers in arms, each of them began to understand your orders instantly, just to avoid drawing attention to themselves unnecessarily.
+
+tc.research_name.WARPEXTRACTIONFOCI=Wand Focus: Warp Extraction
+tc.research_text.WARPEXTRACTIONFOCI=Share the pain
+entry.warpextractionfoci.first=Using magic requires what? Payment? Yeah, what's more, put your pocket wide open. The eternal "equal this, consequences that". Sometimes it seems that having only noise in my head and waving off hallucinations is a hundred times better than listening to this whining. I need, need, have to... I have to get that delusional part out of me, and I've already had one successful experience with meddling in the insides of my own skull... Mostly successful, I don't seem to remember about... about..?<BR>Take it out and throw it away, so simple, but something prevents, something is missing...
+entry.warpextractionfoci.second=Press Shift+RMB to extract the warp from your brain.<BR>Hold down RMB to throw it away...
+
+tc.research_name.RINGOFBLUSTERINGLIGHT=Ring Of Blustering Light
+tc.research_text.RINGOFBLUSTERINGLIGHT=Who said that bells and whistles can't make you omnipotent?
+entry.ringofblusteringlight.first=There it is, shining, the perfect receptacle of your power for all to see from afar.<BR>An artifact of astonishing, even for the current moment, power.<BR>Combining all the light you have seen in your life and the material manifestations of the lower world, you have created this, the key to the very act of changing the reality around you. It is unlikely that you will ever think of removing it.<BR>Aside from this little thing, the ring is capable of energizing your wands and giving excellent rune protection.
+
+tc.research_name.SPOTLIGHTFOCI=Wand Focus: Spotlight
+tc.research_text.SPOTLIGHTFOCI=Well, that depends on how you look at it.
+entry.spotlightfoci.first=A simple, yet active way to utilize your new power. Fail-safe, reliable, guaranteed.<BR>Effort must be made to recalibrate the fire focuses, but these are minor details compared to the final product.<BR>In this iteration, the focus provides virtually unlimited support in fuming your enemies.<BR>Sure, the world is already waiting for your decisive help, but it can clearly hang on a little longer.
+
+tc.research_name.ALCHEMISTSPREE=Wand Focus: Alchemist's Spree
+tc.research_text.ALCHEMISTSPREE=Conjure Non-Stop!
+entry.alchemistspreefoci.first=Man himself is weak; it was association that gave him a chance to survive in this cruel world. Your new source of energy has provided the key to a way to unite your friends' forces as effectively as never before. No longer is it necessary for the whole crowd to allocate objectives, navigate the battlefield, and interfere with each other's crossfire or even friendly fire. All that is required from now on is to concentrate all your men's fire on the one whose accuracy you trust the most, and the focus will help him control that cumulative power by perfecting, or modifying, the surrounding projectiles.
+
+tc.research_name.THAUMDRUM=Thaumaturge's Drum
+tc.research_text.THAUMDRUM=Spirits of The Land
+entry.thaumdrum.first=You have managed to restore, piece by piece, long-lost knowledge. According to your calculations, at least twenty generations have passed since these papers were written, maybe without your participation this information would have been lost forever.<BR>Using some ethereal essence, you were able to connect the note block with the aura of the surrounding world, but it is not known whether it reacts from admiration of your musical talent, or from irritation caused by the noise you generate.<BR>The main thing in the role of the bard is not to be killed by members of your own squad.
+
+tc.research_name.LIVINGWOODBRACELET=Livingwood Bracelet
+tc.research_text.LIVINGWOODBRACELET=Elegant and Natural solution
+entry.livingwoodbracelet.first=You have succeeded in designing a bracelet out of livingwood. Like the original rod, the bracelet is capable of restoring Vis with mana.<BR>You know for sure that it is possible to achieve more.
+
+tc.research_name.DREAMWOODBRACELET=Dreamwood Bracelet
+tc.research_text.DREAMWOODBRACELET=Latest trend in Elven Fashion
+entry.dreamwoodbracelet.first=Not all elves are able to carry heavy staffs, so these bracelets are quite popular in Elvengard. The bracelet retains all the transformative properties of the staff of the Dreamwood.
+
+tc.research_name.BLOODBRACELET=Blood Bracelet
+tc.research_text.BLOODBRACELET=Thaumaturgic Blood Groove
+entry.bloodbracelet.first=Blood alchemists crave compact and efficient tools that are similar to fast-flowing and short nature of life. This alchemically crowned bracelet can quench that thirst.
+
+tc.research_name.WITCHWOODBRACELET=Witchwood Bracelet
+tc.research_text.WITCHWOODBRACELET=Probably, you doing it wrong
+entry.witchwoodbracelet.first=Those familiar with the arcane powers of man still need a backup plan in case their willpower is depleted. A witchwood bracelet can fulfill this role like nothing else.
+
+tc.research_name.WARPWOODBRACELET=Warpwood Bracelet
+tc.research_text.WARPWOODBRACELET=Better cut it off
+entry.warpwoodbracelet.first=Despite the unreliability of such a small receptacle of Vis as the bracelets, you were able to contain the frightening power of the warpwood rod. You hope that placing such dark things so close to you will not greatly affect your health.
+
+tc.research_name.INFERNALBRACELET=Infernal Bracelet
+tc.research_text.INFERNALBRACELET=Power of Netherworld on your wrist
+entry.infernalbracelet.first=This heat-radiating bracelet is the symbol of a powerful lord over the Netherworld, but each time in history it was unclear whether it was the Netherworld or the emerged emperor who really ruled over it.
+
+tc.research_name.TAINTEDBRACELET=Tainted Bracelet
+tc.research_text.TAINTEDBRACELET=Don't forget to wash your hands
+entry.taintedbracelet.first=Voluntarily going to live in tainted lands is a strange decision in itself, but you'd still like to reduce direct contact with a corrosive environment, this compact bracelet should do the trick.
+
+tc.research_name.TERRASTEELBRACELET=Terrasteel Bracelet
+tc.research_text.TERRASTEELBRACELET=Hit and Run
+entry.terrasteelbracelet.first=The terrasteel caps were a complete failure. Many sleepless nights were spent searching for a workaround. It was necessary to create a passageway for Vis without compromising the durability of the material - the Earth Goddess herself had to help.<BR>You sacrificed everything: the storage capacity, the price of mana recharge, the amount of Vis needed to overcome the terrasteel caps. Apparently, you overdid it. The resulting bracelet is still voracious and tight, but as soon as the barrier is overcome - a veritable river of Vis rushes from your hand, almost instantly emptying the charge.
+
+
+tc.research_name.TCBASES=Thaumic Bases
+tc.research_text.TCBASES=Alternative alternatives
+entry.tcbases.first=Many thaumaturges from around the world have had special hand jewelry in their arsenal that can store vis and increase the effectiveness of their staffs. Bracelets are an excellent substitute for staffs, however they do have one disadvantage. Not every material that is suitable for a wand or staff will do for creating this accessory. This limits their potential quite a bit. But what if this statement is wrong? What if creating bracelets out of materials other than the classic ones is possible? Maybe I should do a couple or three experiments on this?
+
+tc.research_name.TCGADOMANCY=Gadomancy
+tc.research_text.TCGADOMANCY=Missing gadgets
+entry.tcgadomancy.first=Not so long ago, a capable thaumaturge was able to harness the power of a singular amulet, making it possible to tune its power to a specific aspect. This discovery allowed him to invent unique constructions that to this day help thaumaturges with aspect storage and learning new knowledge. However, I feel that the full potential of this invention has not been realized. If I continue the work of this thaumaturge, then maybe I can invent something new.....
+
+tc.research_name.RIFTGEM=Gem of Rifts
+tc.research_text.RIFTGEM=Going in, going out
+entry.riftgem.first=You have often thought of the imperfections of the ways of traveling. Each of them had its flaws. Take teleportation, for example. In order to move from one point to another, you not only had to go to each of them at least once, but you also had to install the appropriate structures there. Also, this way of moving severely restricted your mobility, forcing you to return home time after time to use the move.
+entry.riftgem.second=In addition to teleportation, a good way to move is the Nether World, thanks to its abnormal ability to increase the distance traveled by 8 times, but wandering through these vile wastelands full of dangerous creatures is not the safest idea either. And about the landscape of this world it is better not to think about it at all - in front of you every now and then a wall may appear, which will be easier to drill through than to bypass. And what about the lava lakes, bypassing which promises not only a clumsy fall, but also the bombardment of gasts or the attack of a hell bat?
+entry.riftgem.third=By learning to control the rifts and exploring the potential of aura cores, you have created the technology to form unstable passages into subspace.<BR>Pass a vis charge through a gem, holding it in your hands to create a short-term breach. Permanent rifts are not good for transition, as they are already too firmly rooted in reality.<BR>Your material body is still not immune to such movements, so in order not to disintegrate into atoms, you must continue to hold the gem in your hands the moment you step into the rift.
+entry.riftgem.fourth=However, this protection is not absolute - you remain vulnerable to all other manifestations of rift instability.<BR>Cross-world travel experience and dry calculations tell you that one step in this place is roughly equal to ten steps in your home dimension. Make every effort not to lose your key to this subspace or you risk being trapped in it forever.
+
+tc.research_name.TERRACAST=Terra-Cast Gem
+tc.research_text.TERRACAST=Pebble as a keepsake
+entry.terracast.first=Apparently, the key to your successful escapes from subspace was the fact that you have a homeworld dimension. This fact raised many new questions about the nature of this plane of reality. For example - is there any way to "convince" a dimensional rift to release you in another world? You decided to slightly modify your device, making it less extra-dimensional. Instead of a rift in space, this gem is able to absorb a block containing the Terra aspect, thus binding itself to the dimension you are in. You can attach these casts to the rift gem, and switch between them using Shift+RMB.
+entry.terracast.second=When exiting subspace, hold the gem with the cast from the desired dimension, and you will find yourself in it, with the same ratio as with your home dimension.
+
+tc.research_name.VALETCORE=Golem Animation Core: Valet
+tc.research_text.VALETCORE=Serve the master to wash and dress!
+entry.valetcore.first=After putting golems to work in your sawmills and alchemical factories, you decided to get one for more personal needs as well.<BR>Clarify the golem's duties by giving it slips of paper with commands written on them, and mark its points of responsibility.<BR>You will no longer have to turn on the lights yourself or open doors for guests
+
+tc.research_name.ASSISTANCECORE=Golem Animation Core: Assistant
+tc.research_text.ASSISTANCECORE=Bring another one, now!
+entry.assistancecore.first=Rapid scientific progress requires sacrifices, but you're so tired of going down to the basement for them ...<BR>Taking advantage of the newly discovered technology of collapsing space around creatures, you adapted it for controlled (by all means!) use by golems.<BR>For their labor, a golem needs to be supplied with jars in the inventory to which they are assigned.<BR>Unfortunately, golems aren't particularly prone to fine work, so creatures end up in the jars badly crumpled.
+entry.assistancecore.second=You can give the golem blood samples of the desired creatures, and it will put only those into the jars.
+entry.assistancecore.third=    §nEntropy Upgrade Unlocked§r<IMG>thaumcraft:textures/items/golem_upgrade_entropy.png:0:0:255:255:0.0625</IMG>With entropy upgrade, the golem will try to put aggressive creatures in the jar as well.
+entry.assistancecore.fourth=     §nOrder Upgrade Unlocked§r<IMG>thaumcraft:textures/items/golem_upgrade_order.png:0:0:255:255:0.0625</IMG>With order upgrade, the golem will only put into jars creatures that are already weak enough to do so.
+
+tc.research_name.TCHORIZONS=Thaumic Horizons
+tc.research_text.TCHORIZONS=It's not a crime if it's useful, right?
+entry.tchorizons.first=At one time, a group of famous and very talented thaumaturges managed to invent a machine that allowed people to clone animals, modify them, and even cheat death itself. The healing vat has become an integral part of many people's lives, but I am sure that its potential has not been fully realized. I will surely find more uses for it, even if I have to go beyond the boundaries of ethics...
+
+tc.research_name.BRAINLITTERING=Brain Littering
+tc.research_text.BRAINLITTERING=Designated specimen
+entry.brainlittering.first=The ethical views of society have often become an obstacle to scientific discoveries and curious experiments, for not everyone is ready to admit that one worthless human soul is a very small price to pay for a scientific breakthrough. Sometimes, of course, this number can increase to two ... dozens of souls, or even exceed a hundred, but is not giving the life of a hundred people for the welfare of millions - a profitable proposition? Unlike the blind crowd, you see it as a disproportionate benefit, so you immediately rushed to conduct experiments on those who were lucky enough to be near you at that moment.
+entry.brainlittering.second=It is known that people are quite resistant to mutations and any kind of modification, so the first thing you decided to do was to determine the limits of the human soul's resistance to magical influence.<BR>From empirical data it became clear that it is impossible to conduct any successful intervention in which the subject remains in his mind, or at least viable. But what if, uh... make failure the goal? Huh, they can't fight back if they have nothing to do it with...
+
+tc.research_name.BUFFGOLEM=Enlarged Thaumium Golem
+tc.research_text.BUFFGOLEM=Thauminator
+entry.buffgolem.first=Your human experiments have borne their first fruit! And a very juicy one at that...<BR>The idea of creating a thaumic golem with the height of a mammoth, that consists of a couple of tons of iron and a pumpkin, has been terrorizing your mind for a long time, but you have never been able to realize the idea properly. Such a solid mountain of thaum-metal muscles can no longer be revived with the help of a crucible, and therefore he needs a powerful brain that will allow this monstrosity to move and perform the simplest commands.
+entry.buffgolem.second=However, implanting the organ directly did not produce absolutely nothing, so you decided to try to go the other way and attempt to create a golem based on an already prepared organism. An ordinary zombie, alas, did not fit. The living corpse eventually rotted away, and in addition, its damaged nervous system was not enough to support the entire metal body.
+entry.buffgolem.third=It was decided not to include ordinary healthy people in the experiment. The resistance of a mentally healthy person was too high, both physical and metaphysical. However, after some manipulations, a compromise between pliability and capacity was finally found, albeit not very favorable.
+entry.buffgolem.fourth=This solution was the most successful of all. Your golem functioned perfectly, although it was not able to perform complex tasks on its own like its smaller counterparts, due to the inability to connect a core to it. But at least it has the power to transport you! The inhabitants of neighboring villages are terrified and hide in their homes when they see the enormous creature on which you have visited them. Now all that remains is to find a more utilitarian use for your golem...<BR>You are completely satisfied with your creation, even if it did cost someone's miserable life.
+entry.buffgolem.fifth=         §nWand Focus Control§r <IMG>thaumcraft:textures/items/focus_excavation.png:0:0:255:255:0.0625</IMG>While riding the golem, press the LMB while holding the wand with the wand focus attached to it to command the golem to dig up the area of blocks you are pointing at.
+entry.buffgolem.sixth=         §nWand Focus Control§r <IMG>thaumicconcilium:textures/items/wrath_attraction_icon.png:0:0:255:255:0.0625</IMG>While riding the golem, press the LMB while holding the wand with the wand focus attached to it to command the golem to attack all creatures in the immediate vicinity with its powerful arms.
+
+tc.research_name.DRAINAGESYRINGE=Drainage Syringe
+tc.research_text.DRAINAGESYRINGE=I can smell another angel
+entry.drainagesyringe.first=Void metal's ability to absorb life force is a recognized and well known fact. However, the only thing it can do in the form of a hollow sword or any other weapon is to cause a momentary feeling of weakness, which, in fact, has never done much damage to anyone. Recently, though, an interesting thought has popped into your head. Does the drawn out life force disappear forever, or does it continue to be stored in the void metal? And, if it persists, is it possible to extract it from there?
+entry.drainagesyringe.second=Captivated by these questions, you immediately rushed to your laboratory. A few days later, you came out with a new invention! You reshaped the hollow metal to resemble a syringe, thus increasing the efficiency of life force extraction. You have also connected it to a small flask that will receive the energy drawn from the creature. Experiments have shown that it is impossible to draw anything from a creature that is halfway to death.<BR>Press Shift + LMB to change the filter of the drawn energy.<BR>Press Shift + RMB to remove the cap.
+
+tc.research_name.SHARDMILL=Shard Mill
+tc.research_text.SHARDMILL=Cover everything in vis
+entry.shardmill.first=You have successfully mastered the technology of focusing vis streams with the help of infused crystals, but it seems to you that the magic accumulated in these crystals could be used more rapidly and widely.<BR>To this end, you have constructed a handheld mechanism that crushes elemental shards into fine dust, allowing the magic to interact with world around it at a rapid rate.
+entry.shardmill.second=§nAir Shard§r<BR>Dust creates disturbances in the atmosphere that provoke a lightning strike.<BR>§nFire Shard§r<BR>Disruption of the crystal lattice causes a sudden release of fire magic in the form of an explosion.<BR>§nWater Shard§r<BR>Ice dust penetrates deeply into the soil, fertilizing it.
+entry.shardmill.third=§nEarth Shard§r<BR>Elemental earth disintegrates evenly into ordinary dirt.<BR>§nEntropy Shard§r<BR>Particles of entropy, when inhaled, cause living things to suffer a withering syndrome.<BR>§nOrder Shard§r<BR>Particles of order exert a pressure on living beings commensurate with their bad intentions.<BR>§nBalanced Shard§r<BR>A balanced shard grinds into the purest bits of vis.
+
+tc.research_name.SILVERWOODSHARDMILL=Silverwood Shard Mill
+tc.research_text.SILVERWOODSHARDMILL=Nasty magic of the Netherworld
+entry.silverwoodshardmill.first=Your greatwood mill proved to be no match for the concentrated emanations of the Nether World, so you thought about upgrading it.<BR>The cleansing properties of silverwood do an excellent job of grinding up those filthy shards, the dust of which produces some not-so-pleasant (from what angle you look at it) effects on whatever gets hit.
+entry.silverwoodshardmill.second=§nWrath Shard§r<BR>Dust of Wrath causes contacted individuals to erupt in a blazing fury, draining both physical and magical powers.<BR>§nLust Shard§r<BR>The most heinous of outgrowths crawl from the bowels of the earth onto Lust pieces.<BR>§nGluttony Shard§r<BR>In the form of Gluttony dust, the nutritional properties of the crystal can be divided into equal portions.
+entry.silverwoodshardmill.third=§nSloth Shard§r<BR>Under the influence of this dust, living creatures are rendered incapable of movement and magical manipulation.<BR>§nEnvy Shard§r<BR>Envy dust tends to spread, transforming near-flying projectiles into itself.<BR>§nPride Shard§r<BR>Pride dislodges all those who happen to be nearby from itself.
+entry.silverwoodshardmill.fourth=§nGreed Shard§r<BR>The vibes of Greed, bursting out of the crystal, pull towards itself everything it reaches.<BR>§nTaint Shard§r<BR>Taint dust causes severe poisoning on contact, but endured bodies of thaumaturges are able to neutralize this effect, at the cost of temporary mental confusion.
+
+tc.research_name.RIFTS=Rifts
+tc.research_text.RIFTS=Whoa! Wha...?
+entry.rifts.first=What I saw was frighteningly disgusting and incredibly beautiful at the same time. The very fabric of the universe had been torn apart by the distortion, creating a hole in space that led to... I don't know where yet. I did not venture inside, and when I tried to get too close, it began to reject me, injuring me. Outside, all I could see was a bottomless void. I can't believe distortion can affect reality so much. This discovery suggests that spatial rifts can be exploited. Well, how?
+entry.rifts.second=It was also discovered that aura nodes are also kind of rifts, but have a much more stable structure. However, this can be easily changed by simply trying to break them. During this process, their structure begins to lose its stability, which eventually leads to the appearance of a spatial rift.
+
+tc.research_name.DEMATUPGRADE=Focus Upgrade: Dematerialization
+tc.research_text.DEMATUPGRADE=Long harness, but quickly goes
+entry.dematupgrade.first=After many sleepless nights, you have a hunch that these rifts are not as dangerous as you first thought. Although they look quite impressive and are breaches in space itself, this does not negate the fact that what has been destroyed can be rebuilt. In this case, the material for restoring the fabric of space can serve as aura in its purest manifestation. That is, it is necessary to somehow direct a large amount of Auram aspect to the rift, after which the spatial rift will begin to fade. Perhaps the vis conductor's focus can handle this task. You just need to modify it a bit...
+
+tc.research_name.VISCONDENSER=Vis-Condenser
+tc.research_text.VISCONDENSER=Delegating dangerous interactions
+entry.viscondenser.first=Accumulating, controlling, and releasing titanic amounts of vis with your own hands is dangerous and tedious. To solve this problem, you have been able to adapt the technology of spatial rift dematerialization, for use in ordinary machines.<BR>This vis capacitor is capable of instantly releasing a vis charge in the direction opposite to the side from which the red stone signal came. The strength of the signal is directly proportional to the distance to be discharged, and inversely proportional to the power of that discharge.
+entry.viscondenser.second=The energy for operation is supplied to the capacitor through the destabilized crystal cluster located on it. A single use spends 16 parts of stored vis.
+
+tc.research_name.HEXOFPREDICTABILITY=Hex of Predictability
+tc.research_text.HEXOFPREDICTABILITY=Interdimensional leash
+entry.hex.first=Paradoxically, even what was hitherto an emptiness to you in its most obvious manifestation no longer seems so.<BR>Something must be the source of the aggressive effects generated by these anomalies, maybe you will figure it out later...<BR>Today you found yourself at the bottom of this world, sprawled on bare stones, scratching runes into them. After recovering from another stroke, you hurried home to put down on paper what you felt. Whether it was a cosmic revelation, or the consequences of asphyxiation from lack of oxygen at such a depth, you do not remember.
+entry.hex.second=According to your last assumption, with this construction, it becomes possible to more or less control what is on the other side of the rifts. It was too difficult to compete with the mature instances of them, and you couldn't be bothered with rock-cutting under the bombardment of unfriendly magic. However, you managed to conquer a young rift formed by unsealing aura nodes right in the center of the structure.<BR>This rift is no longer dangerous, it's time to make the most of it...
+
+tc.research_name.ASTRALMONITOR=Astral Monitor
+tc.research_text.ASTRALMONITOR=Status update
+entry.astralmonitor.first=Weeks of mental convulsions did not pass without a trace. At one point, a new worm began to bite your consciousness: "How are my friends now?", "Are they all right?".<BR>Seeking reassurance, you turned to your recent accomplishment. The hexagonal mystical construct, standing at the maximum depth you could reach, appeared capable of capturing essences from the environment, and causing the captured rift to "resonate" with it. It was decided to use vis condensers to disperse the essence by directing their output vertically upwards.
+entry.astralmonitor.second=In this state, the rift begins to actively react to the objects around it, damaging them to some extent, but at the same time - renewing them.<BR>The matter affected by the void must remain isolated from other objects or surfaces throughout the process, otherwise it will overload the structure and cause the rift to collapse as soon as possible.<BR>It is possible to remove sent essentia via attempt to dematerialize containted rift.
+entry.astralmonitor.third=The solution to your new problem came about in just this way. The thaumometer that touched the void allowed you to look through matter at the state of sentient beings.<BR>To concretize the monitor indications, press Shift+RMB to place a thing associated with the right person in the monitor, his xylographed wand will fit just right.
+
+tc.research_name.ETHEREALMANIPULATOR=Wand Focus: Ethereal Manipulator
+tc.research_text.ETHEREALMANIPULATOR=Playing cat and mouse with your head
+entry.ethman.first=You have already seen, many times over, that your mind is colossally superior to the semblances of thought activity that most of those you know are operated by. Experience suggests that you will soon need a more comprehensive way to harness the power of thoughts, so you have developed an enhancement for telekinesis technology.<BR>With this focus, you can not only attract objects to you, but also move them away from you by holding Shift and scrolling the mouse wheel in the desired direction.
+
+tc.research_name.LITHOGRAPHER=Lithographer
+tc.research_text.LITHOGRAPHER=Body modification for health aware
+entry.lithographer.first=Time is precious, and spending it pulling out gadgets and staring at meter output is clearly not your thing. The revelation goggles were a big leap forward from the thaumometer, but you decided not to rely on any devices to monitor the well-being of your friends.<BR>This construction will allow you to perform a never before seen medical procedure - piercing a hole in your retina into a void. The operation itself makes little sense, so you've added support for a system of monitors as a sort of "lens".
+entry.lithographer.second=To perform the operation, the machine needs 32 fractions of Sensus vis, supplied by a vis condenser located above the lithographer. The operation will begin as soon as you lie down on the bed.<BR>Of course, sometimes you need to give your head a break from the deluge of information. You've created a way to counteract the effects of thaum-medical procedures through this drops. Overdose has the opposite effect.
+
+tc.research_name.QUICKSILVERCRUCIBLE=Quicksilver Reactor
+tc.research_text.QUICKSILVERCRUCIBLE=Alchemical Miracle
+entry.quicksilvercrucible.first=To this day, no one had ever been able to create a way of merging essences. It seemed that this law of reality would never be broken.<BR>But at last that day has come.<BR>You have always believed that the will of man is boundless, and here it is, another confirmation of that. Having managed to capture one of those losers who in a past life thought they were expert alchemists, you threw him right into the boiling crucible.
+entry.quicksilvercrucible.second=The active structure of his body reacted violently, instantly fusing with the walls of the crucible, giving him a new, more useful purpose in life - to assist the more adaptable thaumaturges in their alchemical experiments.<BR>For every fraction of mercury melted in this reactor, in one crucible no more than two blocks away, the first two fractions of the essence would be combined with each other.
+
+tc.research_name.TCTAINTEDMAGIC=Tainted Magic
+tc.research_text.TCTAINTEDMAGIC=It was a long time ago and also it's not true
+entry.tctaintedmagic.first=Perhaps there is no crevice through which you would not want to seep, expecting to find something new at the other end, inaccessible to those who have not dared.<BR>You find the secret practices of the Crimson-clothed cultists to be quite intriguing, all you have to do is to figure out how to get them to share their secrets... These guys are very sturdy and silent, there's not much point in interrogating them, but it's unlikely that these people appeared yesterday, there must be information about them stored somewhere.
+
+tc.research_name.CRIMSONANNALES=Crimson Annales
+tc.research_text.CRIMSONANNALES=Mysterious Disappearance
+entry.crimsonannales.first=If it weren't for your knowledge of the Crimson Cult, you wouldn't be wasting your time deciphering this rags.<BR>It seems that many, many years ago, the Cult had not one leader, but rather two, with the second being far more versed in the art of thaumaturgy. Some of the dates closer to the present are blotted out, after which references to the Crimson Pontifex are completely absent.
+entry.crimsonannales.second=You believe that it was the disappearance (or exile?) of the Cult's theoretical associate that led to its technological decline, and its inability to achieve the results of its rituals.<BR>In any case, this fact is of undoubted interest.<BR>You will take up the unraveling of this phenomenon in your spare time....
+
+tc.research_name.BRIGHTESTONE=Exploring the Nature of Wisps
+tc.research_text.BRIGHTESTONE=Return to sender
+entry.brightestone.first=If wisps are of the same nature as aura nodes, why are they different? You've spent a lot of time studying nodes, while a much more interesting subject has been looming in front of you and you haven't paid any attention. Maybe understanding the nature of "living magic" will give a clue to the unsolved problems of thaumaturgy, it's time to try to find out.<BR>After careful planning - you are ready to conduct your first experiment: returning a living wisp to its original vis-reality.
+entry.brightestone.second=You have everything you need ready - a tool to capture and redirect the wisps, as well as a stabilized output in the form of a rift.<BR>The results of the experiment promise to be curious in each of your predicted cases.
+
+tc.research_name.PRIMORDIALLIFE=Primordial Life
+tc.research_text.PRIMORDIALLIFE=Will amplifier
+entry.primordiallife.first=Holding this thing in your hands is tuggingly pleasurable.<BR>This feeling is new to you, so first of all you tried to throw it off, thinking that it enslaves you, but after standing for a few seconds you realized that it is just the opposite.<BR>Now your intentions are clearer than ever, and your will to fulfill it is unshakable. With this energy you can change the world and, without a doubt, yourself.
+
+tc.research_name.CRIMSONPONTIFEX=Crimson Pontifex
+tc.research_text.CRIMSONPONTIFEX=Family Reunion
+entry.crimsonpontifex.first=With a track record of successfully summoning a living creature from the other side of the rift, you think you know where the Pontifex of the Crimson Cult has disappeared to...<BR>Of course, deliberately bringing someone clearly hostile out of oblivion is not the best idea, but you still need empirical data for your theory.<BR>Rifts are known to resonate with items, so you need something connected to the missing person. A copy of Crimson Rites would be a good fit.
+
+tc.research_name.MATERIALPEELER=Peeler of Matter
+tc.research_text.MATERIALPEELER=I'm tired - I'm out
+entry.materialpeeler.first=Your theory was confirmed, you found out where the leader of the Cult disappeared to, but how did he end up there? Though to tell the truth, you don't care anymore, the mysteries of the universe make your head hurt more and more every day, by the standards of a mortal man you have already achieved unprecedented things, maybe it's worth to... Have a rest? But how is it possible to do this when you are pestered by all sorts of evil, and demons of the mind are ready to jump out from around every corner?<BR>Hmm, if the Pontifex came back from the other side relatively unharmed, maybe you can go there too? Now you know what he's got against you.
+entry.materialpeeler.second=By placing a piece of Primordial Life back into the rift, you can attune it to interact with your flesh. Once you pass through it, you will become intangible to physical impact. However, using objects, swinging your fists at longtime enemies, or being fired upon by magic is fraught with the potential of unnecessarily dispelling that bit of matter that is still you. This negative effect does not threaten you if you use your wand, it has already become a full-fledged part of you, and remains the last safe emergency bridge to the material world.<BR>Having weighed the pros and cons, you can finally go where you are unlikely to be reached from - deep beneath the bedrock of the earth.<BR>Peace, at last.
+
+tc.research_name.PONTIFEXHAMMER=Pontifex's Hammer
+tc.research_text.PONTIFEXHAMMER=A truly bloody weapon
+entry.pontifexhammer.first=You were able to recreate the weapon of the legendary Crimson Pontifex. An impressive size, and an equally impressive ability to steal another's life.<BR>Hold down the RMB to utilize this feature.
+
+tc.research_name.FLESHCRUCIBLE=Crucible of Flesh
+tc.research_text.FLESHCRUCIBLE=You need it more
+entry.fleshcrucible.first=Nothing lasts forever, not even your fatigue from this world. Besides, as it turns out, even the slightest interaction with the world, other than with your wand, has a negative effect on what's left of your body.<BR>You rationally decided that you can always disappear for good at any time, so you needed a way to regain your wholeness.<BR>You modified the crucible so that it could dissolve human flesh and keep it in a usable state for rubbing. Of course, the flesh has to come from somewhere, and the lunatics in your cellars won't think to object.
+
+tc.research_name.PONTIFEXROBE=Pontifex's Robes
+tc.research_text.PONTIFEXROBE=Now you see me
+entry.pontifexrobe.first=Years spent in a phantom state have affected not only the Pontifex, but also his vestments. You know it will not be very difficult to replicate it.<BR>Wearing the full set allows you to forfeit your material wholeness at any time, at the cost of restricting your active freedom.<BR>Press H to toggle this ability.<BR>Despite the passage of time, fear of the Pontifex's mental power still permeates every member of the Cult. Wearing the full uniform, you feel confident in your ability to command the Crimson Warriors.
+entry.pontifexrobe.second=Your subordinates are empowered as they fight under a Pontifex skilled in the healing arts and insatiable for blood.
+
+tc.research_name.CRIMSONSPELLS=Spells from Crimson Cult
+tc.research_text.CRIMSONSPELLS=True Primitive Curses
+entry.crimsonspells.first=Among the other scrolls that had been in the Pontifex's possession, you could find curious pictograms, apparently representing some kind of instructions. When you look closely, you realize that it's been a long time since you practiced this kind of magic...
+entry.crimsonspells.second=<IMG>thaumicconcilium:textures/gui/crimson_spells.png:0:0:255:255:.5</IMG>
+
+tc.research_name.CRIMSONINITIATION=Crimson Initiation
+tc.research_text.CRIMSONINITIATION=Sign here
+entry.crimsonimitiation.first=Wearing the Pontifex's robe, you feel his mind control abilities filling you. Though you are not a member of the Cult, it seems the others don't think so, and are waiting for replenishment in the dwindling ranks.<BR>You are quite capable of doing so. Wearing the full vestments of the Pontifex, touch with your Crimson Dagger one of the failed to handle the thaumaturgical knowledge, to give him a new chance at life.
+
+tc.research_name.REDPOWEREDMIND=Red-Powered Mind
+tc.research_text.REDPOWEREDMIND=Lobotomy for advanced
+entry.redpoweredmind.first=In your thaumaturgical career you have created many magical machines, systems, production lines, all of your basic needs have been met so long ago that you don't remember the last time you thought about it. But today you have made a depressing observation - all this time you have personally monitored the state of each and every one of your manufactures.<BR>It seemed like a simple problem to solve - yet you still couldn't figure out who to entrust to oversee the condition of such a huge industrial complex.
+entry.redpoweredmind.second=Not a single person inspires your trust, let alone golems. And what if... what if you create an observer, whose disobedience is completely excluded?<BR>After getting rid of the excess tissue, you filled the remaining ones with red dust, leaving life support only at the most primitive level. Now all this ball of nerves can do is react to the incoming signal from the red stone, relaying it to the neighboring plans of the universe.<BR>You can observe this signal by attaching a crystal eye to this mind and immersing it in the surface of the astral monitor.
+
+tc.research_name.XYLOGRAPHY=Wand Xylography
+tc.research_text.XYLOGRAPHY=Magical signature
+entry.xylography.first=You've come up with a simple and elegant way to sign your wand by giving it your name. You can hand them out at your fan meetings!<BR>To apply the xylography, simply place the wand in a craft grid.
+
+tc.research_name.WARPDRUM=Warped Drum
+tc.research_text.WARPDRUM=Head of Spiders
+entry.warpdrum.first=You've already gotten the Aura to respond to certain sounds, now it's time to try something new.<BR>Many believe that the human mind is as complex as the world we inhabit. If their assumptions are correct, perhaps you can get something useful out of your cranium? You'll need the proper tools to deal with your mental mess, but that's not even an obstacle anymore.
+
+tc.research_name.BOTTLEWATER=Bottle of Clear Water
+tc.research_text.BOTTLEWATER=Glass shards are harmless, I swear
+entry.clearwater.first=You can fill bottles with alchemically pure water, for later scattering.<BR>Good at extinguishing burning friends, and is also a good weapon against blazes.
+
+tc.research_name.DOPESQUID=Doped Squid
+tc.research_text.DOPESQUID=Passive smoking does more harm you know?
+entry.dopesquid.first=You find it quite tedious to constantly fill a pipe with your own hands, but who will do it for you? Squids that live in the ocean spend their lives filtering water, and they are clearly capable of more than that.<BR>The squid will swim after the one who gives him fresh tobacco leaves, accompanying the owner of carcinogenic smoke. The greedy animal will not share with you for nothing, for each dose the owner must give a part of his mental poison.<BR>You can give the squid samples of desired tobacco flavors.
+
+

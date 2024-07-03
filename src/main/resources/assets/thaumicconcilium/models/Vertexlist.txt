@@ -1,0 +1,5 @@
+Magic number: 114
+x,y,z for first selected vertex: 9.4265e-009 -0.10173 1.69451e-008 !
+total number of verts: 114
+number of unique verts found: 114
+number of selected vertices: 114
