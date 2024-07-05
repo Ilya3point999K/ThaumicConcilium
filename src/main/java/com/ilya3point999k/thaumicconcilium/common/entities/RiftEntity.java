@@ -435,7 +435,7 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                         if (s == 3) {
                             if (!worldObj.isRemote) {
                                 MaterialPeeler peeler = new MaterialPeeler(worldObj);
-                                peeler.setPositionAndRotation(posX, posY + 1.0, posZ, this.worldObj.rand.nextFloat(), this.worldObj.rand.nextFloat());
+                                peeler.setPositionAndRotation(posX, posY, posZ, this.worldObj.rand.nextFloat(), this.worldObj.rand.nextFloat());
                                 worldObj.spawnEntityInWorld(peeler);
                                 TCPacketHandler.INSTANCE.sendToAllAround(new PacketFXBurst(this.posX, this.posY, this.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, posX, posY, posZ, 32.0));
                                 this.playSound("thaumcraft:craftfail", 1.0F, 1.0F);

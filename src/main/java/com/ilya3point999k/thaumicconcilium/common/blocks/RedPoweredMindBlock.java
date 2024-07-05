@@ -9,13 +9,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import thaumcraft.common.lib.CustomSoundType;
-
-import java.util.ArrayList;
 
 public class RedPoweredMindBlock extends Block implements ITileEntityProvider {
     public IIcon icon;
@@ -76,10 +73,6 @@ public class RedPoweredMindBlock extends Block implements ITileEntityProvider {
 
     public int damageDropped(int par1) {
         return par1;
-    }
-
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int md, int fortune) {
-        return null;
     }
 
 }
