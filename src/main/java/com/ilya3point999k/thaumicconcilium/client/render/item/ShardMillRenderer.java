@@ -158,7 +158,7 @@ public class ShardMillRenderer implements IItemRenderer {
             if (!open){
                 cap.renderAll();
             }
-            if (!using) {
+            if (!using && !open) {
                 handle.renderAll();
                 GL11.glPushMatrix();
                 mc.renderEngine.bindTexture(mc.thePlayer.getLocationSkin());

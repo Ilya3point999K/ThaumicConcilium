@@ -207,7 +207,7 @@ public class AstralMonitorRenderer implements IItemRenderer {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glTranslatef(0.0F, 0.11F, 0.0F);
+        //GL11.glTranslatef(0.0F, 0.11F, 0.0F);
         //GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
         //GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
         ShaderHelper.useShader(ShaderHelper.endScreenShader, shaderCallback);

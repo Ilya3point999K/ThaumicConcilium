@@ -640,7 +640,6 @@ public class ClientEvents {
                     }
                 }
                 // item.stackTagCompound = null;
-                System.out.println(item.getItemDamage());
                 ri.renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, item, -8, -8);
                 RenderHelper.disableStandardItemLighting();
                 GL11.glDisable(32826);

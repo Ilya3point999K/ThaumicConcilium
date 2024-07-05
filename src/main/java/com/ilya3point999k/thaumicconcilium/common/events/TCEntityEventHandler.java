@@ -592,6 +592,7 @@ public class TCEntityEventHandler {
                 event.setCanceled(true);
             }
         }
+
         if (event.entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
 

@@ -12,8 +12,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -94,9 +92,6 @@ public class Samurai extends EntityMob {
                 this.setHealth(f2 - p_70665_2_);
                 this.func_110142_aN().func_94547_a(p_70665_1_, f2, p_70665_2_);
                 this.setAbsorptionAmount(this.getAbsorptionAmount() - p_70665_2_);
-                if (worldObj.rand.nextInt(10) > 7){
-                    this.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 60, 3));
-                }
             }
         }
     }
@@ -107,6 +102,7 @@ public class Samurai extends EntityMob {
         int i = 0;
         int type = getType();
         f += type == 2 ? 15.0F : type == 1 ? 10.0F : 7.0F;
+
         if (p_70652_1_ instanceof EntityLivingBase) {
             f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)p_70652_1_);
             i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)p_70652_1_);
