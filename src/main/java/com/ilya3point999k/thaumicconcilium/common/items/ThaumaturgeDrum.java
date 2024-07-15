@@ -86,14 +86,17 @@ public class ThaumaturgeDrum extends Item {
             }
             if (stack.getItemDamage() == 0) {
                 if (count % 30 == 0) {
-                    EntityWisp wisp = new EntityWisp(player.worldObj);
-                    wisp.setPositionAndRotation(player.posX, player.posY, player.posZ, player.worldObj.rand.nextFloat(), player.worldObj.rand.nextFloat());
-                    wisp.setType((String) Aspect.getPrimalAspects().get(player.worldObj.rand.nextInt(Aspect.getPrimalAspects().size())).getTag());
-                    player.worldObj.spawnEntityInWorld(wisp);
+                    List<EntityWisp> wisps = player.worldObj.getEntitiesWithinAABB(EntityWisp.class, player.boundingBox.expand(64, 32, 64));
+                    if (wisps.size() < 16) {
+                        EntityWisp wisp = new EntityWisp(player.worldObj);
+                        wisp.setPositionAndRotation(player.posX, player.posY, player.posZ, player.worldObj.rand.nextFloat(), player.worldObj.rand.nextFloat());
+                        wisp.setType((String) Aspect.getPrimalAspects().get(player.worldObj.rand.nextInt(Aspect.getPrimalAspects().size())).getTag());
+                        player.worldObj.spawnEntityInWorld(wisp);
+                    }
                 }
             } else {
                 if (count % 10 == 0) {
-                    List<EntityMindSpider> spiders = player.worldObj.getEntitiesWithinAABB(EntityMindSpider.class, player.boundingBox.expand(16, 8, 16));
+                    List<EntityMindSpider> spiders = player.worldObj.getEntitiesWithinAABB(EntityMindSpider.class, player.boundingBox.expand(32, 32, 32));
                     if (spiders.size() < 16) {
                         EntityMindSpider spider = new EntityMindSpider(player.worldObj);
                         spider.setHarmless(true);

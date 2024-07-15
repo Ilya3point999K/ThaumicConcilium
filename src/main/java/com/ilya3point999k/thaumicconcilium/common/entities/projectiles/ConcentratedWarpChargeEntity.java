@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.codechicken.lib.vec.Vector3;
 import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.config.Config;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumic.tinkerer.common.core.helper.MiscHelper;
 
@@ -79,17 +80,17 @@ public class ConcentratedWarpChargeEntity extends Entity implements IEntityOwnab
         this.motionZ *= 0.7;
         float maxDist = byForce ? 9.0F : 49.0F;
         super.onUpdate();
-        if (!byForce && (ticksExisted % 120 == 0 || ticksExisted == 0)){
-            worldObj.playSoundAtEntity(this, ThaumicConcilium.MODID+":whispers", 0.1F, 1.0F);
+        if (!byForce && (ticksExisted % 120 == 0 || ticksExisted == 0)) {
+            worldObj.playSoundAtEntity(this, ThaumicConcilium.MODID + ":whispers", 0.1F, 1.0F);
         }
         if (!this.worldObj.isRemote) {
-            if (getOwner() == null){
+            if (getOwner() == null) {
                 this.setDead();
             }
-            if (byForce && ticksExisted > 200){
+            if (byForce && ticksExisted > 200) {
                 this.setDead();
             }
-            if (getOwner() != null) {
+            if (getOwnerEntity() != null) {
                 EntityPlayer owner = (EntityPlayer) getOwnerEntity();
                 if (owner.isDead || this.dimension != owner.dimension) {
                     this.setDead();
@@ -115,7 +116,7 @@ public class ConcentratedWarpChargeEntity extends Entity implements IEntityOwnab
                             if (badEffect) {
                                 int d = 5 + 4 * this.range;
                                 List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox.expand(d, d, d));
-                                entities.remove(getOwnerEntity());
+                                entities.remove(owner);
                                 Collections.shuffle(entities);
                                 if (!entities.isEmpty()) {
                                     entities.get(0).addPotionEffect(potion);
@@ -130,7 +131,7 @@ public class ConcentratedWarpChargeEntity extends Entity implements IEntityOwnab
                 if (this.selfFlagellation && this.ticksExisted % 10 == 0) {
                     int d = 5 + 4 * this.range;
                     List<EntityPlayer> entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(d, d, d));
-                    entities.remove(getOwnerEntity());
+                    entities.remove(owner);
                     if (!entities.isEmpty()) {
                         for (EntityPlayer p : entities) {
                             Collection<PotionEffect> potions = owner.getActivePotionEffects();
@@ -149,26 +150,27 @@ public class ConcentratedWarpChargeEntity extends Entity implements IEntityOwnab
                     }
                 }
 
-                int warp = Thaumcraft.proxy.getPlayerKnowledge().getWarpPerm(getOwnerEntity().getCommandSenderName());
-                int twarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTemp(getOwnerEntity().getCommandSenderName());
+                int warp = Thaumcraft.proxy.getPlayerKnowledge().getWarpPerm(owner.getCommandSenderName());
+                int twarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTemp(owner.getCommandSenderName());
                 if (twarp == 0 && !byForce) {
-                    ((EntityPlayer)getOwnerEntity()).addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("TC.no_warp")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));
+                    ((EntityPlayer) owner).addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("TC.no_warp")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));
                     this.setDead();
                     return;
                 }
-                List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox);
-                if (!byForce) {
-                    entities.remove(getOwnerEntity());
-                }
-                for (EntityLivingBase entity : entities) {
-                    if (entity instanceof CrimsonPontifex) continue;
-                    entity.attackEntityFrom(
-                            EntityDamageSourceIndirect.causeIndirectMagicDamage(this, getOwnerEntity()), warp / 10.0F * power);
+                if (!owner.isPotionActive(Config.potionWarpWardID)) {
+                    List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox);
                     if (!byForce) {
-                        Thaumcraft.addWarpToPlayer((EntityPlayer) getOwnerEntity(), -1, true);
+                        entities.remove(owner);
+                    }
+                    for (EntityLivingBase entity : entities) {
+                        if (entity instanceof CrimsonPontifex) continue;
+                        entity.attackEntityFrom(
+                                EntityDamageSourceIndirect.causeIndirectMagicDamage(this, owner), warp / 10.0F * power);
+                        if (!byForce) {
+                            Thaumcraft.addWarpToPlayer((EntityPlayer) owner, -1, true);
+                        }
                     }
                 }
-
             }
         }
         if (this.worldObj.isRemote) {
@@ -255,7 +257,7 @@ public class ConcentratedWarpChargeEntity extends Entity implements IEntityOwnab
             buffer.writeInt(1);
         } else if (this.selfFlagellation) {
             buffer.writeInt(2);
-        } else if (this.byForce){
+        } else if (this.byForce) {
             buffer.writeInt(3);
         }
     }

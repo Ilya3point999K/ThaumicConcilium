@@ -57,6 +57,7 @@ public class PontifexHammer extends ItemSword implements IRepairable, IWarpingGe
                             double z = e.posZ;
                             if (!player.worldObj.isRemote) {
                                 if(e.attackEntityFrom(DamageSource.causePlayerDamage(player).setMagicDamage(), (float) player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue())) {
+                                    stack.damageItem(2, player);
                                     player.heal(2.0F);
                                 }
                             } else {

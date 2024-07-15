@@ -75,6 +75,7 @@ public class Samurai extends EntityMob {
         return el instanceof Samurai;
     }
 
+
     @Override
     protected void damageEntity(DamageSource p_70665_1_, float p_70665_2_) {
         if (!this.isEntityInvulnerable()) {

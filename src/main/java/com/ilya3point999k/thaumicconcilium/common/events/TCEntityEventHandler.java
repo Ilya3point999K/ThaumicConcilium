@@ -3,6 +3,7 @@ package com.ilya3point999k.thaumicconcilium.common.events;
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 import baubles.common.lib.PlayerHandler;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
@@ -330,7 +331,7 @@ public class TCEntityEventHandler {
     @SubscribeEvent
     public void on(EntityJoinWorldEvent event) {
         if (event.entity instanceof EntityBrainyZombie || event.entity instanceof EntityGiantBrainyZombie) {
-            if (event.world.rand.nextInt(100) > 80) {
+            if (event.world.rand.nextInt(100) > TCConfig.madThaumaturgeReplacesBrainyZombieChance) {
                 if (!event.world.isRemote) {
                     MadThaumaturge madThaumaturge = new MadThaumaturge(event.world);
                     madThaumaturge.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);
@@ -341,7 +342,7 @@ public class TCEntityEventHandler {
             }
         }
         if (event.entity instanceof EntityCultistKnight){
-            if (event.world.rand.nextInt(100) > 80) {
+            if (event.world.rand.nextInt(100) > TCConfig.crimsonPaladinReplacesCultistWarriorChance) {
                 if (!event.world.isRemote) {
                     CrimsonPaladin paladin = new CrimsonPaladin(event.world);
                     paladin.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);

@@ -55,7 +55,7 @@ public class CrimsonPontifex extends EntityThaumcraftBoss implements IBossDispla
         super(p_i1738_1_);
         this.setSize(0.75F, 2.25F);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(3, new AIAttackOnCollide(this, EntityLivingBase.class, 1.1, false));
+        this.tasks.addTask(3, new AIAttackOnCollide(this, EntityLivingBase.class, 0.7, false));
         this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 0.8));
         this.tasks.addTask(7, new EntityAIWander(this, 0.8));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -218,7 +218,7 @@ public class CrimsonPontifex extends EntityThaumcraftBoss implements IBossDispla
         }
 
         --this.aggroCooldown;
-        if (this.worldObj.rand.nextInt(1000) == 0 && (this.targetedEntity == null || this.aggroCooldown-- <= 0)) {
+        if (this.worldObj.rand.nextInt(10) > 7 && (this.targetedEntity == null || this.aggroCooldown-- <= 0)) {
             this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 32.0);
             if (this.targetedEntity != null) {
                 this.aggroCooldown = 50;
@@ -297,7 +297,7 @@ public class CrimsonPontifex extends EntityThaumcraftBoss implements IBossDispla
                                                 double y = e.posY;
                                                 double z = e.posZ;
                                                 if (!worldObj.isRemote) {
-                                                    e.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, e), (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
+                                                    e.attackEntityFrom(DamageSource.magic, (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
                                                     this.heal(10.0F);
                                                 } else {
                                                     for (int i = 0; i < 3; i++) {

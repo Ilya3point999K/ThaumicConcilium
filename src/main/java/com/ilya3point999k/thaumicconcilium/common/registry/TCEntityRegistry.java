@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.registry;
 
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.*;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.*;
@@ -125,15 +126,15 @@ public class TCEntityRegistry {
 		while(i$.hasNext()) {
 			BiomeGenBase bgb = (BiomeGenBase)i$.next();
 			if (bgb.getSpawnableList(EnumCreatureType.monster) != null & bgb.getSpawnableList(EnumCreatureType.monster).size() > 0) {
-				EntityRegistry.addSpawn(Dissolved.class, 30, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
-				EntityRegistry.addSpawn(QuicksilverElemental.class, 30, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
-				EntityRegistry.addSpawn(Samurai.class, 30, 3, 5, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
-				EntityRegistry.addSpawn(VengefulGolem.class, 30, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
-				EntityRegistry.addSpawn(Overanimated.class, 30, 2, 3, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
-				EntityRegistry.addSpawn(MadThaumaturge.class, 60, 2, 3, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(Dissolved.class, TCConfig.dissolvedSpawnChance, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(QuicksilverElemental.class, TCConfig.quicksilverElementalSpawnChance, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(Samurai.class, TCConfig.paranoidWarriorSpawnChance, 3, 5, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(VengefulGolem.class, TCConfig.vengefulGolemSpawnChance, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(Overanimated.class, TCConfig.overanimatedSpawnChance, 2, 3, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(MadThaumaturge.class, TCConfig.madThaumaturgeSpawnChance, 2, 3, EnumCreatureType.monster, new BiomeGenBase[]{bgb});
 			}
 			if (bgb.getSpawnableList(EnumCreatureType.creature) != null & bgb.getSpawnableList(EnumCreatureType.creature).size() > 0) {
-				EntityRegistry.addSpawn(Thaumaturge.class, 30, 1, 3, EnumCreatureType.creature, new BiomeGenBase[]{bgb});
+				EntityRegistry.addSpawn(Thaumaturge.class, TCConfig.thaumaturgeSpawnChance, 1, 3, EnumCreatureType.creature, new BiomeGenBase[]{bgb});
 			}
 
 		}

@@ -160,7 +160,7 @@ public class ShardMill extends Item {
             Vec3 look = player.getLookVec();
                 int orbs = 2 + player.worldObj.rand.nextInt(3);
                 if (!player.worldObj.isRemote) {
-                    if (type == 6) {
+                    if (loaded == 6) {
                         for (int i = 0; i < orbs; i++) {
                             EntityAspectOrb orb = new EntityAspectOrb(player.worldObj, player.posX + look.xCoord, player.posY + player.getEyeHeight(), player.posZ + look.zCoord, Aspect.getPrimalAspects().get(player.worldObj.rand.nextInt(6)), 1);
                             orb.posX -= (double) (Math.cos(player.rotationYaw / 180.0F * (float) Math.PI) * 0.32F);

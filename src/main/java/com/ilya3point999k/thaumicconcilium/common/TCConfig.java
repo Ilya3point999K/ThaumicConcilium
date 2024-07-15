@@ -33,6 +33,15 @@ public class TCConfig {
     public static int burnoutUpgradeID;
     public static int primalEssenceUpgradeID;
 
+    public static int thaumaturgeSpawnChance;
+    public static int madThaumaturgeSpawnChance;
+    public static int quicksilverElementalSpawnChance;
+    public static int dissolvedSpawnChance;
+    public static int overanimatedSpawnChance;
+    public static int paranoidWarriorSpawnChance;
+    public static int vengefulGolemSpawnChance;
+    public static int madThaumaturgeReplacesBrainyZombieChance;
+    public static int crimsonPaladinReplacesCultistWarriorChance;
 
     public static int causalBouillonID;
 
@@ -62,6 +71,17 @@ public class TCConfig {
             selfFlagellationUpgradeID = conf.getInt("selfFlagellationUpgradeID", "focus", 119, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
             burnoutUpgradeID = conf.getInt("burnoutUpgradeID", "focus", 120, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
             primalEssenceUpgradeID = conf.getInt("primalEssenceUpgradeID", "focus", 121, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
+
+            thaumaturgeSpawnChance = conf.getInt("thaumaturgeSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+            madThaumaturgeSpawnChance = conf.getInt("madThaumaturgeSpawnChance", "mobs", 60, 0, Integer.MAX_VALUE, "");
+            quicksilverElementalSpawnChance = conf.getInt("quicksilverElementalSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+            dissolvedSpawnChance = conf.getInt("dissolvedSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+            overanimatedSpawnChance = conf.getInt("overanimatedSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+            paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+            vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 30, 0, Integer.MAX_VALUE, "");
+
+            madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
+            crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
         } catch (Exception e){

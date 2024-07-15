@@ -13,8 +13,11 @@ import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.ShardPowd
 import com.ilya3point999k.thaumicconcilium.common.golems.AssistantGolemCore;
 import com.ilya3point999k.thaumicconcilium.common.golems.ValetGolemCore;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.Bracelets;
+import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
+import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fox.spiteful.forbidden.Config;
@@ -552,8 +555,8 @@ public class Integration {
                             EntityMob mob = (EntityMob) e;
                             if (mob.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
                                 if (!e.isDead) {
-                                    player.playSound("thaumcraft:craftfail", 1.0F, 1.0F);
-                                    Thaumcraft.proxy.beam(player.worldObj, player.posX, player.posY + player.height - 0.5, player.posZ, e.posX, e.posY + e.height / 2, e.posZ, 1, 0xFFFFFF, false, 1.0f, 1);
+                                    player.worldObj.playSoundAtEntity(player,"thaumcraft:craftfail", 1.0F, 1.0F);
+                                    TCPacketHandler.INSTANCE.sendToAllAround(new PacketFXLightning((float) player.posX, (float) (player.posY + player.height - 0.5), (float) player.posZ, (float) e.posX, (float) (e.posY + e.height / 2), (float) e.posZ, 0xFFFFFF, 0.02F), new NetworkRegistry.TargetPoint(world.provider.dimensionId, player.posX, player.posY, player.posZ, 32.0));
                                     if (inf == 1) {
                                         int light = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(player.getCommandSenderName(), Aspect.LIGHT);
                                         double dmg = Math.sqrt(light) * 2.5;
@@ -586,8 +589,8 @@ public class Integration {
                             EntityMob mob = (EntityMob) e;
                             if (mob.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
                                 if (!e.isDead) {
-                                    player.playSound("thaumcraft:craftfail", 1.0F, 1.0F);
-                                    Thaumcraft.proxy.beam(player.worldObj, player.posX, player.posY + player.height - 0.5, player.posZ, e.posX, e.posY + e.height / 2, e.posZ, 1, 0xFFFFFF, false, 1.0f, 1);
+                                    player.worldObj.playSoundAtEntity(player,"thaumcraft:craftfail", 1.0F, 1.0F);
+                                    TCPacketHandler.INSTANCE.sendToAllAround(new PacketFXLightning((float) player.posX, (float) (player.posY + player.height - 0.5), (float) player.posZ, (float) e.posX, (float) (e.posY + e.height / 2), (float) e.posZ, 0xFFFFFF, 0.02F), new NetworkRegistry.TargetPoint(world.provider.dimensionId, player.posX, player.posY, player.posZ, 32.0));
                                     if (inf == 1) {
                                         int light = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(player.getCommandSenderName(), Aspect.LIGHT);
                                         double dmg = Math.sqrt(light) * 2.5;
@@ -621,6 +624,7 @@ public class Integration {
                         }
                         Entity e = EntityUtils.getPointedEntity(world, player, 1.0, 32.0, 1.0F);
                         if (e instanceof EntityLiving) {
+                            player.worldObj.playSoundAtEntity(player,"thaumcraft:craftfail", 1.0F, 1.0F);
                             PotionEffect effect = new PotionEffect(thaumcraft.common.config.Config.potionBlurredID, dur + 200, 60);
                             effect.getCurativeItems().clear();
                             ((EntityLivingBase) e).addPotionEffect(effect);
