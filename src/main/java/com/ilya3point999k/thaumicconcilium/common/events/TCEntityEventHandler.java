@@ -162,7 +162,7 @@ public class TCEntityEventHandler {
         TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
         if (tile instanceof TileNode) {
             if (!event.world.isRemote) {
-                RiftEntity.createRift(event.world, new Vector3(event.x, event.y, event.z), event.getPlayer());
+                RiftEntity.createRift(event.world, new Vector3(event.x, event.y, event.z), (TileNode) tile);
             }
         }
     }

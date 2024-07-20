@@ -140,11 +140,6 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-    }
-
-    @Override
     public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
         super.writeEntityToNBT(p_70014_1_);
     }

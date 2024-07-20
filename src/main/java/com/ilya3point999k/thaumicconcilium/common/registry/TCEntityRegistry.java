@@ -34,6 +34,7 @@ public class TCEntityRegistry {
 
 		EntityRegistry.registerModEntity(WrathEffectEntity.class, "WrathEffectEntity", entityID++, ThaumicConcilium.instance, 64, 1, false);
 		EntityRegistry.registerModEntity(DistortionEffectEntity.class, "DistortionEffectEntity", entityID++, ThaumicConcilium.instance, 64, 1, false);
+		EntityRegistry.registerModEntity(UpcomingHoleEntity.class, "UpcomingHoleEntity", entityID++, ThaumicConcilium.instance, 64, 1, false);
 
 		EntityRegistry.registerModEntity(RiftEntity.class, "RiftEntity", entityID++, ThaumicConcilium.instance, 64, 3, true);
 		ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID+".RiftEntity", new AspectList().add(Aspect.VOID, 16).add(Aspect.MAGIC, 4).add(Aspect.ELDRITCH, 8).add(Aspect.ENTROPY, 32));

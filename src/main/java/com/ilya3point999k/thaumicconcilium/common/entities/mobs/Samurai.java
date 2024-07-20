@@ -2,6 +2,7 @@ package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.ai.SamuraiAttackAI;
+import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,7 +24,6 @@ public class Samurai extends EntityMob {
 
     public Samurai(World w) {
         super(w);
-
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.6D, false));
         this.tasks.addTask(2, new SamuraiAttackAI(this, EntityLivingBase.class, 1D, false));
@@ -52,8 +52,9 @@ public class Samurai extends EntityMob {
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(13, new Byte((byte) rand.nextInt(3)));
-        this.dataWatcher.addObject(14, new Short((short)0));
+        this.dataWatcher.addObject(14, new Short((short) 0));
     }
+
     @Override
     protected void addRandomArmor() {
         //super.addRandomArmor();
@@ -67,6 +68,7 @@ public class Samurai extends EntityMob {
     protected boolean isAIEnabled() {
         return true;
     }
+
     public boolean canPickUpLoot() {
         return false;
     }
@@ -99,21 +101,21 @@ public class Samurai extends EntityMob {
 
     @Override
     public boolean attackEntityAsMob(Entity p_70652_1_) {
-        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
         int i = 0;
         int type = getType();
         f += type == 2 ? 15.0F : type == 1 ? 10.0F : 7.0F;
 
         if (p_70652_1_ instanceof EntityLivingBase) {
-            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)p_70652_1_);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)p_70652_1_);
+            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) p_70652_1_);
+            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) p_70652_1_);
         }
 
         boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), f);
 
         if (flag) {
             if (i > 0) {
-                p_70652_1_.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F));
+                p_70652_1_.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -125,7 +127,7 @@ public class Samurai extends EntityMob {
             }
 
             if (p_70652_1_ instanceof EntityLivingBase) {
-                EnchantmentHelper.func_151384_a((EntityLivingBase)p_70652_1_, this);
+                EnchantmentHelper.func_151384_a((EntityLivingBase) p_70652_1_, this);
             }
 
             EnchantmentHelper.func_151385_b(this, p_70652_1_);
@@ -143,25 +145,27 @@ public class Samurai extends EntityMob {
     public byte getType() {
         return this.dataWatcher.getWatchableObjectByte(13);
     }
+
     public void setType(int par1) {
-        this.dataWatcher.updateObject(13, (byte)par1);
+        this.dataWatcher.updateObject(13, (byte) par1);
     }
 
     public int getAnger() {
         return this.dataWatcher.getWatchableObjectShort(14);
     }
+
     public void setAnger(int par1) {
-        this.dataWatcher.updateObject(14, (short)par1);
+        this.dataWatcher.updateObject(14, (short) par1);
     }
 
     @Override
     protected String getLivingSound() {
-        return ThaumicConcilium.MODID+":speech";
+        return ThaumicConcilium.MODID + ":speech";
     }
 
     @Override
     protected String getDeathSound() {
-        return ThaumicConcilium.MODID+":uagh";
+        return ThaumicConcilium.MODID + ":uagh";
     }
 
     protected float getSoundVolume() {
@@ -180,12 +184,27 @@ public class Samurai extends EntityMob {
         if (a % 3 == 0) {
             this.entityDropItem(new ItemStack(ConfigItems.itemBaubleBlanks, 1, r), 1.5F);
         }
+        r = this.rand.nextInt(10) + 4;
+        switch (getType()) {
+            case 0: {
+                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, 6, r), 1.5F);
+                break;
+            }
+            case 1: {
+                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, 7, r), 1.5F);
+                break;
+            }
+            case 2: {
+                this.entityDropItem(new ItemStack(Integration.tmMaterial, 8, r), 1.5F);
+                break;
+            }
+        }
         super.dropFewItems(flag, i);
     }
 
     @Override
     public void onUpdate() {
-        if (getAnger() > 0){
+        if (getAnger() > 0) {
             this.setAnger(this.getAnger() - 1);
         }
         super.onUpdate();

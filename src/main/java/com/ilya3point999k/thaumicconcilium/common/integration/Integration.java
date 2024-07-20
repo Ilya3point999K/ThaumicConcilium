@@ -85,6 +85,7 @@ public class Integration {
     public static ITobacco tobacco = null;
     public static Item tobaccoitem = null;
     public static Item tobaccoleaves = null;
+    public static Item tmMaterial = null;
 
     public static void init() {
         thaumicBases = Loader.isModLoaded("thaumicbases");
@@ -289,6 +290,12 @@ public class Integration {
             } else {
                 ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Tainted Magic's crimson dagger, what a mess");
             }
+
+            tmMaterial = GameRegistry.findItem("TaintedMagic", "ItemMaterial");
+            if (tmMaterial == null){
+                ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Tainted Magic's material, what a mess");
+            }
+
         }
 
         if (thaumicBases && taintedMagic) {

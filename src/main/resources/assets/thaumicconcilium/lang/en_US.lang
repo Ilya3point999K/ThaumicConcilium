@@ -447,7 +447,7 @@ entry.astralmonitor.third=The solution to your new problem came about in just th
 
 tc.research_name.ETHEREALMANIPULATOR=Wand Focus: Ethereal Manipulator
 tc.research_text.ETHEREALMANIPULATOR=Playing cat and mouse with your head
-entry.ethman.first=You have already seen, many times over, that your mind is colossally superior to the semblances of thought activity that most of those you know are operated by. Experience suggests that you will soon need a more comprehensive way to harness the power of thoughts, so you have developed an enhancement for telekinesis technology.<BR>With this focus, you can not only attract objects to you, but also move them away from you by holding Shift and scrolling the mouse wheel in the desired direction.
+entry.ethman.first=You have already seen, many times over, that your mind is colossally superior to the semblances of thought activity that most of those you know are operated by. Experience suggests that you will soon need a more comprehensive way to harness the power of thoughts, so you have developed an enhancement for telekinesis technology.<BR>With this focus, you can not only attract objects to you, but also move them away from you by holding Shift and scrolling the mouse wheel in the desired direction.<BR>The focus can control projectiles as well.
 
 tc.research_name.LITHOGRAPHER=Lithographer
 tc.research_text.LITHOGRAPHER=Body modification for health aware

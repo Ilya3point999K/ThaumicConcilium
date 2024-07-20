@@ -116,6 +116,13 @@ public class Thaumaturge extends EntityMob implements IRangedAttackMob {
 		}
 		super.onUpdate();
 	}
+	@Override
+	protected void dropFewItems(boolean flag, int i) {
+		int r = this.rand.nextInt(2);
+		r += i;
+		this.entityDropItem(new ItemStack(ConfigItems.itemResource, r, 9), 1.5F);
+		super.dropFewItems(flag, i);
+	}
 
 	public int getAnger() {
 		return this.dataWatcher.getWatchableObjectShort(14);

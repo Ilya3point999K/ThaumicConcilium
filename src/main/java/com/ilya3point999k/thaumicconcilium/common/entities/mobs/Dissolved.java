@@ -1,8 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
-import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
-import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketMakeHole;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import com.ilya3point999k.thaumicconcilium.common.entities.UpcomingHoleEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -13,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigItems;
@@ -105,15 +102,16 @@ public class Dissolved extends EntityMob {
     }
 
     public int getTalkInterval() {
-        return 500;
+        return 100;
     }
 
     @Override
     public void onLivingUpdate() {
         if ((ticksExisted % 200 == 0) && (getAttackTarget() != null)) {
             EntityLivingBase target = getAttackTarget();
-            ItemFocusPortableHole.createHole(target.worldObj, MathHelper.floor_double(target.posX), MathHelper.floor_double(target.posY) - 1, MathHelper.floor_double(target.posZ), 1, (byte) 33, 120);
-            TCPacketHandler.INSTANCE.sendToAllAround(new PacketMakeHole(target.posX, target.posY, target.posZ), new NetworkRegistry.TargetPoint(target.worldObj.provider.dimensionId, target.posX, target.posY, target.posZ, 32.0F));
+            UpcomingHoleEntity hole = new UpcomingHoleEntity(worldObj);
+            hole.setPositionAndRotation(target.posX, target.posY, target.posZ, worldObj.rand.nextFloat(), worldObj.rand.nextFloat());
+            worldObj.spawnEntityInWorld(hole);
         }
         super.onLivingUpdate();
 
@@ -128,7 +126,7 @@ public class Dissolved extends EntityMob {
 
     @Override
     protected void dropFewItems(boolean flag, int i) {
-        int r = this.rand.nextInt(2);
+        int r = this.rand.nextInt(6);
         r += i;
         this.entityDropItem(new ItemStack(ConfigItems.itemResource, r, 17), 1.5F);
         super.dropFewItems(flag, i);

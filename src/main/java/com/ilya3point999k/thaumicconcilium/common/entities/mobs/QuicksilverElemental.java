@@ -36,7 +36,6 @@ import java.util.List;
 public class QuicksilverElemental extends EntityMob {
     public QuicksilverElemental(World w) {
         super(w);
-        this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.6D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
         this.tasks.addTask(7, new EntityAIWander(this, 0.6D));
@@ -51,7 +50,7 @@ public class QuicksilverElemental extends EntityMob {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
     }
@@ -86,7 +85,7 @@ public class QuicksilverElemental extends EntityMob {
 
     @Override
     protected void dropFewItems(boolean flag, int i) {
-        int r = this.rand.nextInt(2);
+        int r = this.rand.nextInt(8) + 4;
         r += i;
         this.entityDropItem(new ItemStack(ConfigItems.itemResource, r, 3), 1.5F);
         super.dropFewItems(flag, i);
@@ -97,7 +96,7 @@ public class QuicksilverElemental extends EntityMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float f) {
-        if (!source.isFireDamage()) return false;
+        if (!source.isFireDamage()) f = 0.1F;
         int x = MathHelper.floor_double(posX);
         int y = MathHelper.floor_double(posY);
         int z = MathHelper.floor_double(posZ);
@@ -133,9 +132,11 @@ public class QuicksilverElemental extends EntityMob {
     public boolean attackEntityAsMob(Entity e) {
         if (e instanceof EntityLivingBase) {
             if (((EntityLivingBase) e).getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
+                this.swingItem();
                 float f = (float) ((EntityLivingBase) e).getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
                 return e.attackEntityFrom(DamageSource.anvil, f);
             } else {
+                this.swingItem();
                 return e.attackEntityFrom(DamageSource.anvil, (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
             }
         }
@@ -147,12 +148,16 @@ public class QuicksilverElemental extends EntityMob {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.setSize(0.6F * (getHealth() / 30.0F), 1.8F * (getHealth() / 30.0F));
-
     }
 
     @Override
     protected String getLivingSound() {
         return ThaumicConcilium.MODID + ":melted";
+    }
+
+    @Override
+    protected String getHurtSound() {
+        return "random.break";
     }
 
     @Override

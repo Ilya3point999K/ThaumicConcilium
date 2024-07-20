@@ -29,6 +29,7 @@ public class PontifexRobe extends ItemArmor implements IRunicArmor, IRepairable,
     public IIcon[] icons = new IIcon[4];
     final static ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial("TCPONTIFEXROBE", 30, new int[]{4, 8, 7, 4}, 25);
     static PontifexRobeModel model = null;
+    
     public static String chest = ThaumicConcilium.MODID + ":textures/models/armor/pontifex_robe.png";
 
     public PontifexRobe(int j, int k) {

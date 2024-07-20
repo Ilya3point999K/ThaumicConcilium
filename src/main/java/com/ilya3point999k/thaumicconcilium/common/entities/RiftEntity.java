@@ -44,6 +44,7 @@ import thaumcraft.common.lib.network.fx.PacketFXBlockZap;
 import thaumcraft.common.lib.utils.EntityUtils;
 import thaumcraft.common.lib.utils.Utils;
 import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
+import thaumcraft.common.tiles.TileNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -352,7 +353,7 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                             e.attackEntityFrom(DamageSource.outOfWorld, 2.0f);
                             continue;
                         }
-                        if (!this.chained) e.setDead();
+                        if (!this.chained && ticksExisted > 100) e.setDead();
 
                     }
                 }
@@ -565,13 +566,13 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
         }
     }
 
-    public static void createRift(World world, Vector3 pos, EntityPlayer player) {
-        Vector3 p2 = new Vector3(pos.x, world.getPrecipitationHeight((int) pos.x, (int) pos.z), pos.z);
+    public static void createRift(World world, Vector3 pos, TileNode tile) {
+        Vector3 p2 = new Vector3(pos.x, pos.y, pos.z);
         RiftEntity rift = new RiftEntity(world);
         rift.setRiftSeed(world.rand.nextInt());
+        int amount = tile.getAspects().visSize() / 2;
+        double size = MathHelper.clamp_double(amount, 5.0, 80.0);
         rift.setLocationAndAngles(p2.x, p2.y, p2.z, (float) world.rand.nextInt(360), 0.0f);
-        final int totalWarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTotal(player.getCommandSenderName());
-        double size = MathHelper.clamp_double(totalWarp, 5.0, 60.0);
         if (world.spawnEntityInWorld(rift)) {
             rift.posX = p2.x;
             rift.posY = p2.y;
@@ -587,14 +588,12 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
         rift.setRiftSeed(player.worldObj.rand.nextInt());
         rift.setLocationAndAngles(pos.x, pos.y, pos.z, (float) player.worldObj.rand.nextInt(360), 0.0f);
         rift.interdimensional = interdimensional;
-        final int totalWarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTotal(player.getCommandSenderName());
-        double size = interdimensional ? 50.0 : MathHelper.clamp_double(totalWarp, 5.0, 60.0);
+        double size = 50.0;
         if (!player.worldObj.isRemote) {
             if (player.worldObj.spawnEntityInWorld(rift)) {
                 rift.posX = pos.x;
                 rift.posY = pos.y;
                 rift.posZ = pos.z;
-                //rift.setRiftSize((int) Math.round(size));
                 rift.maxSize = ((int) size);
                 rift.setGrowing();
             }

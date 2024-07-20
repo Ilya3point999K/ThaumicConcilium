@@ -3,6 +3,7 @@ package com.ilya3point999k.thaumicconcilium.client.render.mob;
 import com.ilya3point999k.thaumicconcilium.client.render.model.FakeFortressArmorModel;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.Samurai;
 import fox.spiteful.forbidden.compat.Compat;
+import fox.spiteful.forbidden.items.ForbiddenItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -15,7 +16,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import thaumcraft.api.wands.WandCap;
 import thaumcraft.client.lib.UtilsFX;
+import thaumcraft.common.config.ConfigItems;
+import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class SamuraiRenderer extends RenderBiped {
 
@@ -30,14 +34,19 @@ public class SamuraiRenderer extends RenderBiped {
     private final ResourceLocation shadowTexture = new ResourceLocation("taintedmagic", "textures/models/ModelKatanaShadowmetal.png");
 
 
-
     private final ModelSaya saya = new ModelSaya();
     private final ModelKatana katana = new ModelKatana();
     private final ItemStack swordItem;
+    private final ItemStack wand;
 
     {
         try {
             swordItem = new ItemStack(Compat.getItem("TaintedMagic", "ItemKatana"), 1, 0);
+            wand = new ItemStack(ConfigItems.itemWandCasting);
+            ((ItemWandCasting) wand.getItem()).setCap(wand, WandCap.caps.get("crimsoncloth"));
+            ((ItemWandCasting) wand.getItem()).setRod(wand, ForbiddenItems.WAND_ROD_PROFANE);
+            ItemStack focus = new ItemStack(ConfigItems.itemFocusShock);
+            ((ItemWandCasting) wand.getItem()).setFocus(wand, focus);
         } catch (Compat.ItemNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -56,8 +65,8 @@ public class SamuraiRenderer extends RenderBiped {
     @Override
     protected void renderModel(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
         super.renderModel(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
-        byte type = ((Samurai)p_77036_1_).getType();
-        switch (type){
+        byte type = ((Samurai) p_77036_1_).getType();
+        switch (type) {
             case 0:
                 UtilsFX.bindTexture("textures/models/fortress_armor.png");
                 break;
@@ -106,7 +115,7 @@ public class SamuraiRenderer extends RenderBiped {
         GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
 
         GL11.glTranslatef(-0.6F, 2.25F, 1.25F);
-        switch (type){
+        switch (type) {
             case 0:
                 Minecraft.getMinecraft().renderEngine.bindTexture(thaumTexture);
                 break;
@@ -122,7 +131,7 @@ public class SamuraiRenderer extends RenderBiped {
         GL11.glPopMatrix();
 
         //System.out.println("AGG " + ((Samurai)p_77036_1_).getAnger());
-        if (((Samurai)p_77036_1_).getAnger() == 0) {
+        if (((Samurai) p_77036_1_).getAnger() == 0) {
             GL11.glPushMatrix();
 
             GL11.glScalef(0.5F, 0.5F, 0.5F);
@@ -141,10 +150,15 @@ public class SamuraiRenderer extends RenderBiped {
     }
 
     protected void renderEquippedItems(EntityLiving p_77029_1_, float p_77029_2_) {
-        if (((Samurai)p_77029_1_).getAnger() == 0) return;
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         super.renderEquippedItems(p_77029_1_, p_77029_2_);
-        ItemStack itemstack = swordItem;
+        boolean low = p_77029_1_.getHealth() < p_77029_1_.getMaxHealth() / 3;
+        ItemStack itemstack = null;
+        if (low) {
+            itemstack = wand;
+        } else {
+            itemstack = swordItem;
+        }
         float f1;
 
         if (itemstack != null && itemstack.getItem() != null) {
@@ -178,9 +192,17 @@ public class SamuraiRenderer extends RenderBiped {
             f2 = (float) (i & 255) / 255.0F;
             GL11.glColor4f(f4, f5, f2, 1.0F);
             GL11.glPushMatrix();
-            GL11.glScalef(0.5F, 0.5F, 0.5F);
-            GL11.glRotatef(-90F, 0.0F, 1.0F, 0.0F);
-            this.renderManager.itemRenderer.renderItem(p_77029_1_, itemstack, 0);
+
+            if (low) {
+                GL11.glRotatef(-90F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(-45F, 1.0F, 0.0F, 0.0F);
+                GL11.glTranslated(0.1, -0.5, -0.1);
+                this.renderManager.itemRenderer.renderItem(p_77029_1_, itemstack, 0);
+            } else if (((Samurai) p_77029_1_).getAnger() != 0) {
+                GL11.glScalef(0.5F, 0.5F, 0.5F);
+                GL11.glRotatef(-90F, 0.0F, 1.0F, 0.0F);
+                this.renderManager.itemRenderer.renderItem(p_77029_1_, itemstack, 0);
+            }
             GL11.glPopMatrix();
             GL11.glPopMatrix();
         }

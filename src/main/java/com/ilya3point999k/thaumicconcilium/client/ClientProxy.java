@@ -101,6 +101,7 @@ public class ClientProxy extends CommonProxy {
 
         RenderingRegistry.registerEntityRenderingHandler(WrathEffectEntity.class, new WrathEffectRender());
         RenderingRegistry.registerEntityRenderingHandler(DistortionEffectEntity.class, new DistortionEffectRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(UpcomingHoleEntity.class, new UpcomingHoleRender());
 
         RenderingRegistry.registerEntityRenderingHandler(Thaumaturge.class, new ThaumaturgeRenderer(new ModelBiped(),
                 new ResourceLocation(ThaumicConcilium.MODID + ":textures/entity/thaumaturge.png"), 0.5f));
@@ -216,7 +217,7 @@ public class ClientProxy extends CommonProxy {
                         ClientEvents.isEnslaved = false;
                     }
 
-                    if(player.ticksExisted % 20 == 0) {
+                    if(player.ticksExisted % 60 == 0) {
                         player.rotationYaw = 360.0F * (-0.5F + player.worldObj.rand.nextFloat());
                     }
                     player.moveEntityWithHeading((-0.5F + player.worldObj.rand.nextFloat()), 1.0F);

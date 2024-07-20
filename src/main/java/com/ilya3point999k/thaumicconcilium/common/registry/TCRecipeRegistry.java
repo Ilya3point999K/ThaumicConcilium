@@ -570,7 +570,7 @@ public class TCRecipeRegistry {
                                 new ItemStack(ForbiddenItems.wandCap, 1, 3),
                                 new ItemStack(ConfigItems.itemResource, 1, 14),
                                 new ItemStack(resource, 1, 2)}));
-                Thaumonomicon.recipes.put("DreamwoodBracelet", ThaumcraftApi.addInfusionCraftingRecipe("DREAMWOODBRACELET", new ItemStack(TCItemRegistry.castingBracelet, 1, 0), 5, new AspectList().add(Aspect.TOOL, 32).add(Aspect.TREE, 128).add(Aspect.SOUL, 64).add(Aspect.MAGIC, 64),
+                Thaumonomicon.recipes.put("DreamwoodBracelet", ThaumcraftApi.addInfusionCraftingRecipe("DREAMWOODBRACELET", new ItemStack(TCItemRegistry.castingBracelet, 1, 1), 5, new AspectList().add(Aspect.TOOL, 32).add(Aspect.TREE, 128).add(Aspect.SOUL, 64).add(Aspect.MAGIC, 64),
                         new ItemStack(ForbiddenItems.wandCore, 1, 13), new ItemStack[]{
                                 new ItemStack(ForbiddenItems.wandCap, 1, 5),
                                 new ItemStack(ConfigItems.itemResource, 1, 14),

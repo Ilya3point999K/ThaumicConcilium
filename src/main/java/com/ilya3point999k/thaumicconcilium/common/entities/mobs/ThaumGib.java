@@ -37,7 +37,7 @@ public class ThaumGib extends EntityMob {
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.85D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
     }
 
     @Override

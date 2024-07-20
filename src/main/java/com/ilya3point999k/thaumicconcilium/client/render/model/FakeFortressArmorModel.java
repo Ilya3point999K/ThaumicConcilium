@@ -451,18 +451,18 @@ public class FakeFortressArmorModel extends ModelBiped {
         this.bipedHead.addChild(this.Mask[1]);
         this.bipedHead.addChild(this.Mask[2]);
         this.bipedBody.cubeList.clear();
-        if (f < 1.0F) {
+        //if (f < 1.0F) {
             this.bipedBody.addChild(this.Mbelt);
             this.bipedBody.addChild(this.MbeltL);
             this.bipedBody.addChild(this.MbeltR);
-        } else {
+        //} else {
             this.bipedBody.addChild(this.BeltR);
             this.bipedBody.addChild(this.BeltL);
             this.bipedBody.addChild(this.Chestplate);
             this.bipedBody.addChild(this.Scroll);
             this.bipedBody.addChild(this.Backplate);
             this.bipedBody.addChild(this.Book);
-        }
+        //}
 
         this.bipedRightArm.cubeList.clear();
         this.bipedRightArm.addChild(this.ShoulderR);
