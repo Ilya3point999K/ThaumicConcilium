@@ -43,6 +43,8 @@ public class TCConfig {
     public static int madThaumaturgeReplacesBrainyZombieChance;
     public static int crimsonPaladinReplacesCultistWarriorChance;
 
+    public static boolean quicksilverImmortality;
+
     public static int causalBouillonID;
 
     public static void configurate(File f){
@@ -82,6 +84,8 @@ public class TCConfig {
 
             madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
             crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
+
+            quicksilverImmortality = conf.getBoolean("quicksilverImmortality", "mobs", true, "Will quicksilver elemental be immune to non-fire attacks.");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
         } catch (Exception e){

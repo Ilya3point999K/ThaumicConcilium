@@ -437,7 +437,7 @@ public class Thaumonomicon {
 				r.setConcealed().setParents("BRAINLITTERING", "LIQUIDDEATH", "ELDRITCHMINOR").setParentsHidden("CRYSTALBRAIN").registerResearchItem();
 				ThaumcraftApi.addWarpToResearch("REDPOWEREDMIND", 5);
 			}
-			if (Integration.thaumicBases){
+			if (Integration.thaumicBases && Integration.allowTobacco){
 				r = new ResearchItem("DOPESQUID", catName, new AspectList().add(Aspect.PLANT, 10).add(Aspect.BEAST, 10).add(Aspect.MAGIC, 10).add(Aspect.MAN, 10).add(Aspect.FLIGHT, 10),
 						11, -2, 2, new ItemStack(TCItemRegistry.itemEntityIcon, 1, 6));
 				r.setPages(new ResearchPage("entry.dopesquid.first"), infusionPage("DopeSquid"));

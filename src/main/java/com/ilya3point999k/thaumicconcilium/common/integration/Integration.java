@@ -82,6 +82,7 @@ public class Integration {
     public static Class crystalEye = null;
 
     public static Item crimsonDagger = null;
+    public static boolean allowTobacco = false;
     public static ITobacco tobacco = null;
     public static Item tobaccoitem = null;
     public static Item tobaccoleaves = null;
@@ -308,17 +309,23 @@ public class Integration {
 
         if (horizons) {
             if (thaumicBases){
-                tobaccoitem = GameRegistry.findItem("thaumicbases", "tobaccoPowder");
-                if (tobaccoitem != null){
-                    tobacco = (ITobacco) tobaccoitem;
-                } else {
-                    ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Thaumic Bases's tobacco, what a mess");
+                try {
+                    if (Class.forName("tb.utils.TBConfig").getField("allowTobacco").getBoolean(null)) {
+                        allowTobacco = true;
+                        tobaccoitem = GameRegistry.findItem("thaumicbases", "tobaccoPowder");
+                        if (tobaccoitem != null) {
+                            tobacco = (ITobacco) tobaccoitem;
+                        } else {
+                            ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Thaumic Bases's tobacco, what a mess");
+                        }
+                        tobaccoleaves = GameRegistry.findItem("thaumicbases", "resource");
+                        if (tobaccoleaves == null) {
+                            ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Thaumic Bases's tobacco leaves, what a mess");
+                        }
+                    }
+                } catch (IllegalAccessException | NoSuchFieldException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
-                tobaccoleaves = GameRegistry.findItem("thaumicbases", "resource");
-                if (tobaccoleaves == null){
-                    ThaumicConcilium.logger.log(Level.ERROR, "Couldn't find Thaumic Bases's tobacco leaves, what a mess");
-                }
-
             }
 
 
@@ -419,7 +426,7 @@ public class Integration {
                 }
             }
 
-            if (thaumicBases){
+            if (thaumicBases && allowTobacco){
                 Object dopeSquidRecipe = null;
                 try {
                     dopeSquidRecipe = creatureInfusion.getConstructors()[0].newInstance("DOPESQUID", 44, 4, new AspectList().add(Aspect.PLANT, 64).add(Aspect.MAGIC, 64).add(Aspect.MAN, 32).add(Aspect.FLIGHT, 64),

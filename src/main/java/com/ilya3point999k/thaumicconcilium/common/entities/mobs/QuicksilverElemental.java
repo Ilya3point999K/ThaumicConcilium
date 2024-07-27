@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
 import com.ilya3point999k.thaumicconcilium.common.tiles.QuicksilverCrucibleTile;
@@ -96,7 +97,13 @@ public class QuicksilverElemental extends EntityMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float f) {
-        if (!source.isFireDamage()) f = 0.1F;
+        if (!source.isFireDamage()) {
+            if (TCConfig.quicksilverImmortality){
+                return false;
+            } else {
+                f = 0.1F;
+            }
+        }
         int x = MathHelper.floor_double(posX);
         int y = MathHelper.floor_double(posY);
         int z = MathHelper.floor_double(posZ);

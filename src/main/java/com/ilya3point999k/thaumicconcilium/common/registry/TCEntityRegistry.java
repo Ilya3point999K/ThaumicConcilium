@@ -52,7 +52,7 @@ public class TCEntityRegistry {
 			EntityRegistry.registerModEntity(ThaumGib.class, "ThaumGib", entityID++, ThaumicConcilium.instance, 64, 3, true);
 			ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID + ".ThaumGib", new AspectList().add(Aspect.MAN, 4).add(Aspect.MAGIC, 4).add(Aspect.LIFE, 4).add(Aspect.ENTROPY, 4));
 
-			if (Integration.thaumicBases) {
+			if (Integration.thaumicBases && Integration.allowTobacco) {
 				EntityRegistry.registerModEntity(DopeSquid.class, "DopeSquid", entityID++, ThaumicConcilium.instance, 64, 3, true);
 				ItemSpawnerEgg.addMapping("DopeSquid", 0x00FFFF, 0x00008B);
 				ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID + ".DopeSquid", new AspectList().add(Aspect.MAN, 4).add(Aspect.MAGIC, 4).add(Aspect.LIFE, 4).add(Aspect.ENTROPY, 4));

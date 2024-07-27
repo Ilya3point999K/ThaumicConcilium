@@ -187,15 +187,15 @@ public class Samurai extends EntityMob {
         r = this.rand.nextInt(10) + 4;
         switch (getType()) {
             case 0: {
-                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, 6, r), 1.5F);
+                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, r, 6), 1.5F);
                 break;
             }
             case 1: {
-                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, 7, r), 1.5F);
+                this.entityDropItem(new ItemStack(ConfigItems.itemNugget, r, 7), 1.5F);
                 break;
             }
             case 2: {
-                this.entityDropItem(new ItemStack(Integration.tmMaterial, 8, r), 1.5F);
+                this.entityDropItem(new ItemStack(Integration.tmMaterial, r, 8), 1.5F);
                 break;
             }
         }

@@ -96,7 +96,7 @@ public class SamuraiAttackAI extends EntityAIBase {
      * Execute a one shot task or start executing a continuous task
      */
     public void startExecuting() {
-        if (((Samurai) this.attacker).getAnger() <= 200) {
+        if (((Samurai) this.attacker).getAnger() <= 200 && this.attacker.getHealth() > this.attacker.getMaxHealth() / 3) {
             ((Samurai) this.attacker).setAnger(MathHelper.clamp_int(200 + this.attacker.worldObj.rand.nextInt(200), 0, 1000));
         }
         this.attacker.getNavigator().setPath(this.entityPathEntity, this.speedTowardsTarget);
@@ -169,13 +169,12 @@ public class SamuraiAttackAI extends EntityAIBase {
                 this.entityPathEntity = this.attacker.getNavigator().getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
                 this.attacker.getNavigator().tryMoveToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord, this.speedTowardsTarget);
                 if (this.attacker.ticksExisted % 20 == 0 && d0 < 256F) {
-                    if (this.attacker.getRNG().nextInt(100) > 90) {
-                        this.attacker.faceEntity(entitylivingbase, 100F, 100F);
-                    }
                     if (!worldObj.isRemote) {
-                        this.attacker.worldObj.playSoundEffect(this.attacker.posX, this.attacker.posY, this.attacker.posZ, "thaumcraft:shock", 0.25F, 1.0F);
-                        entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.attacker), 2 * (((Samurai) this.attacker).getType() + 1));
-                        TCPacketHandler.INSTANCE.sendToAllAround(new PacketFXLightning((float) this.attacker.posX, (float) (this.attacker.posY + this.attacker.height - 0.5), (float) this.attacker.posZ, (float) entitylivingbase.posX, (float) (entitylivingbase.posY + entitylivingbase.height / 2), (float) entitylivingbase.posZ, 0x6666DD, 0.02F), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.attacker.posX, this.attacker.posY, this.attacker.posZ, 32.0));
+                        if (this.attacker.getEntitySenses().canSee(entitylivingbase)) {
+                            this.attacker.worldObj.playSoundEffect(this.attacker.posX, this.attacker.posY, this.attacker.posZ, "thaumcraft:shock", 0.25F, 1.0F);
+                            entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.attacker), 2 * (((Samurai) this.attacker).getType() + 1));
+                            TCPacketHandler.INSTANCE.sendToAllAround(new PacketFXLightning((float) this.attacker.posX, (float) (this.attacker.posY + this.attacker.height - 0.5), (float) this.attacker.posZ, (float) entitylivingbase.posX, (float) (entitylivingbase.posY + entitylivingbase.height / 2), (float) entitylivingbase.posZ, 0x6666DD, 0.02F), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.attacker.posX, this.attacker.posY, this.attacker.posZ, 32.0));
+                        }
                     }
                 }
             }

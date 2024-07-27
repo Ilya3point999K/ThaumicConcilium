@@ -268,13 +268,15 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                 }
             }
             if (!this.worldObj.isRemote) {
-                copy = points.get(pi + 1);
-                Vec3 v2 = Vec3.createVectorHelper(copy.xCoord, copy.yCoord, copy.zCoord).addVector(posX, posY + height / 2.0, posZ);
-                MovingObjectPosition rt = this.worldObj.rayTraceBlocks(v1, v2, false);
-                if (rt != null) {
-                    Block block = this.worldObj.getBlock(rt.blockX, rt.blockY, rt.blockZ);
-                    if (!this.worldObj.isAirBlock(rt.blockX, rt.blockY, rt.blockZ) && EntityEnderman.getCarriable(block) && block.getBlockHardness(this.worldObj, rt.blockX, rt.blockY, rt.blockZ) >= 0.0f && block.canCollideCheck(block.getDamageValue(this.worldObj, rt.blockX, rt.blockY, rt.blockZ), false)) {
-                        this.worldObj.setBlockToAir(rt.blockX, rt.blockY, rt.blockZ);
+                if (this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
+                    copy = points.get(pi + 1);
+                    Vec3 v2 = Vec3.createVectorHelper(copy.xCoord, copy.yCoord, copy.zCoord).addVector(posX, posY + height / 2.0, posZ);
+                    MovingObjectPosition rt = this.worldObj.rayTraceBlocks(v1, v2, false);
+                    if (rt != null) {
+                        Block block = this.worldObj.getBlock(rt.blockX, rt.blockY, rt.blockZ);
+                        if (!this.worldObj.isAirBlock(rt.blockX, rt.blockY, rt.blockZ) && EntityEnderman.getCarriable(block) && block.getBlockHardness(this.worldObj, rt.blockX, rt.blockY, rt.blockZ) >= 0.0f && block.canCollideCheck(block.getDamageValue(this.worldObj, rt.blockX, rt.blockY, rt.blockZ), false)) {
+                            this.worldObj.setBlockToAir(rt.blockX, rt.blockY, rt.blockZ);
+                        }
                     }
                 }
                 List<Entity> el = EntityUtils.getEntitiesInRange(this.worldObj, v1.xCoord, v1.yCoord, v1.zCoord, this, Entity.class, 0.5);

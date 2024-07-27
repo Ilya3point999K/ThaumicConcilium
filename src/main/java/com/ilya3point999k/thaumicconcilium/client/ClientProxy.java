@@ -127,7 +127,7 @@ public class ClientProxy extends CommonProxy {
                     new ResourceLocation(ThaumicConcilium.MODID + ":textures/entity/overanimated.png"), 0.5f));
             RenderingRegistry.registerEntityRenderingHandler(ThaumGib.class, new ThaumGibRenderer());
 
-            if (Integration.thaumicBases) {
+            if (Integration.thaumicBases && Integration.allowTobacco) {
                 RenderingRegistry.registerEntityRenderingHandler(DopeSquid.class, new DopeSquidRenderer(new ModelSquid(), 0.5F));
             }
 
