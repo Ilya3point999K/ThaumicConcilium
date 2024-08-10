@@ -26,6 +26,8 @@ tc.tooltip.book.1=Click to study it.
 tc.tooltip.book.2=The meaning of this book remains unclear to you.
 tc.tooltip.life.0=You've never held anything more
 tc.tooltip.life.1=pleasant in your hands than this.
+tc.tooltip.polishment=Right click on Rift to remove it.
+tc.tooltip.creative=§6Creative Only
 
 tc.valet.gui.text=I hear and obey Your will.
 tc.assistant.gui.text=What kind of specimen do You need this time?
@@ -99,6 +101,7 @@ tile.FleshCrucible.name=Crucible of Flesh
 tile.VoidRealityBlock.name=Void Reality
 tile.HexOfPredictability.name=Hex Of Predictability
 
+item.PolishmentDevice.name=Polishment Device
 item.BottleOfThickTaint.name=Bottle of Thick Taint
 item.VisCapsule.name=Vis Capsule
 item.BurdeningAmulet.name=Burdening Amulet

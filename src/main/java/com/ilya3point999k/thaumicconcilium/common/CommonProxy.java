@@ -27,7 +27,11 @@ import thaumcraft.common.entities.golems.EntityGolemBase;
 public class CommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		Integration.init();
+		try {
+			Integration.init();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		TCEntityRegistry.init();
 		TCConfig.configurate(event.getSuggestedConfigurationFile());
 		TCPacketHandler.init();

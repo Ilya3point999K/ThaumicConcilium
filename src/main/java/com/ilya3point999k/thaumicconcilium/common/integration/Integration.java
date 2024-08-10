@@ -55,6 +55,7 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.utils.EntityUtils;
+import thaumic.tinkerer.common.core.handler.ConfigHandler;
 import thaumic.tinkerer.common.core.helper.MiscHelper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -88,14 +89,16 @@ public class Integration {
     public static Item tobaccoleaves = null;
     public static Item tmMaterial = null;
 
-    public static void init() {
+    public static void init() throws Exception {
         thaumicBases = Loader.isModLoaded("thaumicbases");
         taintedMagic = Loader.isModLoaded("TaintedMagic");
         gadomancy = Loader.isModLoaded("gadomancy");
         horizons = Loader.isModLoaded("ThaumicHorizons");
         automagy = Loader.isModLoaded("Automagy");
         witchery = Loader.isModLoaded("witchery");
-
+        if (!ConfigHandler.enableKami){
+            throw new Exception("Thaumic Concilium - turning off KAMI module of Thaumic Tinkerer is not supported.");
+        }
         if (gadomancy) {
             if (horizons) {
                 GadomancyApi.registerAdditionalGolemCore("assistantCore", new AssistantGolemCore());

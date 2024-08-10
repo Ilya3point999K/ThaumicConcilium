@@ -41,6 +41,7 @@ public class ShardPowderEntity extends Entity implements IEntityAdditionalSpawnD
     public int orbCooldown;
     private int orbHealth = 5;
     public int type;
+    public int iteration;
     private EntityPlayer closestPlayer;
     private EntityLivingBase caster;
 
@@ -64,7 +65,20 @@ public class ShardPowderEntity extends Entity implements IEntityAdditionalSpawnD
         this.caster = caster;
         this.rotationYaw = (float)(Math.random() * 360.0);
         this.type = type;
+        this.iteration = 0;
     }
+
+    public ShardPowderEntity(EntityLivingBase caster, int iteration, double x, double y, double z) {
+        super(caster.worldObj);
+        this.setSize(0.125F, 0.125F);
+        this.yOffset = this.height / 2.0F;
+        this.setPosition(x, y, z);
+        this.caster = caster;
+        this.rotationYaw = (float)(Math.random() * 360.0);
+        this.type = 8;
+        this.iteration = iteration;
+    }
+
 
     protected boolean canTriggerWalking() {
         return false;
@@ -254,7 +268,10 @@ public class ShardPowderEntity extends Entity implements IEntityAdditionalSpawnD
                 if (!worldObj.isRemote) {
                     for (Entity e : projs) {
                         if (e instanceof IProjectile) {
-                            worldObj.spawnEntityInWorld(new ShardPowderEntity(caster, e.posX, e.posY, e.posZ, 8));
+                            if (caster != null && iteration < 5) {
+                                ShardPowderEntity powder = new ShardPowderEntity(caster, iteration + 1, e.posX, e.posY, e.posZ);
+                                worldObj.spawnEntityInWorld(powder);
+                            }
                             e.setDead();
                         }
                     }
@@ -403,12 +420,14 @@ public class ShardPowderEntity extends Entity implements IEntityAdditionalSpawnD
     @Override
     public void writeSpawnData(ByteBuf buffer) {
         buffer.writeInt(this.type);
+        buffer.writeInt(this.iteration);
     }
 
     @Override
     public void readSpawnData(ByteBuf additionalData) {
         try {
             this.type = additionalData.readInt();
+            this.iteration = additionalData.readInt();
         } catch (Exception e){}
     }
 }

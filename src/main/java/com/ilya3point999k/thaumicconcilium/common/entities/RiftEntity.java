@@ -5,6 +5,7 @@ import com.ilya3point999k.thaumicconcilium.common.dim.CausalBouillonTeleporter;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.BrightestOne;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.LesserPortal;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.ChargedWispEntity;
+import com.ilya3point999k.thaumicconcilium.common.items.PolishmentDevice;
 import com.ilya3point999k.thaumicconcilium.common.items.RiftGem;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXBurst;
@@ -137,6 +138,19 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
     @Override
     public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 
+    }
+
+    @Override
+    public boolean interactFirst(EntityPlayer player) {
+        ItemStack stack = player.getHeldItem();
+        if (stack != null){
+            if(stack.getItem() instanceof PolishmentDevice){
+                if (!player.worldObj.isRemote) {
+                    this.setDead();
+                }
+            }
+        }
+        return super.interactFirst(player);
     }
 
     public void setCollisionSize(float width, float height) {
@@ -445,6 +459,9 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                             }
                         }
 
+                    } else {
+                        int r = this.rand.nextInt(12);
+                        this.entityDropItem(new ItemStack(ConfigItems.itemResource, r, 17), 1.5F);
                     }
                     setDead();
                 }
@@ -569,19 +586,22 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
     }
 
     public static void createRift(World world, Vector3 pos, TileNode tile) {
-        Vector3 p2 = new Vector3(pos.x, pos.y, pos.z);
-        RiftEntity rift = new RiftEntity(world);
-        rift.setRiftSeed(world.rand.nextInt());
-        int amount = tile.getAspects().visSize() / 2;
-        double size = MathHelper.clamp_double(amount, 5.0, 80.0);
-        rift.setLocationAndAngles(p2.x, p2.y, p2.z, (float) world.rand.nextInt(360), 0.0f);
-        if (world.spawnEntityInWorld(rift)) {
-            rift.posX = p2.x;
-            rift.posY = p2.y;
-            rift.posZ = p2.z;
-            rift.setRiftSize(5);
-            rift.maxSize = ((int) size);
-            rift.setGrowing();
+        if (world.rand.nextInt(100) > TCConfig.chanceOfRiftOpening) {
+            Vector3 p2 = new Vector3(pos.x, pos.y, pos.z);
+            RiftEntity rift = new RiftEntity(world);
+            rift.setRiftSeed(world.rand.nextInt());
+            int amount = tile.getAspects().visSize() / 2;
+            if (amount < 5) return;
+            double size = MathHelper.clamp_double(amount, 5.0, 80.0);
+            rift.setLocationAndAngles(p2.x, p2.y, p2.z, (float) world.rand.nextInt(360), 0.0f);
+            if (world.spawnEntityInWorld(rift)) {
+                rift.posX = p2.x;
+                rift.posY = p2.y;
+                rift.posZ = p2.z;
+                rift.setRiftSize(5);
+                rift.maxSize = ((int) size);
+                rift.setGrowing();
+            }
         }
     }
 

@@ -382,7 +382,7 @@ public class Thaumonomicon {
 			r = new ResearchItem("VALETCORE", catName, new AspectList().add(Aspect.MAN, 8).add(DarkAspects.PRIDE, 8).add(Aspect.MECHANISM, 8),
 					-7, -1, 2, new ItemStack(TCItemRegistry.golemCores, 1, 1));
 			r.setPages(new ResearchPage("entry.valetcore.first"), infusionPage("ValetCore"));
-			r.setConcealed().setParents("TCGADOMANCY").setParentsHidden("GADOMANCY.COREUSE").registerResearchItem();
+			r.setConcealed().setParents("TCGADOMANCY").setParentsHidden("COREUSE", "ARCANEEAR").registerResearchItem();
 
 			if (Integration.horizons) {
 				r = new ResearchItem("ASSISTANCECORE", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.TRAP, 8).add(Aspect.BEAST, 8),

@@ -44,6 +44,7 @@ public class TCConfig {
     public static int crimsonPaladinReplacesCultistWarriorChance;
 
     public static boolean quicksilverImmortality;
+    public static int chanceOfRiftOpening;
 
     public static int causalBouillonID;
 
@@ -82,10 +83,12 @@ public class TCConfig {
             paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
             vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
 
-            madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
-            crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always");
+            madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
+            crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
 
-            quicksilverImmortality = conf.getBoolean("quicksilverImmortality", "mobs", true, "Will quicksilver elemental be immune to non-fire attacks.");
+            quicksilverImmortality = conf.getBoolean("quicksilverImmortality", "balance", true, "Will quicksilver elemental be immune to non-fire attacks.");
+
+            chanceOfRiftOpening = conf.getInt("chanceOfRiftOpening", "balance", 0, 0, Integer.MAX_VALUE, "99 - never, 0 - always. Never is not recommended, it will lead to softlock of progress in unmodified survival.");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
         } catch (Exception e){

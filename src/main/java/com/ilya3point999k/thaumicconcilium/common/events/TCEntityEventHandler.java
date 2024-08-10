@@ -136,7 +136,7 @@ public class TCEntityEventHandler {
                 }
             }
         }
-        if (event.entityLiving instanceof EntityCultist && event.target instanceof EntityPlayer) {
+        if (Integration.taintedMagic && event.entityLiving instanceof EntityCultist && event.target instanceof EntityPlayer) {
             if (PontifexRobe.isFullSet((EntityPlayer) event.target)) {
                 ((EntityLiving) event.entityLiving).setAttackTarget(null);
             }
