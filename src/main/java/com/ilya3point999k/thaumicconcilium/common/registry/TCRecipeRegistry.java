@@ -163,7 +163,7 @@ public class TCRecipeRegistry {
                         new ItemStack(ForbiddenItems.deadlyShards, 1, 5),
                         new ItemStack(ConfigItems.itemShovelThaumium)}));
 
-        Thaumonomicon.recipes.put("RunicBodyWindings", ThaumcraftApi.addInfusionCraftingRecipe("RUNICWIDINGS", new ItemStack(TCItemRegistry.runicBodyWindings), 10, new AspectList().add(Aspect.ELDRITCH, 64).add(Aspect.ARMOR, 128).add(Aspect.MAGIC, 32).add(Aspect.ENERGY, 64).add(Aspect.MIND, 128),
+        Thaumonomicon.recipes.put("RunicBodyWindings", ThaumcraftApi.addInfusionCraftingRecipe("RUNICWINDINGS", new ItemStack(TCItemRegistry.runicBodyWindings), 10, new AspectList().add(Aspect.ELDRITCH, 64).add(Aspect.ARMOR, 128).add(Aspect.MAGIC, 32).add(Aspect.ENERGY, 64).add(Aspect.MIND, 128),
                 new ItemStack(Items.paper), new ItemStack[]{
                         new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemResource, 1, 1),
@@ -178,7 +178,7 @@ public class TCRecipeRegistry {
                         new ItemStack(ConfigItems.itemResearchNotes, 1, 42),
                         new ItemStack(ConfigBlocks.blockCrystal, 1, 6)}));
 
-        Thaumonomicon.recipes.put("RunicLegsWindings", ThaumcraftApi.addInfusionCraftingRecipe("RUNICWIDINGS", new ItemStack(TCItemRegistry.runicLegsWindings), 10, new AspectList().add(Aspect.ELDRITCH, 64).add(Aspect.ARMOR, 128).add(Aspect.MAGIC, 32).add(Aspect.ENERGY, 64).add(Aspect.MIND, 128),
+        Thaumonomicon.recipes.put("RunicLegsWindings", ThaumcraftApi.addInfusionCraftingRecipe("RUNICWINDINGS", new ItemStack(TCItemRegistry.runicLegsWindings), 10, new AspectList().add(Aspect.ELDRITCH, 64).add(Aspect.ARMOR, 128).add(Aspect.MAGIC, 32).add(Aspect.ENERGY, 64).add(Aspect.MIND, 128),
                 new ItemStack(Items.paper), new ItemStack[]{
                         new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemResource, 1, 1),

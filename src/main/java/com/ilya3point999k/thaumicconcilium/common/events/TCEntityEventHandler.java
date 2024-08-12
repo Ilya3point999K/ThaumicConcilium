@@ -176,7 +176,7 @@ public class TCEntityEventHandler {
                     ItemStack stack = e.entityPlayer.getHeldItem();
                     if (stack.getItem() == ConfigItems.itemResearchNotes) {
                         ResearchNoteData data = ResearchManager.getData(stack);
-                        if (data.key.equals("CRIMSONSPELLS")) {
+                        if (data != null && data.key != null && data.key.equals("CRIMSONSPELLS")) {
                             NBTTagCompound nbtPlayer = null;
                             try {
                                 nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);

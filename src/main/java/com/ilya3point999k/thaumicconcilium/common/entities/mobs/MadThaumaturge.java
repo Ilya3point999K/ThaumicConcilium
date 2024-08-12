@@ -106,8 +106,8 @@ public class MadThaumaturge extends EntityMob {
 
     @Override
     protected boolean interact(EntityPlayer player) {
-        if (!Integration.taintedMagic) return false;
-        if (player.getHeldItem() == null) return false;
+        if (!Integration.taintedMagic) return true;
+        if (player.getHeldItem() == null) return true;
         if (PontifexRobe.isFullSet(player) && player.getHeldItem().getItem() == Integration.crimsonDagger){
             if (!player.worldObj.isRemote) {
                 this.setDead();
