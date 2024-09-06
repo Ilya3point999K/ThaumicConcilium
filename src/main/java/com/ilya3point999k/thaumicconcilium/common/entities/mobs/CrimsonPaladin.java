@@ -135,7 +135,7 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
         } else if (r <= 3 + i) {
             this.entityDropItem(new ItemStack(ConfigItems.itemResource, 1, 18), 1.5F);
         }
-
+        
         super.dropFewItems(flag, i);
     }
 

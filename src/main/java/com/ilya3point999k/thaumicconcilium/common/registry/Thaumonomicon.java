@@ -253,7 +253,7 @@ public class Thaumonomicon {
 		r = new ResearchItem("THAUMDRUM", catName, new AspectList().add(Aspect.SENSES, 10).add(Aspect.AURA, 20).add(Aspect.LIFE, 10),
 				-6, 7, 2, new ItemStack(TCItemRegistry.thaumaturgeDrum));
 		r.setPages(new ResearchPage("entry.thaumdrum.first"), infusionPage("ThaumDrum"));
-		r.setConcealed().setHidden().setParents("VISCONDUCTOR").registerResearchItem();
+		r.setHidden().setParents("VISCONDUCTOR").setItemTriggers(new ItemStack(Blocks.noteblock)).setEntityTriggers("Thaumcraft.Wisp").registerResearchItem();
 
 		r = new ResearchItem("WARPDRUM", catName, new AspectList().add(Aspect.SENSES, 10).add(Aspect.MIND, 20).add(Aspect.LIFE, 10).add(Aspect.ENTROPY, 10).add(Aspect.BEAST, 10),
 				-5, 7, 2, new ItemStack(TCItemRegistry.thaumaturgeDrum, 1, 1));
