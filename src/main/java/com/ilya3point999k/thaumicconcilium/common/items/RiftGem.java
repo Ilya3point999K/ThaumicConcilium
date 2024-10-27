@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -88,6 +89,7 @@ public class RiftGem extends Item {
                 tag = new NBTTagCompound();
                 tag.setInteger("MAX_GEMS", 0);
                 tag.setInteger("CURR", 0);
+                tag.setBoolean("REVERSE", false);
                 stack.setTagCompound(tag);
             }
             if (player.isSneaking()) {
@@ -96,12 +98,33 @@ public class RiftGem extends Item {
                 int curr = tag.getInteger("CURR") + 1;
                 if (curr >= max) curr = 0;
                 tag.setInteger("CURR", curr);
-                System.out.println("MAX " + max);
-                System.out.println("CURR " + curr);
                 stack.setTagCompound(tag);
             } else player.setItemInUse(stack, Integer.MAX_VALUE);
         }
         return stack;
+    }
+
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (!(entityLiving instanceof EntityPlayer)) {
+            return super.onEntitySwing(entityLiving, stack);
+        }
+        EntityPlayer player = (EntityPlayer) entityLiving;
+        NBTTagCompound tag = stack.getTagCompound();
+        if (tag == null) {
+            tag = new NBTTagCompound();
+            tag.setInteger("MAX_GEMS", 0);
+            tag.setInteger("CURR", 0);
+            tag.setBoolean("REVERSE", false);
+            stack.setTagCompound(tag);
+        } else {
+            if (!player.isSneaking()) {
+                return super.onEntitySwing(entityLiving, stack);
+            } else {
+                tag.setBoolean("REVERSE", !tag.getBoolean("REVERSE"));
+            }
+        }
+        return super.onEntitySwing(entityLiving, stack);
     }
 
     @Override
@@ -148,6 +171,8 @@ public class RiftGem extends Item {
 
             NBTTagCompound tag = stack.getTagCompound();
             if (tag != null) {
+                boolean mode = tag.getBoolean("REVERSE");
+                list.add(StatCollector.translateToLocal(mode ? "tc.tooltip.riftgem.deflate" : "tc.tooltip.riftgem.inflate"));
                 int am = tag.getInteger("MAX_GEMS");
                 if (am > 0) {
                     int curr = tag.getInteger("CURR");

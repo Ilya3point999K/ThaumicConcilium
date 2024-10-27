@@ -295,18 +295,20 @@ public class TCEntityEventHandler {
             }
         }
         if (Integration.taintedMagic) {
-            if (!event.entityPlayer.worldObj.isRemote && PontifexRobe.isFullSet(event.entityPlayer) && event.target != null) {
-                List<EntityCultist> list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityCultist.class, event.entityPlayer.boundingBox.expand(32, 32, 32));
-                if (!list.isEmpty()) {
-                    int life = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(event.entityPlayer.getCommandSenderName(), Aspect.HUNGER);
-                    int heal = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(event.entityPlayer.getCommandSenderName(), Aspect.HEAL);
-                    int potency = MathHelper.clamp_int((life / 100), 1, 200);
-                    int regen = MathHelper.clamp_int((heal / 100), 1, 200);
-                    for (EntityCultist cultist : list) {
-                        if (event.target instanceof EntityLivingBase && !(cultist instanceof IBossDisplayData) && !(event.target instanceof EntityCultist)) {
-                            cultist.setAttackTarget((EntityLivingBase) event.target);
-                            cultist.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 100, potency));
-                            cultist.addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, regen));
+            if (!event.entityPlayer.worldObj.isRemote && event.target != null) {
+                if(PontifexRobe.isFullSet(event.entityPlayer)) {
+                    List<EntityCultist> list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityCultist.class, event.entityPlayer.boundingBox.expand(32, 32, 32));
+                    if (!list.isEmpty()) {
+                        int life = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(event.entityPlayer.getCommandSenderName(), Aspect.HUNGER);
+                        int heal = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(event.entityPlayer.getCommandSenderName(), Aspect.HEAL);
+                        int potency = MathHelper.clamp_int((life / 100), 1, 200);
+                        int regen = MathHelper.clamp_int((heal / 100), 1, 200);
+                        for (EntityCultist cultist : list) {
+                            if (event.target instanceof EntityLivingBase && !(cultist instanceof IBossDisplayData) && !(event.target instanceof EntityCultist)) {
+                                cultist.setAttackTarget((EntityLivingBase) event.target);
+                                cultist.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 100, potency));
+                                cultist.addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, regen));
+                            }
                         }
                     }
                 }
@@ -319,8 +321,8 @@ public class TCEntityEventHandler {
         if (!event.player.worldObj.isRemote) {
             TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(event.player);
             if (capabilities.ethereal) {
-                if (capabilities.fleshAmount >= event.player.getMaxHealth()) {
-                    capabilities.fleshAmount = MathHelper.floor_float(event.player.getMaxHealth() - 2);
+                if (capabilities.fleshAmount >= event.player.getHealth()) {
+                    capabilities.fleshAmount = MathHelper.floor_float(event.player.getHealth() - 2);
                 }
                 capabilities.ethereal = false;
             }
@@ -635,7 +637,6 @@ public class TCEntityEventHandler {
 
     @SubscribeEvent
     public void on(final PlayerEvent.ItemCraftedEvent event) {
-        System.out.println("CRAFTED");
         if (event.crafting.getItem() instanceof ItemWandCasting && !(event.player instanceof FakePlayer)) {
             NBTTagCompound tag = event.crafting.getTagCompound();
             if (tag != null) {
@@ -643,7 +644,6 @@ public class TCEntityEventHandler {
                 if (xyl != null && xyl.equals(" ")) {
                     tag.setString("Xylography", event.player.getCommandSenderName());
                     event.crafting.setTagCompound(tag);
-                    System.out.println(event.crafting.getTagCompound().getString("Xylography"));
                 }
             }
         }

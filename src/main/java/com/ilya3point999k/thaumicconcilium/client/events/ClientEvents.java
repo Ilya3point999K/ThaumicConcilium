@@ -96,6 +96,7 @@ public class ClientEvents {
     public static ResourceLocation excsi = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/excsi.png");
     public static ResourceLocation loot = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/loot.png");
     public static ResourceLocation krump = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/krump.png");
+    public static ResourceLocation shark = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/shark.png");
 
     public static ResourceLocation ichor = new ResourceLocation(LibResources.MODEL_ARMOR_ICHOR_GEM_1);
     public static ResourceLocation ichor2 = new ResourceLocation(LibResources.MODEL_ARMOR_ICHOR_GEM_2);
@@ -910,7 +911,8 @@ public class ClientEvents {
                 player.getCommandSenderName().equals("RA3DUPLYATOR") ||
                 player.getCommandSenderName().equals("BreadX22") ||
                 player.getCommandSenderName().equals("Excsi") ||
-                player.getCommandSenderName().equals("krumplerban")) {
+                player.getCommandSenderName().equals("krumplerban") ||
+                player.getCommandSenderName().equals("Fantasy5hark")) {
             if (player.isInvisible() || player.isInvisibleToPlayer(mc.thePlayer) || player.isPotionActive(Potion.invisibility)) return;
             float move = player.limbSwing;
             if (player.prevPosX == player.posX && player.prevPosZ == player.posZ){
@@ -922,6 +924,8 @@ public class ClientEvents {
                 mc.getTextureManager().bindTexture(excsi);
             } else if(player.getCommandSenderName().equals("krumplerban")){
                 mc.getTextureManager().bindTexture(krump);
+            } else if(player.getCommandSenderName().equals("Fantasy5hark")){
+                mc.getTextureManager().bindTexture(shark);
             }
             else {
                 mc.getTextureManager().bindTexture(skin);

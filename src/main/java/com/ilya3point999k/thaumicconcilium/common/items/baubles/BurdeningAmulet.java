@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -15,6 +17,8 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.lib.utils.EntityUtils;
+
+import java.util.List;
 
 public class BurdeningAmulet extends Item implements IBauble {
     public BurdeningAmulet() {
@@ -70,6 +74,16 @@ public class BurdeningAmulet extends Item implements IBauble {
                     Entity look = EntityUtils.getPointedEntity(player.worldObj, player, 1.0, 32.0, 0.1F);
                     if (look instanceof EntityLivingBase) {
                         MinecraftForge.EVENT_BUS.post(new AttackEntityEvent(player, look));
+                        List<EntityLiving> livings = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, player.boundingBox.expand(32, 32, 32));
+                        if (!livings.isEmpty()) {
+                            for (EntityLiving pet : livings) {
+                                if (pet instanceof IEntityOwnable) {
+                                    if ((((IEntityOwnable) pet).getOwner() == player) && (look != pet)) {
+                                        pet.setAttackTarget((EntityLivingBase) look);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 final int warp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTemp(player.getCommandSenderName());

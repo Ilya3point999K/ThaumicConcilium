@@ -136,9 +136,11 @@ public class SpotlightFoci extends ItemFocusBasic {
 							} else if (pointedEntity instanceof EntityTaintVillager) {
 								entity = new EntityVillager(pointedEntity.worldObj);
 							} else if (pointedEntity instanceof ITaintedMob || pointedEntity instanceof IEldritchMob) {
-								((EntityLivingBase) pointedEntity).setHealth(((EntityLivingBase) pointedEntity).getHealth() - (1.0F + ((Integer.MAX_VALUE - i) / 20.0F) * wand.getFocusPotency(stack)));
-								if (((EntityLivingBase) pointedEntity).getHealth() <= 0F){
-									((EntityLivingBase) pointedEntity).onDeath(DamageSource.causePlayerDamage(player));
+								if (pointedEntity.hurtResistantTime == 0 && pointedEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 0)) {
+									((EntityLivingBase) pointedEntity).setHealth(((EntityLivingBase) pointedEntity).getHealth() - (1.0F + ((Integer.MAX_VALUE - i) / 10.0F) * wand.getFocusPotency(stack)));
+									if ((((EntityLivingBase) pointedEntity).getHealth() <= 0F) && !pointedEntity.isDead) {
+										((EntityLivingBase) pointedEntity).onDeath(DamageSource.causePlayerDamage(player));
+									}
 								}
 							}
 							if (entity != null) {
@@ -149,7 +151,7 @@ public class SpotlightFoci extends ItemFocusBasic {
 						}else {
 							if (pointedEntity.hurtResistantTime == 0 && pointedEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 0)) {
 								((EntityLivingBase) pointedEntity).setHealth(((EntityLivingBase) pointedEntity).getHealth() - (1.0F + ((Integer.MAX_VALUE - i) / 20.0F) * wand.getFocusPotency(stack)));
-								if (((EntityLivingBase) pointedEntity).getHealth() <= 0F){
+								if ((((EntityLivingBase) pointedEntity).getHealth() <= 0F) && !pointedEntity.isDead){
 									((EntityLivingBase) pointedEntity).onDeath(DamageSource.causePlayerDamage(player));
 								}
 							}

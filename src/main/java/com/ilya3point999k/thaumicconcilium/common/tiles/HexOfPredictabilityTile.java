@@ -95,8 +95,9 @@ public class HexOfPredictabilityTile extends TileEntity implements IAspectContai
                     List<EntityItem> near = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - 8.0, yCoord - 3.0, zCoord - 8.0, xCoord + 8.0, yCoord + 3.0, zCoord + 8.0));
                     if (essentia.size() != 0 && !near.isEmpty()) {
                         for (EntityItem e : near) {
-                            if (e.onGround) {
-                                heat += 5;
+                            ItemStack es = e.getEntityItem();
+                            if (es != null && es.getItem() == TCItemRegistry.resource && es.getItemDamage() == 2) {
+                                heat += 2;
                                 this.markDirty();
                                 this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
                             }
@@ -114,7 +115,7 @@ public class HexOfPredictabilityTile extends TileEntity implements IAspectContai
                                         MiscHelper.setEntityMotionFromVector(slag, new Vector3(slag.posX + (-0.5 + worldObj.rand.nextDouble()) * 2.0, slag.posY + 1.0, slag.posZ + (-0.5 + worldObj.rand.nextDouble()) * 2.0), 0.2F);
                                     }
                                 }
-                                heat--;
+                                heat -= 3;
                                 this.markDirty();
                                 this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
                             } else {

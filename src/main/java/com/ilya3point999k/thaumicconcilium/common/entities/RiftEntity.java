@@ -282,7 +282,7 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                 }
             }
             if (!this.worldObj.isRemote) {
-                if (this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
+                if (!interdimensional && this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
                     copy = points.get(pi + 1);
                     Vec3 v2 = Vec3.createVectorHelper(copy.xCoord, copy.yCoord, copy.zCoord).addVector(posX, posY + height / 2.0, posZ);
                     MovingObjectPosition rt = this.worldObj.rayTraceBlocks(v1, v2, false);
@@ -310,16 +310,16 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                                                 p.timeUntilPortal = 100;
                                             } else if (p.dimension != TCConfig.causalBouillonID) {
                                                 p.timeUntilPortal = 100;
-                                                p.mcServer.getConfigurationManager().transferPlayerToDimension(p, TCConfig.causalBouillonID, new CausalBouillonTeleporter(mServer.worldServerForDimension(TCConfig.causalBouillonID)));
+                                                p.mcServer.getConfigurationManager().transferPlayerToDimension(p, TCConfig.causalBouillonID, new CausalBouillonTeleporter(mServer.worldServerForDimension(TCConfig.causalBouillonID), false));
                                             } else {
                                                 p.timeUntilPortal = 100;
                                                 NBTTagCompound tag = gem.getTagCompound();
                                                 if (tag == null) {
-                                                    p.mcServer.getConfigurationManager().transferPlayerToDimension(p, 0, new CausalBouillonTeleporter(mServer.worldServerForDimension(0)));
+                                                    p.mcServer.getConfigurationManager().transferPlayerToDimension(p, 0, new CausalBouillonTeleporter(mServer.worldServerForDimension(0), false));
                                                 } else {
                                                     if (tag.hasKey("CURR")) {
                                                         if (tag.getInteger("CURR") != -1) {
-                                                            p.mcServer.getConfigurationManager().transferPlayerToDimension(p, tag.getInteger("DIM" + tag.getInteger("CURR")), new CausalBouillonTeleporter(mServer.worldServerForDimension(0)));
+                                                            p.mcServer.getConfigurationManager().transferPlayerToDimension(p, tag.getInteger("DIM" + tag.getInteger("CURR")), new CausalBouillonTeleporter(mServer.worldServerForDimension(0), tag.getBoolean("REVERSE")));
                                                         }
                                                     }
                                                 }
@@ -459,7 +459,7 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
                             }
                         }
 
-                    } else {
+                    } else if (!interdimensional){
                         int r = this.rand.nextInt(12);
                         this.entityDropItem(new ItemStack(ConfigItems.itemResource, r, 17), 1.5F);
                     }

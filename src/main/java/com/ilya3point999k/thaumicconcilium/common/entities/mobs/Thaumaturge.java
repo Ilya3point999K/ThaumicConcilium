@@ -71,6 +71,7 @@ public class Thaumaturge extends EntityMob implements IRangedAttackMob {
 	public Thaumaturge(World world, double x, double y, double z) {
 		this(world);
 		setPosition(x, y, z);
+		//this.faceEntity();
 	}
 
 	protected void entityInit() {

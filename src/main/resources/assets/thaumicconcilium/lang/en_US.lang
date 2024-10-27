@@ -20,6 +20,8 @@ tc.thaumaturge.taunt.3=Oh, lovely. They've sent me a mo-ron.
 tc.tooltip.xylography=§6§nXylography:
 tc.tooltip.monitor=§9Watching:
 tc.tooltip.riftgem=§9Casts Inserted:
+tc.tooltip.riftgem.inflate=§eInflates Space
+tc.tooltip.riftgem.deflate=§eDeflates Space
 tc.tooltip.terragem=§9Cast:
 tc.tooltip.book.0=The book is filled with faded strange symbols.
 tc.tooltip.book.1=Click to study it.
@@ -369,7 +371,7 @@ tc.research_text.RIFTGEM=Going in, going out
 entry.riftgem.first=You have often thought of the imperfections of the ways of traveling. Each of them had its flaws. Take teleportation, for example. In order to move from one point to another, you not only had to go to each of them at least once, but you also had to install the appropriate structures there. Also, this way of moving severely restricted your mobility, forcing you to return home time after time to use the move.
 entry.riftgem.second=In addition to teleportation, a good way to move is the Nether World, thanks to its abnormal ability to increase the distance traveled by 8 times, but wandering through these vile wastelands full of dangerous creatures is not the safest idea either. And about the landscape of this world it is better not to think about it at all - in front of you every now and then a wall may appear, which will be easier to drill through than to bypass. And what about the lava lakes, bypassing which promises not only a clumsy fall, but also the bombardment of gasts or the attack of a hell bat?
 entry.riftgem.third=By learning to control the rifts and exploring the potential of aura cores, you have created the technology to form unstable passages into subspace.<BR>Pass a vis charge through a gem, holding it in your hands to create a short-term breach. Permanent rifts are not good for transition, as they are already too firmly rooted in reality.<BR>Your material body is still not immune to such movements, so in order not to disintegrate into atoms, you must continue to hold the gem in your hands the moment you step into the rift.
-entry.riftgem.fourth=However, this protection is not absolute - you remain vulnerable to all other manifestations of rift instability.<BR>Cross-world travel experience and dry calculations tell you that one step in this place is roughly equal to ten steps in your home dimension. Make every effort not to lose your key to this subspace or you risk being trapped in it forever.
+entry.riftgem.fourth=However, this protection is not absolute - you remain vulnerable to all other manifestations of rift instability.<BR>Shift + LMB allows you to change the orientation of the curvature of space.<BR>Cross-world travel experience and dry calculations tell you that one step in this place is roughly equal to ten steps in your home dimension. Make every effort not to lose your key to this subspace or you risk being trapped in it forever.
 
 tc.research_name.TERRACAST=Terra-Cast Gem
 tc.research_text.TERRACAST=Pebble as a keepsake
@@ -445,7 +447,7 @@ entry.hex.second=According to your last assumption, with this construction, it b
 tc.research_name.ASTRALMONITOR=Astral Monitor
 tc.research_text.ASTRALMONITOR=Status update
 entry.astralmonitor.first=Weeks of mental convulsions did not pass without a trace. At one point, a new worm began to bite your consciousness: "How are my friends now?", "Are they all right?".<BR>Seeking reassurance, you turned to your recent accomplishment. The hexagonal mystical construct, standing at the maximum depth you could reach, appeared capable of capturing essences from the environment, and causing the captured rift to "resonate" with it. It was decided to use vis condensers to disperse the essence by directing their output vertically upwards.
-entry.astralmonitor.second=In this state, the rift begins to actively react to the objects around it, damaging them to some extent, but at the same time - renewing them.<BR>The matter affected by the void must remain isolated from other objects or surfaces throughout the process, otherwise it will overload the structure and cause the rift to collapse as soon as possible.<BR>It is possible to remove sent essentia via attempt to dematerialize containted rift.
+entry.astralmonitor.second=In this state, the rift begins to actively react to the objects around it, damaging them to some extent, but at the same time - renewing them.<BR>The matter affected by the void must remain isolated from other objects throughout the process, otherwise it will overload the structure and cause the rift to collapse as soon as possible.<BR>It is possible to remove sent essentia via attempt to dematerialize containted rift.
 entry.astralmonitor.third=The solution to your new problem came about in just this way. The thaumometer that touched the void allowed you to look through matter at the state of sentient beings.<BR>To concretize the monitor indications, press Shift+RMB to place a thing associated with the right person in the monitor, his xylographed wand will fit just right.
 
 tc.research_name.ETHEREALMANIPULATOR=Wand Focus: Ethereal Manipulator
