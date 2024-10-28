@@ -95,7 +95,7 @@ entity.ThaumicConcilium.ShardPowderEntity.name=碎片粉末
 entity.ThaumicConcilium.DopeSquid.name=烟枪鱿鱼
 
 tile.DestabilizedCrystalBlock.name=不稳定晶簇
-tile.VisCondenserBlock.name=魔力凝结器
+tile.VisCondenserBlock.name=魔力电容器
 tile.QuicksilverCrucible.name=水银反应炉
 tile.Lithographer.name=眼部光刻机
 tile.RedPoweredMindBlock.name=红石之脑
@@ -434,7 +434,7 @@ tc.research_name.DEMATUPGRADE=核心升级: 去物质化
 tc.research_text.DEMATUPGRADE=长期束缚,但很快就会过去
 entry.dematupgrade.first=经过了许多个不眠之夜,你预感到这些裂隙并不像你一开始想象的那么危险.尽管它们看起来相当壮观,又是空间本身的裂缝,但这并不会否定被毁灭的东西可以被重建的事实.在这种情况下,修复空间结构的材料可以是最纯净表现形式下的灵气.也就是说,有必要设法把大量的Auram要素引导至裂隙,在这之后空间裂隙就会开始消逝.也许魔力引导核心可以胜任这个任务.你只需要对它做出一点改进......
 
-tc.research_name.VISCONDENSER=魔力凝结器
+tc.research_name.VISCONDENSER=魔力电容器
 tc.research_text.VISCONDENSER=危险交互代理
 entry.viscondenser.first=亲手聚集,操控还有释放巨量魔力是既危险又繁琐的.为了解决这个问题,你已经能够将空间裂隙去物质化技术应用于普通机器.<BR>这个魔力电容器能够在通入红石信号的反方向立刻释放一次魔力脉冲.魔力脉冲的距离与红石信号强度呈正相关,而脉冲强度与信号强度呈负相关.
 entry.viscondenser.second=电容器运行所需的能量由安置于其内的不稳定晶簇提供.每次使用需要消耗16份存储的魔力.
@@ -457,7 +457,7 @@ entry.ethman.first=你已经很多,很多次地看到,你的思维比你所认�
 tc.research_name.LITHOGRAPHER=眼部光刻机
 tc.research_text.LITHOGRAPHER=为注意健康而进行的身体改造
 entry.lithographer.first=时间宝贵,而花时间拿出小工具并盯着仪表读数很明显不是你的风格.揭示之护目镜是自魔导透镜以来的一大飞跃,但你决定不依赖任何设备来监测你朋友们的健康情况.<BR>这个结构能让你施行一种前所未有的医疗程序 - 在你的视网膜上刺穿一个通往虚空的洞.手术本身没有太大意义,所以你为它添加了对监测仪系统的支持,作为某种"透镜".
-entry.lithographer.second=要进行这个手术,机器需要32份Sensus源质,由位于光刻机上方的魔力凝结器提供.手术将在你躺到床上时立即开始.<BR>当然,有时候你需要让你的头脑在海量信息中休息一下.你创造了一种方法,可以使用这种滴眼液来抵消神秘学医疗程序的影响.过度使用将产生相反的效果.
+entry.lithographer.second=要进行这个手术,机器需要32份Sensus源质,由位于光刻机上方的魔力电容器提供.手术将在你躺到床上时立即开始.<BR>当然,有时候你需要让你的头脑在海量信息中休息一下.你创造了一种方法,可以使用这种滴眼液来抵消神秘学医疗程序的影响.过度使用将产生相反的效果.
 
 tc.research_name.QUICKSILVERCRUCIBLE=水银反应炉
 tc.research_text.QUICKSILVERCRUCIBLE=炼金奇迹
