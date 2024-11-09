@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.api;
 
+import com.ilya3point999k.thaumicconcilium.common.integration.minetweaker.TweakerHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApiHelper;
@@ -87,5 +88,13 @@ public class ChainedRiftRecipe {
         return recipeOutput;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof ChainedRiftRecipe) {
+            ChainedRiftRecipe recipe = (ChainedRiftRecipe) o;
+            return key.equals(recipe.key) && catalyst.equals(recipe.catalyst) && TweakerHelper.aspectsToString(aspects).equals(TweakerHelper.aspectsToString(recipe.aspects))
+                    && ItemStack.areItemStacksEqual(recipeOutput,recipe.getRecipeOutput());
+        }
+        return false;
+    }
 }
