@@ -531,7 +531,7 @@ public class Thaumonomicon {
 	private static ResearchPage cruciblePage(String key) {
 		return new ResearchPage((CrucibleRecipe) recipes.get(key));
 	}
-	private static ResearchPage riftPage(String key) {
+	public static ResearchPage riftPage(String key) {
 		ResearchPage page = new ResearchPage("");
 		ChainedRiftRecipe recipe = (ChainedRiftRecipe)recipes.get(key);
 		page.recipe = recipe;
@@ -540,7 +540,7 @@ public class Thaumonomicon {
 		return page;
 	}
 
-	private static ResearchPage riftMultiPage(String[] keys) {
+	public static ResearchPage riftMultiPage(String[] keys) {
 		ResearchPage page = new ResearchPage("");
 		ArrayList<ChainedRiftRecipe> recipes = new ArrayList<>();
 		for (String s : keys){
