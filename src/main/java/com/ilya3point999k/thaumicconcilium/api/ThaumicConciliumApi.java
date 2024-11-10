@@ -1,5 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.api;
 
+import com.ilya3point999k.thaumicconcilium.common.integration.minetweaker.TweakerHelper;
+import com.ilya3point999k.thaumicconcilium.common.registry.Thaumonomicon;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Tuple;
 import thaumcraft.api.aspects.AspectList;
@@ -17,9 +19,33 @@ public class ThaumicConciliumApi {
         return recipe;
     }
 
+    public static void addChainedRecipe(String id, String researchKey, ItemStack result, Object catalyst, AspectList tags) {
+        Thaumonomicon.recipes.put(id,addChainedRiftRecipe(researchKey,result,catalyst,tags));
+    }
+
+    public static void removeChainedRiftRecipe(String id) {
+        Object obj = Thaumonomicon.recipes.get(id);
+        if(obj instanceof ChainedRiftRecipe) {
+            ChainedRiftRecipe recipe = (ChainedRiftRecipe) obj;
+            Thaumonomicon.recipes.remove(id);
+            riftRecipes.remove(recipe);
+        }
+    }
+
     public static void addPolishmentRecipe(ItemStack item, AspectList tags) {
         polishmentRecipes.add(new Tuple(item, tags));
     }
+
+    public static void removePolismentRecipe(ItemStack item, AspectList aspectList) {
+        for(int i = 0; i < polishmentRecipes.size(); i++) {
+            if(ItemStack.areItemStacksEqual((ItemStack) polishmentRecipes.get(i).getFirst(),item)
+                    && TweakerHelper.aspectsToString((AspectList) polishmentRecipes.get(i).getSecond()).equals(TweakerHelper.aspectsToString(aspectList))) {
+                polishmentRecipes.remove(i);
+                break;
+            }
+        }
+    }
+
 
     public static ChainedRiftRecipe getRiftRecipe(ItemStack res, AspectList tags) {
         for (ChainedRiftRecipe r : riftRecipes) {
