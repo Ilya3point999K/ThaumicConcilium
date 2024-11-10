@@ -30,6 +30,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import fox.spiteful.forbidden.compat.Compat;
 import makeo.gadomancy.api.GadomancyApi;
 import net.minecraft.entity.Entity;
@@ -83,11 +84,12 @@ import thaumcraft.common.tiles.TilePedestal;
 import vazkii.botania.api.mana.IManaItem;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 
 public class TCEntityEventHandler {
-    public static final HashSet<String> ethereals = new HashSet<>();
+    public static final HashMap<EntityPlayer, Boolean> etherealsClient = new HashMap<>();
+    public static final HashMap<EntityPlayer, Boolean> etherealsServer = new HashMap<>();
 
     @SubscribeEvent
     public void onEntityConstruction(EntityEvent.EntityConstructing event) {
@@ -220,7 +222,7 @@ public class TCEntityEventHandler {
                     wand = true;
                 }
             }
-            if (capabilities != null && capabilities.ethereal && !wand) {
+            if (!e.entityPlayer.capabilities.isCreativeMode && capabilities != null && capabilities.ethereal && !wand) {
                 capabilities.fleshAmount++;
                 capabilities.sync();
             }
@@ -261,7 +263,7 @@ public class TCEntityEventHandler {
         if (capabilities != null) {
             if (capabilities.chainedTime != 0) event.setCanceled(true);
             if (!event.entityPlayer.worldObj.isRemote) {
-                if (capabilities.ethereal) {
+                if (!event.entityPlayer.capabilities.isCreativeMode && capabilities.ethereal) {
                     if (event.item == null) {
                         capabilities.fleshAmount++;
                         capabilities.sync();
@@ -282,7 +284,7 @@ public class TCEntityEventHandler {
         if (capabilities != null) {
             if (capabilities.chainedTime != 0) event.setCanceled(true);
             if (!event.entityPlayer.worldObj.isRemote) {
-                if (capabilities.ethereal) {
+                if (!event.entityPlayer.capabilities.isCreativeMode && capabilities.ethereal) {
                     ItemStack stack = event.entityPlayer.getHeldItem();
                     if (stack == null) {
                         capabilities.fleshAmount++;
@@ -324,8 +326,9 @@ public class TCEntityEventHandler {
                 if (capabilities.fleshAmount >= event.player.getHealth()) {
                     capabilities.fleshAmount = MathHelper.floor_float(event.player.getHealth() - 2);
                 }
-                capabilities.ethereal = false;
             }
+            capabilities.pontifexRobeToggle = false;
+            capabilities.ethereal = false;
             capabilities.sync(event.player);
         }
     }
@@ -577,14 +580,17 @@ public class TCEntityEventHandler {
                     }
                 }
             }
+            HashMap<EntityPlayer, Boolean> ethereals = event.side == Side.SERVER ? etherealsServer : etherealsClient;
+
             if (capabilities.ethereal) {
                 player.noClip = true;
                 if (!player.isSneaking() || (!player.isSneaking() && !player.capabilities.allowFlying)) {
                     player.motionY = 0;
                 }
-            } else if (player.noClip) {
+            } else if (ethereals.getOrDefault(player, false)) {
                 player.noClip = false;
             }
+            ethereals.put(player, capabilities.ethereal);
         }
     }
 
@@ -601,7 +607,7 @@ public class TCEntityEventHandler {
 
             TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(player);
             if (capabilities != null) {
-                if (capabilities.ethereal) {
+                if (!player.capabilities.isCreativeMode && capabilities.ethereal) {
                     if (event.source.isMagicDamage() || event.source.damageType.equals("outOfWorld")) {
                         capabilities.fleshAmount++;
                         capabilities.sync();

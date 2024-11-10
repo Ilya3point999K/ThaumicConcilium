@@ -115,7 +115,7 @@ public class RiftGem extends Item {
             tag = new NBTTagCompound();
             tag.setInteger("MAX_GEMS", 0);
             tag.setInteger("CURR", 0);
-            tag.setBoolean("REVERSE", false);
+            tag.setBoolean("REVERSE", true);
             stack.setTagCompound(tag);
         } else {
             if (!player.isSneaking()) {
@@ -180,6 +180,8 @@ public class RiftGem extends Item {
                     list.add(StatCollector.translateToLocal("tc.tooltip.riftgem") + " " + am + "/16");
                     list.add(StatCollector.translateToLocal("tc.tooltip.terragem") + " " + block.getDisplayName());
                 }
+            } else {
+                list.add(StatCollector.translateToLocal("tc.tooltip.riftgem.inflate"));
             }
         }
     }
