@@ -1,11 +1,13 @@
 package com.ilya3point999k.thaumicconcilium.common;
 
+import com.ilya3point999k.thaumicconcilium.common.cmd.CommandConcilium;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +18,7 @@ public class ThaumicConcilium
 {
     public static final String MODID = "ThaumicConcilium";
     public static final String NAME = "Thaumic Concilium";
-    public static final String VERSION = "1.0.10";
+    public static final String VERSION = "1.0.11";
 
     
     @Mod.Instance(value = ThaumicConcilium.MODID)
@@ -28,6 +30,11 @@ public class ThaumicConcilium
     public static CreativeTabs tabTC = new TCCreativeTab();
 
     public static Logger logger = LogManager.getLogger("Thaumic Concilium");
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandConcilium());
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

@@ -12,6 +12,7 @@ import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.EtherealS
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.ShardPowderEntity;
 import com.ilya3point999k.thaumicconcilium.common.golems.AssistantGolemCore;
 import com.ilya3point999k.thaumicconcilium.common.golems.ValetGolemCore;
+import com.ilya3point999k.thaumicconcilium.common.integration.minetweaker.MineTweakerIntegration;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.Bracelets;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;
@@ -74,6 +75,8 @@ public class Integration {
     public static boolean automagy = false;
     public static boolean witchery = false;
 
+    public static boolean minetweaker = false;
+
     public static Class witcheryClass;
     public static Class witcheryInfusionClass;
     public static Class witcheryEffectRegistryClass;
@@ -96,6 +99,7 @@ public class Integration {
         horizons = Loader.isModLoaded("ThaumicHorizons");
         automagy = Loader.isModLoaded("Automagy");
         witchery = Loader.isModLoaded("witchery");
+        minetweaker = Loader.isModLoaded("MineTweaker3");
         if (!ConfigHandler.enableKami){
             throw new Exception("Thaumic Concilium - turning off KAMI module of Thaumic Tinkerer is not supported.");
         }
@@ -466,7 +470,7 @@ public class Integration {
                 witcheryConstClass = Class.forName("com.emoniph.witchery.util.Const");
                 witcheryTimeUtilClass = Class.forName("com.emoniph.witchery.util.TimeUtil");
 
-                Object instance = witcheryEffectRegistryClass.getDeclaredMethod("instance").invoke(null);
+                final Object instance = witcheryEffectRegistryClass.getDeclaredMethod("instance").invoke(null);
                 Method addEffect = instance.getClass().getMethod("addEffect", SymbolEffect.class, StrokeSet[].class);
                 addEffect.invoke(instance, new SymbolEffect(90, "tc.spell.incarcerous", 2, true, false, "incarcerous", 0) {
                     @Override
@@ -552,7 +556,7 @@ public class Integration {
                             world.spawnEntityInWorld(entityarrow);
                         }
                     }
-                }, new StrokeSet[]{new StrokeSet(new byte[]{1, 1, 1, 2})});
+                }, new StrokeSet[]{new StrokeSet(new byte[]{1, 1, 1, 3})});
 
                 addEffect.invoke(instance, new SymbolEffect(92, "tc.spell.spider", 2, false, false, "spiderspell", 0) {
                     @Override
@@ -657,6 +661,11 @@ public class Integration {
                      InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
+        }
+
+        if(minetweaker) {
+            MineTweakerIntegration.register();
+            ThaumicConcilium.logger.info("MineTweaker integration loaded");
         }
     }
 }
