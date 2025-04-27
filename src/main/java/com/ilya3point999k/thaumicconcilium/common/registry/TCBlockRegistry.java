@@ -18,6 +18,7 @@ public class TCBlockRegistry {
     public static int quicksilverCrucibleID = -1;
     public static int lithographerID = -1;
     public static int fleshCrucibleID = -1;
+    public static int solidVoidID = -1;
     public static Block DESTABILIZED_CRYSTAL_BLOCK = (new DestabilizedCrystalBlock()).setBlockName("DestabilizedCrystalBlock");
     public static Block VOID_REALITY_BLOCK = new VoidRealityBlock().setBlockName("VoidRealityBlock");
     public static Block RED_POWERED_MIND_BLOCK = new RedPoweredMindBlock().setBlockName("RedPoweredMindBlock");
@@ -26,6 +27,7 @@ public class TCBlockRegistry {
     public static Block QUICKSILVER_CRUCIBLE = new QuicksilverCrucibleBlock().setBlockName("QuicksilverCrucible");
     public static Block LITHOGRAPHER_BLOCK = new LithographerBlock().setBlockName("Lithographer");
     public static Block FLESH_CRUCIBLE = new FleshCrucibleBlock().setBlockName("FleshCrucible");
+    public static Block SOLID_VOID = new SolidVoidBlock().setBlockName("SolidVoid");
 
     public static void init() {
         GameRegistry.registerBlock(DESTABILIZED_CRYSTAL_BLOCK, DestabilizedCrystalBlockItem.class, "destabilizedCrystalBlock");
@@ -43,6 +45,8 @@ public class TCBlockRegistry {
         ThaumcraftApi.registerObjectTag(new ItemStack(LITHOGRAPHER_BLOCK), new AspectList().add(Aspect.METAL, 64).add(Aspect.SENSES, 32).add(Aspect.MAGIC, 64).add(Aspect.ENERGY, 16).add(Aspect.VOID, 32));
         if(Integration.taintedMagic) {
             GameRegistry.registerBlock(FLESH_CRUCIBLE, "FleshCrucible");
+            GameRegistry.registerBlock(SOLID_VOID, "SolidVoid");
+            ThaumcraftApi.registerObjectTag(new ItemStack(SOLID_VOID), new AspectList().add(Aspect.VOID, 2));
         }
 
         if (Integration.automagy && Integration.horizons) {

@@ -262,9 +262,13 @@ public class TCEntityEventHandler {
         TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(event.entityPlayer);
         if (capabilities != null) {
             if (capabilities.chainedTime != 0) event.setCanceled(true);
-            if (!event.entityPlayer.worldObj.isRemote) {
-                if (!event.entityPlayer.capabilities.isCreativeMode && capabilities.ethereal) {
+            EntityPlayer player = event.entityPlayer;
+            if (!player.worldObj.isRemote) {
+                if (!player.capabilities.isCreativeMode && capabilities.ethereal) {
                     if (event.item == null) {
+                        if(player.posY < 0){
+                            //player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, is.copy()));
+                        }
                         capabilities.fleshAmount++;
                         capabilities.sync();
                     } else if (!(event.item.getItem() instanceof ItemWandCasting)) {
@@ -679,10 +683,11 @@ public class TCEntityEventHandler {
                             int x = fociTag.getInteger("blockX");
                             int y = fociTag.getInteger("blockY");
                             int z = fociTag.getInteger("blockZ");
-                            int amount = fociTag.getInteger("amount");
+
                             if (player.worldObj.getTileEntity(x, y, z) instanceof DestabilizedCrystalTile) {
                                 DestabilizedCrystalTile crystal = (DestabilizedCrystalTile) player.worldObj.getTileEntity(x, y, z);
-                                if (crystal.capacity == 0 && amount >= aspectList.getAmount(aspectList.getAspects()[0]) && crystal.aspect.equals(aspectList.getAspects()[0].getTag())) {
+                                int amount = MathHelper.clamp_int(fociTag.getInteger("amount") - crystal.capacity, 0, Integer.MAX_VALUE);
+                                if (amount >= aspectList.getAmount(aspectList.getAspects()[0]) && crystal.aspect.equalsIgnoreCase(aspectList.getAspects()[0].getTag())) {
                                     if (!player.worldObj.isRemote) {
                                         player.worldObj.setBlock(x, y, z, Blocks.air, 0, 7);
                                         player.worldObj.removeTileEntity(x, y, z);

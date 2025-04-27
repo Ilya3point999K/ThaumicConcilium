@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 import thaumcraft.api.wands.FocusUpgradeType;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class TCConfig {
     private static ConfigCategory category;
@@ -47,6 +48,13 @@ public class TCConfig {
     public static int chanceOfRiftOpening;
 
     public static int causalBouillonID;
+    public static int[] thaumaturgeBiomeBlacklist;
+    public static int[] madThaumaturgeBiomeBlacklist;
+    public static int[] quicksilverElementalBiomeBlacklist;
+    public static int[] dissolvedBiomeBlacklist;
+    public static int[] overanimatedBiomeBlacklist;
+    public static int[] paranoidWarriorBiomeBlacklist;
+    public static int[] vengefulGolemBiomeBlacklist;
 
     public static void configurate(File f){
         Configuration conf = new Configuration(f);
@@ -83,6 +91,21 @@ public class TCConfig {
             paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
             vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
 
+            String biomes = conf.getString("thaumaturgeBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            thaumaturgeBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("madThaumaturgeBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            madThaumaturgeBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("quicksilverElementalBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            quicksilverElementalBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("dissolvedBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            dissolvedBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("overanimatedBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            overanimatedBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("paranoidWarriorBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            paranoidWarriorBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("vengefulGolemBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            vengefulGolemBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+
             madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
             crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
 
@@ -93,6 +116,7 @@ public class TCConfig {
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
         } catch (Exception e){
             ThaumicConcilium.logger.log(Level.ERROR, "Thaumic Concilium can't load config");
+            e.printStackTrace();
         } finally {
             conf.save();
         }

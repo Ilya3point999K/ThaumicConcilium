@@ -1,6 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketEnslave;
 import net.minecraft.entity.*;
@@ -113,8 +114,17 @@ public class VengefulGolem extends EntityMob implements IRangedAttackMob {
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float f) {
         if (target instanceof EntityPlayer) {
+            boolean muffed = false;
+            if(Integration.witchery){
+                ItemStack currentArmor = ((EntityPlayer)target).getCurrentArmor(3);
+                if(currentArmor != null && currentArmor.getItem() == Integration.earmuffs){
+                    muffed = true;
+                }
+            }
             String name = target.getCommandSenderName();
-            if (rand.nextInt(10) >= 2) {
+            if (!muffed && rand.nextInt(10) >= 2) {
+                this.swingItem();
+                target.worldObj.playSoundAtEntity(target, "random.orb", 0.7F, 1.0F + target.worldObj.rand.nextFloat() * 0.1F);
                 if (rand.nextInt(10) > 5) {
                     int r = rand.nextInt(4);
                     ((EntityPlayer) target).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tc.golem.taunt." + r)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));

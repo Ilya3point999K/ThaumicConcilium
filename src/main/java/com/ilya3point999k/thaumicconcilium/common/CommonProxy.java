@@ -1,20 +1,22 @@
 package com.ilya3point999k.thaumicconcilium.common;
 
+import com.ilya3point999k.thaumicconcilium.common.containers.AstralMonitorContainer;
+import com.ilya3point999k.thaumicconcilium.common.containers.LithographerContainer;
 import com.ilya3point999k.thaumicconcilium.common.entities.ContainerThaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.Thaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.events.TCEntityEventHandler;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
-import com.ilya3point999k.thaumicconcilium.common.containers.AstralMonitorContainer;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.TCFociUpgrades;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.registry.*;
-import com.ilya3point999k.thaumicconcilium.common.containers.LithographerContainer;
 import com.ilya3point999k.thaumicconcilium.common.tiles.LithographerTile;
+import com.ilya3point999k.thaumicconcilium.common.world.ThaumicConciliumWorldGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +37,7 @@ public class CommonProxy implements IGuiHandler {
 		TCEntityRegistry.init();
 		TCConfig.configurate(event.getSuggestedConfigurationFile());
 		TCPacketHandler.init();
+		//GameRegistry.registerWorldGenerator(new ThaumicConciliumWorldGen(), 10);
 	}
 
 	public void init(FMLInitializationEvent event) {

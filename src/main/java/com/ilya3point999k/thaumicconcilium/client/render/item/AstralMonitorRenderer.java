@@ -38,7 +38,7 @@ public class AstralMonitorRenderer implements IItemRenderer {
     private static final ResourceLocation ATSRAL_FRAME = new ResourceLocation(ThaumicConcilium.MODID + ":textures/models/atsral_frame.png");
     private static final ResourceLocation FLUC_OFF = new ResourceLocation(ThaumicConcilium.MODID + ":textures/misc/fluctuation_off.png");
     private static final ResourceLocation FLUC_ON = new ResourceLocation(ThaumicConcilium.MODID + ":textures/misc/fluctuation_on.png");
-    private static final ResourceLocation SCREEN = new ResourceLocation("textures/entity/end_portal.png");
+    public static final ResourceLocation SCREEN = new ResourceLocation("textures/entity/end_portal.png");
     private static final ResourceLocation GLASS = new ResourceLocation(ThaumicConcilium.MODID + ":models/screen.obj");
 
     private final ShaderCallback shaderCallback;

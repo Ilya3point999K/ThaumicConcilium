@@ -12,7 +12,10 @@ public class TCTileRegistry {
         GameRegistry.registerTileEntity(HexOfPredictabilityTile.class, "HexOfPredictabilityTile");
         GameRegistry.registerTileEntity(QuicksilverCrucibleTile.class, "QuicksilverCrucibleTile");
         GameRegistry.registerTileEntity(LithographerTile.class, "LithographerTile");
-        GameRegistry.registerTileEntity(FleshCrucibleTile.class, "FleshCrucibleTile");
+        if(Integration.taintedMagic) {
+            GameRegistry.registerTileEntity(FleshCrucibleTile.class, "FleshCrucibleTile");
+            GameRegistry.registerTileEntity(SolidVoidTile.class, "SolidVoidTile");
+        }
         if (Integration.automagy && Integration.horizons) {
             GameRegistry.registerTileEntity(RedPoweredMindTile.class, "RedPoweredMindTile");
         }

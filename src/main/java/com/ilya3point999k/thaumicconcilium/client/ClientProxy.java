@@ -179,6 +179,10 @@ public class ClientProxy extends CommonProxy {
             ClientRegistry.bindTileEntitySpecialRenderer(FleshCrucibleTile.class, new FleshCrucibleTileRenderer());
             TCBlockRegistry.fleshCrucibleID = RenderingRegistry.getNextAvailableRenderId();
             RenderingRegistry.registerBlockHandler(new FleshCrucibleBlockRenderer());
+
+            ClientRegistry.bindTileEntitySpecialRenderer(SolidVoidTile.class, new SolidVoidTileRenderer());
+            TCBlockRegistry.solidVoidID = RenderingRegistry.getNextAvailableRenderId();
+            RenderingRegistry.registerBlockHandler(new SolidVoidBlockRenderer());
         }
 
         if(Integration.thaumicBases){

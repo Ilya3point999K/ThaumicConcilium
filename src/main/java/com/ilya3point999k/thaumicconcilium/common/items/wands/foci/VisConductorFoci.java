@@ -119,14 +119,16 @@ public class VisConductorFoci extends ItemFocusBasic {
 
                     DestabilizedCrystalTile crystal = (DestabilizedCrystalTile) p.worldObj.getTileEntity(x, y, z);
                     if (crystal != null) {
+                        if(!crystal.aspect.equalsIgnoreCase(fociTag.getString("aspect"))) p.stopUsingItem();
                         if (!p.worldObj.isRemote && this.soundDelay < System.currentTimeMillis()) {
                             p.worldObj.playSoundAtEntity(p, "thaumcraft:jacobs", 0.5F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                             this.soundDelay = System.currentTimeMillis() + 500L;
                         }
+                        int potency = wand.getFocusPotency(stack);
                         if (time % 3 == 0) {
                             if (!p.worldObj.isRemote) {
                                 wand.consumeAllVis(stack, p, COST, true, false);
-                                crystal.updateAmount();
+                                crystal.capacity = MathHelper.clamp_int( crystal.capacity - (1 + potency), 0, Integer.MAX_VALUE);
                                 p.worldObj.markBlockForUpdate(x, y, z);
                                 crystal.markDirty();
                             }
@@ -149,6 +151,7 @@ public class VisConductorFoci extends ItemFocusBasic {
                         fociTag.setInteger("blockY", pos.blockY);
                         fociTag.setInteger("blockZ", pos.blockZ);
                         fociTag.setInteger("amount", crystal.capacity);
+                        fociTag.setString("aspect", crystal.aspect);
                         stack.getTagCompound().getCompoundTag("focus").setTag("tag", fociTag);
                     }
                 }
@@ -217,7 +220,7 @@ public class VisConductorFoci extends ItemFocusBasic {
                     } else {
                         if (this.isUpgradedWith(wand.getFocusItem(wandstack), TCFociUpgrades.dematerialization)) {
                             int amount = fociTag.getInteger("amount");
-                            int rgb = Aspect.aspects.get(crystal.aspect).getColor();
+                            int rgb = Aspect.aspects.get(fociTag.getString("aspect")).getColor();
                             if (look instanceof EntityLivingBase) {
                                 if (!world.isRemote) {
                                     look.attackEntityFrom(DamageSource.causePlayerDamage(player).setMagicDamage(), (amount - crystal.capacity) / (6.0f - wand.getFocusPotency(wandstack)));
@@ -272,6 +275,7 @@ public class VisConductorFoci extends ItemFocusBasic {
                 fociTag.removeTag("blockY");
                 fociTag.removeTag("blockZ");
                 fociTag.removeTag("amount");
+                fociTag.removeTag("aspect");
 
         }
     }
@@ -294,20 +298,12 @@ public class VisConductorFoci extends ItemFocusBasic {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         super.addInformation(stack, player, list, par4);
-        NBTTagCompound tag = stack.getTagCompound();
-        if (tag != null) {
-            if (tag.hasKey("blockX")) {
-                list.add("X: " + tag.getInteger("blockX"));
-                list.add("Y: " + tag.getInteger("blockY"));
-                list.add("Z: " + tag.getInteger("blockZ"));
-            }
-        }
     }
 
     public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack stack, int rank) {
         switch (rank) {
             case 1:
-                return new FocusUpgradeType[]{TCFociUpgrades.wispLauncher, TCFociUpgrades.dematerialization};
+                return new FocusUpgradeType[]{FocusUpgradeType.frugal, FocusUpgradeType.potency, TCFociUpgrades.wispLauncher, TCFociUpgrades.dematerialization};
             case 2:
             case 3:
             case 4:

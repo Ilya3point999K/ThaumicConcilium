@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.aspects.Aspect;

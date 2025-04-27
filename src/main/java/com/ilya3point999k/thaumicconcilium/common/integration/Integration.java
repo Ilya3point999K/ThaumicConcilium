@@ -91,6 +91,7 @@ public class Integration {
     public static Item tobaccoitem = null;
     public static Item tobaccoleaves = null;
     public static Item tmMaterial = null;
+    public static Item earmuffs = null;
 
     public static void init() throws Exception {
         thaumicBases = Loader.isModLoaded("thaumicbases");
@@ -469,7 +470,7 @@ public class Integration {
                 witcheryEffectRegistryClass = Class.forName("com.emoniph.witchery.infusion.infusions.symbols.EffectRegistry");
                 witcheryConstClass = Class.forName("com.emoniph.witchery.util.Const");
                 witcheryTimeUtilClass = Class.forName("com.emoniph.witchery.util.TimeUtil");
-
+                earmuffs = Compat.getItem("witchery", "earmuffs");
                 final Object instance = witcheryEffectRegistryClass.getDeclaredMethod("instance").invoke(null);
                 Method addEffect = instance.getClass().getMethod("addEffect", SymbolEffect.class, StrokeSet[].class);
                 addEffect.invoke(instance, new SymbolEffect(90, "tc.spell.incarcerous", 2, true, false, "incarcerous", 0) {
@@ -658,7 +659,7 @@ public class Integration {
                     }
                 }, new StrokeSet[]{new StrokeSet(new byte[]{0, 0, 3, 3, 1, 1, 2, 2})});
             } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
-                     InvocationTargetException e) {
+                     InvocationTargetException | Compat.ItemNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
