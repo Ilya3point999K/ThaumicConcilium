@@ -76,3 +76,10 @@ artifacts {
 	archives devJar
 	archives sourcesJar
 }
+
+jar {
+	manifest {
+		attributes 'FMLCorePluginContainsFMLMod': 'true'
+		attributes 'FMLCorePlugin': 'com.ilya3point999k.thaumicconcilium.core.ThaumicConciliumCore'
+	}
+}
