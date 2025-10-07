@@ -125,6 +125,7 @@ public class Thaumonomicon {
 				new ItemStack(TCItemRegistry.itemEntityIcon, 1, 1));
 		r.setPages(new ResearchPage("entry.madthaumaturges.first"), new ResearchPage("entry.madthaumaturges.second"));
 		r.setLost().setRound().setParents("THAUMATURGES").setConcealed().setEntityTriggers(new String[]{ThaumicConcilium.MODID+".MadThaumaturge"}).registerResearchItem();
+		ThaumcraftApi.addWarpToResearch("MADTHAUMATURGES", 1);
 
 		r = new ResearchItem("THAUMICCONCILIUM", catName, new AspectList().add(Aspect.MIND, 5).add(Aspect.ELDRITCH, 10).add(Aspect.MAN, 15),
 				-2, 2, 1,
@@ -145,6 +146,7 @@ public class Thaumonomicon {
 						ThaumicConcilium.MODID + ".CrimsonPaladin"
 				}
 				).registerResearchItem();
+		ThaumcraftApi.addWarpToResearch("THAUMICCONCILIUM", 1);
 
 		r = new ResearchItem("SHARDMILL", catName, new AspectList().add(Aspect.TOOL, 16).add(Aspect.CRYSTAL, 16).add(Aspect.ENTROPY, 4).add(Aspect.MAGIC, 4),
 				0, -3, 2, new ItemStack(TCItemRegistry.shardMill, 1, 0));
@@ -162,7 +164,8 @@ public class Thaumonomicon {
 				3, -5, 2, new ItemStack(TCItemRegistry.bottleOfThickTaint));
 		r.setPages(new ResearchPage("entry.bottleofthicktaint.first"), cruciblePage("BottleOfThickTaint"));
 		r.setLost().setParents("TCBOTTLETAINT").registerResearchItem();
-		ThaumcraftApi.addWarpToResearch("HEXOFPREDICTABILITY", 2);
+		ThaumcraftApi.addWarpToResearch("BOTTLEOFTHICKTAINT", 2);
+		ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.bottleOfThickTaint), 2);
 
 		r = new ResearchItem("RUNICWINDINGS", catName, new AspectList().add(Aspect.ARMOR, 10).add(Aspect.ELDRITCH, 15).add(Aspect.MIND, 20).add(Aspect.MAGIC, 20),
 				3, -3, 1, new ItemStack(TCItemRegistry.runicBodyWindings));
@@ -240,8 +243,8 @@ public class Thaumonomicon {
 				5, -4, 2, new ItemStack(TCItemRegistry.tightBelt));
 		r.setPages(new ResearchPage("entry.tightbelt.first"), infusionPage("TightBelt"));
 		r.setConcealed().setParents("BOTTLEOFTHICKTAINT").setParentsHidden("HOVERGIRDLE", "DESTCRYSTAL").registerResearchItem();
-		ThaumcraftApi.addWarpToResearch("TIGHTBELT", 4);
-		ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.tightBelt), 4);
+		ThaumcraftApi.addWarpToResearch("TIGHTBELT", 3);
+		ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.tightBelt), 3);
 
 		r = new ResearchItem("BURDENINGAMULET", catName, new AspectList().add(Aspect.ELDRITCH, 20).add(Aspect.ARMOR, 30).add(Aspect.SENSES, 30).add(Aspect.DEATH, 30).add(DarkAspects.ENVY, 10),
 				7, -5, 2, new ItemStack(TCItemRegistry.burdeningAmulet));
@@ -259,6 +262,8 @@ public class Thaumonomicon {
 				-5, 7, 2, new ItemStack(TCItemRegistry.thaumaturgeDrum, 1, 1));
 		r.setPages(new ResearchPage("entry.warpdrum.first"), riftPage("WarpDrum"));
 		r.setConcealed().setParents("THAUMDRUM").setParentsHidden("HEXOFPREDICTABILITY").registerResearchItem();
+		ThaumcraftApi.addWarpToResearch("WARPDRUM", 3);
+		ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.thaumaturgeDrum), 3);
 
 		r = new ResearchItem("BRIGHTESTONE", catName, new AspectList().add(Aspect.ENERGY, 10).add(Aspect.AURA, 20).add(Aspect.LIFE, 10).add(DarkAspects.PRIDE, 10),
 				-10, 4, 2, new ResourceLocation(ThaumicConcilium.MODID+":textures/misc/brightest.png"));
@@ -429,6 +434,8 @@ public class Thaumonomicon {
 					9, 0, 2, new ItemStack(TCItemRegistry.drainageSyringe));
 			r.setPages(new ResearchPage("entry.drainagesyringe.first"), new ResearchPage("entry.drainagesyringe.second"), infusionPage("DrainageSyringe"));
 			r.setConcealed().setParents("TCHORIZONS").setParentsHidden(new String[]{"injector", "ESSENTIARESERVOIR"}).registerResearchItem();
+			ThaumcraftApi.addWarpToResearch("DRAINAGESYRINGE", 3);
+			ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.drainageSyringe), 3);
 
 			if (Integration.automagy){
 				r = new ResearchItem("REDPOWEREDMIND", catName, new AspectList().add(Aspect.MIND, 10).add(Aspect.MECHANISM, 10).add(Aspect.CRYSTAL, 10).add(Aspect.SENSES, 10),
@@ -481,9 +488,16 @@ public class Thaumonomicon {
 			r = new ResearchItem("CRIMSONINITIATION", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.LIFE, 8).add(Aspect.EXCHANGE, 8).add(Aspect.MIND, 8),
 					-6, 12, 1, new ResourceLocation(ThaumicConcilium.MODID + ":textures/misc/crimson_initiation.png"));
 			r.setPages(new ResearchPage("entry.crimsonimitiation.first"));
-			r.setRound().setConcealed().setParents("PONTIFEXROBE").registerResearchItem();
+			r.setRound().setConcealed().setParents("PONTIFEXROBE").setSiblings("CRIMSONRAID").registerResearchItem();
 			ThaumcraftApi.addWarpToResearch("CRIMSONINITIATION", 3);
 
+			if(Compat.am2) {
+				r = new ResearchItem("CRIMSONRAID", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.WEAPON, 8).add(Aspect.ELDRITCH, 8).add(Aspect.TRAVEL, 8),
+						-4, 14, 1, new ItemStack(TCItemRegistry.spellIcon, 1, 0));
+				r.setPages(new ResearchPage("entry.crimsonraid.first"));
+				r.setRound().setConcealed().setParents("CRIMSONINITIATION").registerResearchItem();
+				ThaumcraftApi.addWarpToResearch("CRIMSONRAID", 3);
+			}
 
 			r = new ResearchItem("PONTIFEXHAMMER", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.LIFE, 8).add(DarkAspects.PRIDE, 8).add(Aspect.WEAPON, 8).add(Aspect.HUNGER, 8),
 					-6, 10, 1, new ItemStack(TCItemRegistry.pontifexHammer));

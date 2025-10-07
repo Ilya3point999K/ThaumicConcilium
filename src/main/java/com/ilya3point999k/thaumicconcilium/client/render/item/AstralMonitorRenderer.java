@@ -27,7 +27,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.client.lib.UtilsFX;
+import thaumcraft.common.config.Config;
 
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.Random;
 
@@ -44,15 +46,16 @@ public class AstralMonitorRenderer implements IItemRenderer {
     private final ShaderCallback shaderCallback;
     private final ShaderCallback emptyCallback;
     //private int index, next;
-    private IntBuffer indexes;
-    private IntBuffer nexts;
-    private int progress, index, next;
+    private FloatBuffer indexes;
+    private FloatBuffer nexts;
+    private int index, next;
+    private float progress;
 
     public AstralMonitorRenderer() {
         Random random = new Random(System.currentTimeMillis());
 
-        indexes = BufferUtils.createIntBuffer(6);
-        nexts = BufferUtils.createIntBuffer(6);
+        indexes = BufferUtils.createFloatBuffer(6);
+        nexts = BufferUtils.createFloatBuffer(6);
         indexes.clear();
         nexts.clear();
 
@@ -72,7 +75,7 @@ public class AstralMonitorRenderer implements IItemRenderer {
         int nextLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "nexts");
         ARBShaderObjects.glUniform1ARB(nextLoc, nexts);
         int progLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "progress");
-        ARBShaderObjects.glUniform1iARB(progLoc, progress);
+        ARBShaderObjects.glUniform1fARB(progLoc, progress);
 
         this.model = AdvancedModelLoader.loadModel(SCANNER);
         this.glass = AdvancedModelLoader.loadModel(GLASS);
@@ -171,39 +174,43 @@ public class AstralMonitorRenderer implements IItemRenderer {
             }
         }
 
-
-        ShaderHelper.useShader(ShaderHelper.atsralFrameShader, emptyCallback);
-        ++progress;
-        if (progress == 60) {
-            nexts.clear();
-            indexes.clear();
-            for (int i = 0; i < 6; i++) {
-                indexes.put(nexts.get());
-            }
-            indexes.clear();
-            nexts.clear();
-            for (int i = 0; i < 6; i++) {
-                index = next;
-                next = playermp.worldObj.rand.nextInt(6);
-                while (next == index) {
-                    next = playermp.worldObj.rand.nextInt(6);
+        if(Config.shaders) {
+            ShaderHelper.useShader(ShaderHelper.atsralFrameShader, emptyCallback);
+            ++progress;
+            if (progress == 60) {
+                nexts.clear();
+                indexes.clear();
+                for (int i = 0; i < 6; i++) {
+                    indexes.put(nexts.get());
                 }
-                nexts.put(next);
+                indexes.clear();
+                nexts.clear();
+                for (int i = 0; i < 6; i++) {
+                    index = next;
+                    next = playermp.worldObj.rand.nextInt(6);
+                    while (next == index) {
+                        next = playermp.worldObj.rand.nextInt(6);
+                    }
+                    nexts.put(next);
+                }
+                indexes.clear();
+                nexts.clear();
+                int indexLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "indexes");
+                ARBShaderObjects.glUniform1ARB(indexLoc, indexes);
+                int nextLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "nexts");
+                ARBShaderObjects.glUniform1ARB(nextLoc, nexts);
+                progress = 0;
             }
-            indexes.clear();
-            nexts.clear();
-            int indexLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "indexes");
-            ARBShaderObjects.glUniform1ARB(indexLoc, indexes);
-            int nextLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "nexts");
-            ARBShaderObjects.glUniform1ARB(nextLoc, nexts);
-            progress = 0;
-        }
-        int progLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "progress");
-        ARBShaderObjects.glUniform1iARB(progLoc, progress);
+            int progLoc = ARBShaderObjects.glGetUniformLocationARB(ShaderHelper.atsralFrameShader, "progress");
+            ARBShaderObjects.glUniform1fARB(progLoc, progress);
 
-        mc.renderEngine.bindTexture(ATSRAL_FRAME);
-        this.model.renderAll();
-        ShaderHelper.releaseShader();
+            mc.renderEngine.bindTexture(ATSRAL_FRAME);
+            this.model.renderAll();
+            ShaderHelper.releaseShader();
+        } else {
+            mc.renderEngine.bindTexture(ATSRAL_FRAME);
+            this.model.renderAll();
+        }
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

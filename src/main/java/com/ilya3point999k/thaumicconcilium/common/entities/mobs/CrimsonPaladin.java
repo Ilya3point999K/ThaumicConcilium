@@ -3,6 +3,7 @@ package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.CrimsonOrbEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.EtherealShacklesEntity;
+import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import fox.spiteful.forbidden.items.ForbiddenItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -52,7 +53,15 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
 
     @Override
     protected void addRandomArmor() {
-        this.setCurrentItemOrArmor(4, new ItemStack(ConfigItems.itemHelmetCultistRobe));
+        if(Integration.dyes){
+            if(rand.nextBoolean()) {
+                this.setCurrentItemOrArmor(4, new ItemStack(Integration.paladinHelm));
+            } else {
+                this.setCurrentItemOrArmor(4, new ItemStack(ConfigItems.itemHelmetCultistRobe));
+            }
+        } else {
+            this.setCurrentItemOrArmor(4, new ItemStack(ConfigItems.itemHelmetCultistRobe));
+        }
         this.setCurrentItemOrArmor(3, new ItemStack(ConfigItems.itemChestCultistPlate));
         this.setCurrentItemOrArmor(2, new ItemStack(ConfigItems.itemLegsCultistRobe));
         this.setCurrentItemOrArmor(1, new ItemStack(ConfigItems.itemBootsCultist));
@@ -133,7 +142,7 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
         } else if (r <= 1) {
             this.entityDropItem(new ItemStack(ConfigItems.itemResource, 1, 17), 1.5F);
         } else if (r <= 3 + i) {
-            this.entityDropItem(new ItemStack(ConfigItems.itemResource, 1, 18), 1.5F);
+            this.entityDropItem(new ItemStack(ConfigItems.itemResource, 1 + this.rand.nextInt(i + 3), 18), 1.5F);
         }
         
         super.dropFewItems(flag, i);

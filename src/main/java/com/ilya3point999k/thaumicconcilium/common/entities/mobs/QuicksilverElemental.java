@@ -97,12 +97,8 @@ public class QuicksilverElemental extends EntityMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float f) {
-        if (!source.isFireDamage()) {
-            if (TCConfig.quicksilverImmortality){
-                return false;
-            } else {
-                f = 0.1F;
-            }
+        if (!source.isFireDamage() && !this.isPotionActive(Potion.moveSlowdown)) {
+            return false;
         }
         int x = MathHelper.floor_double(posX);
         int y = MathHelper.floor_double(posY);

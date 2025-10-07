@@ -297,7 +297,7 @@ public class CrimsonPontifex extends EntityThaumcraftBoss implements IBossDispla
                                                 double y = e.posY;
                                                 double z = e.posZ;
                                                 if (!worldObj.isRemote) {
-                                                    e.attackEntityFrom(DamageSource.magic, (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
+                                                    e.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
                                                     this.heal(10.0F);
                                                 } else {
                                                     for (int i = 0; i < 3; i++) {

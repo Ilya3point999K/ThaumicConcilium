@@ -1,6 +1,9 @@
 tc.research_category.CONCILIUM=Thaumic Concilium
 itemGroup.ThaumicConcilium=Thaumic Concilium
 
+am2.spell.crimson_raid=Crimson Raid
+am2.entry.crimson_raid=Summon a group of cultists through a Crimson Portal. Must wear a full Pontifex Robe to cast.
+
 TC.infusionInfo.require=Need to remove %2$s of %1$s to reach perfection...
 TC.oblivion_cost=A piece of knowledge about the essence of things
 TC.oblivion_response=It seems to you that you have forgotten something about...
@@ -501,7 +504,7 @@ entry.fleshcrucible.first=Nothing lasts forever, not even your fatigue from this
 
 tc.research_name.PONTIFEXROBE=Pontifex's Robes
 tc.research_text.PONTIFEXROBE=Now you see me
-entry.pontifexrobe.first=Years spent in a phantom state have affected not only the Pontifex, but also his vestments. You know it will not be very difficult to replicate it.<BR>Wearing the full set allows you to forfeit your material wholeness at any time, at the cost of restricting your active freedom.<BR>Press H to toggle this ability.<BR>Despite the passage of time, fear of the Pontifex's mental power still permeates every member of the Cult. Wearing the full uniform, you feel confident in your ability to command the Crimson Warriors.
+entry.pontifexrobe.first=Years spent in a phantom state have affected not only the Pontifex, but also his vestments. You know it will not be very difficult to replicate it.<BR>Wearing the full set allows you to forfeit your material wholeness at any time, at the cost of restricting your active freedom.<BR>Press L to toggle this ability.<BR>Despite the passage of time, fear of the Pontifex's mental power still permeates every member of the Cult. Wearing the full uniform, you feel confident in your ability to command the Crimson Warriors.
 entry.pontifexrobe.second=Your subordinates are empowered as they fight under a Pontifex skilled in the healing arts and insatiable for blood.
 
 tc.research_name.CRIMSONSPELLS=Spells from Crimson Cult
@@ -533,5 +536,9 @@ entry.clearwater.first=You can fill bottles with alchemically pure water, for la
 tc.research_name.DOPESQUID=Doped Squid
 tc.research_text.DOPESQUID=Passive smoking does more harm you know?
 entry.dopesquid.first=You find it quite tedious to constantly fill a pipe with your own hands, but who will do it for you? Squids that live in the ocean spend their lives filtering water, and they are clearly capable of more than that.<BR>The squid will swim after the one who gives him fresh tobacco leaves, accompanying the owner of carcinogenic smoke. The greedy animal will not share with you for nothing, for each dose the owner must give a part of his mental poison.<BR>You can give the squid samples of desired tobacco flavors.
+
+tc.research_name.CRIMSONRAID=Crimson Raid
+tc.research_text.CRIMSONRAID=All of a sudden, out of nowhere
+entry.crimsonraid.first=With a weave of hand, the most powerful warriors of the Cult appear before you. While most summoners struggle with a couple of creatures - you have a whole army on demand.<BR>Refer to Arcane Compendium for details on casting.
 
 

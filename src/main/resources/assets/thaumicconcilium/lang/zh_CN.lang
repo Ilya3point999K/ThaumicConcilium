@@ -501,7 +501,7 @@ entry.fleshcrucible.first=没有什么是永恒的,即使是你对这个世界�
 
 tc.research_name.PONTIFEXROBE=教皇法袍
 tc.research_text.PONTIFEXROBE=现在你看到我了
-entry.pontifexrobe.first=多年来处于幻象状态的不只是教皇,还有他的法衣.你知道复制它并不困难.<BR>穿上全套服装可以让你随时放弃你的物质完整性,代价是限制你的活动自由.<BR>按下H键切换此功能.<BR>尽管时间流逝,但对教皇精神力量的恐惧仍然渗透到教派的每一位成员身上.穿上全套制服,你对自己指挥血腥战士的能力充满信心.
+entry.pontifexrobe.first=多年来处于幻象状态的不只是教皇,还有他的法衣.你知道复制它并不困难.<BR>穿上全套服装可以让你随时放弃你的物质完整性,代价是限制你的活动自由.<BR>按下L键切换此功能.<BR>尽管时间流逝,但对教皇精神力量的恐惧仍然渗透到教派的每一位成员身上.穿上全套制服,你对自己指挥血腥战士的能力充满信心.
 entry.pontifexrobe.second=你的下属在精通治疗术且嗜血成性的教皇的率领下作战,将获得强大的力量.
 
 tc.research_name.CRIMSONSPELLS=血腥教派之魔符

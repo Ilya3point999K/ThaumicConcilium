@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
+import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class LesserPortal extends EntityMob {
     int stage = 0;
-    int stagecounter = 200;
+    public int stagecounter = 200;
     public int pulse = 0;
     public boolean boss = false;
 
@@ -163,7 +164,7 @@ public class LesserPortal extends EntityMob {
     }
     void spawnMinions() {
         EntityCultist cultist = null;
-        int rand = this.rand.nextInt(3);
+        int rand = this.rand.nextInt(5);
         switch (rand){
             case 0:{
                 cultist = new EntityCultistKnight(this.worldObj);
@@ -175,6 +176,22 @@ public class LesserPortal extends EntityMob {
             }
             case 2:{
                 cultist = new CrimsonPaladin(this.worldObj);
+                break;
+            }
+            case 3:{
+                if(Integration.dyes){
+                    cultist = new CrimsonArcher(this.worldObj);
+                } else {
+                    cultist = new EntityCultistKnight(this.worldObj);
+                }
+                break;
+            }
+            case 4:{
+                if(Integration.dyes){
+                    cultist = new CrimsonRanger(this.worldObj);
+                } else {
+                    cultist = new EntityCultistKnight(this.worldObj);
+                }
                 break;
             }
         }

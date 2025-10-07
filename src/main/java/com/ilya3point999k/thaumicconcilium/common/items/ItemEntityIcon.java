@@ -12,7 +12,7 @@ import net.minecraft.util.StatCollector;
 
 public class ItemEntityIcon extends Item {
     @SideOnly(Side.CLIENT)
-    public IIcon iconThaumaturge;
+    public static IIcon iconThaumaturge;
     public IIcon iconMadThaumaturge;
     public IIcon iconGolem;
     public IIcon iconRedMind;
@@ -27,7 +27,7 @@ public class ItemEntityIcon extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(final IIconRegister ir) {
-        this.iconThaumaturge = ir.registerIcon(ThaumicConcilium.MODID+":iconThaumaturge");
+        iconThaumaturge = ir.registerIcon(ThaumicConcilium.MODID+":iconThaumaturge");
         this.iconMadThaumaturge = ir.registerIcon(ThaumicConcilium.MODID+":iconMadThaumaturge");
         this.iconGolem = ir.registerIcon(ThaumicConcilium.MODID+":iconGolem");
         this.iconRedMind = ir.registerIcon(ThaumicConcilium.MODID+":iconRedMind");

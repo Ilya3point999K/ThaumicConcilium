@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class CrimsonPaladinRenderer  extends RenderBiped {
+public class CrimsonPaladinRenderer extends RenderBiped {
 
     private final ResourceLocation texture;
 

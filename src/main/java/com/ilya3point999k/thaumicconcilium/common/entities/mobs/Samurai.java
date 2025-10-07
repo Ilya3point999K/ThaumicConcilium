@@ -26,7 +26,7 @@ public class Samurai extends EntityMob {
         super(w);
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.6D, false));
-        this.tasks.addTask(2, new SamuraiAttackAI(this, EntityLivingBase.class, 1D, false));
+        this.tasks.addTask(2, new SamuraiAttackAI(this, EntityLivingBase.class, 0.8D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1D));
         this.tasks.addTask(7, new EntityAIWander(this, 1D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -43,9 +43,9 @@ public class Samurai extends EntityMob {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Samurai extends EntityMob {
             p_70665_2_ = ForgeHooks.onLivingHurt(this, p_70665_1_, p_70665_2_);
             if (p_70665_2_ <= 0) return;
             int type = getType();
-            p_70665_2_ /= type == 2 ? 25.0F : type == 1 ? 20.0F : 15.0F;
+            p_70665_2_ /= type == 2 ? 10.0F : type == 1 ? 5F : 3.5F;
             p_70665_2_ = this.applyPotionDamageCalculations(p_70665_1_, p_70665_2_);
             float f1 = p_70665_2_;
             p_70665_2_ = Math.max(p_70665_2_ - this.getAbsorptionAmount(), 0.0F);

@@ -1,12 +1,22 @@
 package com.ilya3point999k.thaumicconcilium.common.world;
 
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonArcher;
+import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
+import thaumcraft.common.entities.monster.EntityCultist;
+import thaumcraft.common.entities.monster.EntityCultistCleric;
+import thaumcraft.common.entities.monster.EntityCultistKnight;
 import thaumcraft.common.tiles.TileBanner;
+import thaumcraft.common.tiles.TileLifter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +45,7 @@ public class CultistTowerWorldGen extends WorldGenerator {
     @Override
     public boolean generate(World world, Random random, int x, int y, int z) {
         if(hasValidPlatform(x-2,y-1,z+3,world)) {
+
             setColumn(x, y, z, 4, ConfigBlocks.blockMagicalLog, world, 0);
             setColumn(x + 1, y, z + 1, 4, ConfigBlocks.blockMagicalLog, world, 0);
             setColumn(x + 3, y, z + 2, 4, ConfigBlocks.blockMagicalLog, world, 0);
@@ -180,7 +191,61 @@ public class CultistTowerWorldGen extends WorldGenerator {
                 ((TileBanner) te).setFacing((byte) 12);
                 ((TileBanner) te).setWall(true);
             }
+            //y + 9
+            for (int xx = -1; xx <= 1; ++xx) {
+                for (int zz = -1; zz <= 1; ++zz) {
+                    world.setBlock(x + 3 + xx, y + 9, z - 2 + zz, Blocks.stained_hardened_clay, 14, 3);
+                }
+            }
+            world.setBlock(x + 3, y + 9, z - 2, Blocks.air);
+            world.setBlock(x + 5, y + 9, z - 2, Blocks.stained_hardened_clay, 14, 3);
+            world.setBlock(x + 1, y + 9, z - 2, Blocks.stained_hardened_clay, 14, 3);
+            world.setBlock(x + 3, y + 9, z - 4, Blocks.stained_hardened_clay, 14, 3);
+            world.setBlock(x + 3, y + 9, z, Blocks.stained_hardened_clay, 14, 3);
+            world.setBlock(x + 3, y, z - 2, ConfigBlocks.blockLifter);
 
+            world.setBlock(x + 5, y + 10, z - 2, Blocks.chest);
+            TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 5, y + 10, z - 2);
+                ItemStack[] lootTable = new ItemStack[]{
+                        new ItemStack(ConfigItems.itemNugget, random.nextInt(3) + 1, 7),
+                        new ItemStack(ConfigItems.itemEldritchObject, 1, 1),
+                        new ItemStack(Items.bow),
+                        new ItemStack(Items.arrow, random.nextInt(16) + 1),
+                        new ItemStack(ConfigItems.itemTripleMeatTreat, random.nextInt(3) + 1),
+                        new ItemStack(ConfigItems.itemResource, random.nextInt(3) + 1, 9)
+                };
+
+                int itemsToAdd = random.nextInt(8) + 2;
+                for (int i = 0; i < itemsToAdd; i++) {
+                    int slot = random.nextInt(chest.getSizeInventory());
+                    ItemStack loot = lootTable[random.nextInt(lootTable.length)].copy();
+
+                    if (chest.getStackInSlot(slot) == null) {
+                        chest.setInventorySlotContents(slot, loot);
+                    }
+                }
+
+            CrimsonArcher archer = new CrimsonArcher(world);
+            archer.setLocationAndAngles(x + 3, y + 11, z - 3, 0, 0);
+            archer.onSpawnWithEgg(null);
+            world.spawnEntityInWorld(archer);
+            archer = new CrimsonArcher(world);
+            archer.setLocationAndAngles(x + 5, y + 11, z - 3, 0, 0);
+            archer.onSpawnWithEgg(null);
+            world.spawnEntityInWorld(archer);
+            archer = new CrimsonArcher(world);
+            archer.setLocationAndAngles(x + 3, y + 11, z, 0, 0);
+            archer.onSpawnWithEgg(null);
+            world.spawnEntityInWorld(archer);
+            int randknights = random.nextInt(5);
+            for(int it = 0; it < randknights; it++) {
+                archer = new CrimsonArcher(world);
+                int xx = x - 8 + random.nextInt(16);
+                int zz = z - 8 + random.nextInt(16);
+                archer.setLocationAndAngles(xx, world.getHeightValue(xx, zz), zz, 0, 0);
+                archer.onSpawnWithEgg(null);
+                world.spawnEntityInWorld(archer);
+            }
             return true;
         }else {
             return false;

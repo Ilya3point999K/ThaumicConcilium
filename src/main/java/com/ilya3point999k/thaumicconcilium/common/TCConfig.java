@@ -41,10 +41,11 @@ public class TCConfig {
     public static int overanimatedSpawnChance;
     public static int paranoidWarriorSpawnChance;
     public static int vengefulGolemSpawnChance;
+    public static int crimsonRangerSpawnChance;
     public static int madThaumaturgeReplacesBrainyZombieChance;
     public static int crimsonPaladinReplacesCultistWarriorChance;
+    public static int crimsonAvanpostGenChance;
 
-    public static boolean quicksilverImmortality;
     public static int chanceOfRiftOpening;
 
     public static int causalBouillonID;
@@ -55,6 +56,9 @@ public class TCConfig {
     public static int[] overanimatedBiomeBlacklist;
     public static int[] paranoidWarriorBiomeBlacklist;
     public static int[] vengefulGolemBiomeBlacklist;
+    public static int[] crimsonRangerBiomeBlacklist;
+
+    public static int crimsonRaidID;
 
     public static void configurate(File f){
         Configuration conf = new Configuration(f);
@@ -84,12 +88,13 @@ public class TCConfig {
             primalEssenceUpgradeID = conf.getInt("primalEssenceUpgradeID", "focus", 121, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
 
             thaumaturgeSpawnChance = conf.getInt("thaumaturgeSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
-            madThaumaturgeSpawnChance = conf.getInt("madThaumaturgeSpawnChance", "mobs", 15, 0, Integer.MAX_VALUE, "");
-            quicksilverElementalSpawnChance = conf.getInt("quicksilverElementalSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
-            dissolvedSpawnChance = conf.getInt("dissolvedSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
-            overanimatedSpawnChance = conf.getInt("overanimatedSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
-            paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
-            vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
+            madThaumaturgeSpawnChance = conf.getInt("madThaumaturgeSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            quicksilverElementalSpawnChance = conf.getInt("quicksilverElementalSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            dissolvedSpawnChance = conf.getInt("dissolvedSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            overanimatedSpawnChance = conf.getInt("overanimatedSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            crimsonRangerSpawnChance = conf.getInt("crimsonRangerSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
 
             String biomes = conf.getString("thaumaturgeBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
             thaumaturgeBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
@@ -105,15 +110,19 @@ public class TCConfig {
             paranoidWarriorBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
             biomes = conf.getString("vengefulGolemBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
             vengefulGolemBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("crimsonRangerBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            crimsonRangerBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
 
-            madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
-            crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 80, 0, Integer.MAX_VALUE, "99 - never, 0 - always.");
+            madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
+            crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
 
-            quicksilverImmortality = conf.getBoolean("quicksilverImmortality", "balance", true, "Will quicksilver elemental be immune to non-fire attacks.");
+            crimsonAvanpostGenChance = conf.getInt("crimsonAvanpostGenChance", "world", 5, 0, 100, "Chance to generate Crimson Avanpost in the world");
 
-            chanceOfRiftOpening = conf.getInt("chanceOfRiftOpening", "balance", 0, 0, Integer.MAX_VALUE, "99 - never, 0 - always. Never is not recommended, it will lead to softlock of progress in unmodified survival.");
+            chanceOfRiftOpening = conf.getInt("chanceOfRiftOpening", "balance", 100, 0, 100, "0 - never, 100 - always. Never is not recommended, it will lead to softlock of progress in unmodified survival.");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
+
+            crimsonRaidID = conf.get("crimsonRaidID", "am2", 555).getInt();
         } catch (Exception e){
             ThaumicConcilium.logger.log(Level.ERROR, "Thaumic Concilium can't load config");
             e.printStackTrace();

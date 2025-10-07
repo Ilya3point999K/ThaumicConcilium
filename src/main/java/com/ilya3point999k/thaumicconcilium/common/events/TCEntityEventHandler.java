@@ -1,6 +1,12 @@
 package com.ilya3point999k.thaumicconcilium.common.events;
 
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import am2.api.ArsMagicaApi;
+import am2.api.events.SkillLearnedEvent;
+import am2.lore.ArcaneCompendium;
+import am2.playerextensions.SkillData;
+import am2.spell.SkillManager;
+import am2.spell.SkillTreeManager;
 import baubles.common.lib.PlayerHandler;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
 import com.ilya3point999k.thaumicconcilium.common.TCConfig;
@@ -51,14 +57,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import thaumcraft.api.aspects.Aspect;
@@ -178,25 +182,35 @@ public class TCEntityEventHandler {
                     ItemStack stack = e.entityPlayer.getHeldItem();
                     if (stack.getItem() == ConfigItems.itemResearchNotes) {
                         ResearchNoteData data = ResearchManager.getData(stack);
-                        if (data != null && data.key != null && data.key.equals("CRIMSONSPELLS")) {
-                            NBTTagCompound nbtPlayer = null;
-                            try {
-                                nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);
-                            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                            if (nbtPlayer != null) {
-                                if (!nbtPlayer.hasKey("WITCSpellBook")) {
-                                    nbtPlayer.setTag("WITCSpellBook", new NBTTagCompound());
+                        if (data != null && data.key != null) {
+                            if (data.key.equals("CRIMSONSPELLS")) {
+                                NBTTagCompound nbtPlayer = null;
+                                try {
+                                    nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);
+                                } catch (IllegalAccessException | InvocationTargetException |
+                                         NoSuchMethodException ex) {
+                                    throw new RuntimeException(ex);
                                 }
+                                if (nbtPlayer != null) {
+                                    if (!nbtPlayer.hasKey("WITCSpellBook")) {
+                                        nbtPlayer.setTag("WITCSpellBook", new NBTTagCompound());
+                                    }
 
-                                NBTTagCompound nbtSpells = nbtPlayer.getCompoundTag("WITCSpellBook");
-                                nbtSpells.setBoolean("incarcerous", true);
-                                nbtSpells.setBoolean("arrowspell", true);
-                                nbtSpells.setBoolean("spiderspell", true);
-                                nbtSpells.setBoolean("spellundead", true);
-                                nbtSpells.setBoolean("conjunctivitis", true);
+                                    NBTTagCompound nbtSpells = nbtPlayer.getCompoundTag("WITCSpellBook");
+                                    nbtSpells.setBoolean("incarcerous", true);
+                                    nbtSpells.setBoolean("arrowspell", true);
+                                    nbtSpells.setBoolean("spiderspell", true);
+                                    nbtSpells.setBoolean("spellundead", true);
+                                    nbtSpells.setBoolean("conjunctivitis", true);
 
+                                }
+                            } else if(data.key.equals("CRIMSONINITIATION")){
+                                SkillData d = SkillData.For(e.entityPlayer);
+                                SkillTreeManager t = SkillTreeManager.instance;
+                                d.incrementSpellPoints(t.getSkillPointTypeForPart(Integration.crimson_raid_component));
+                                d.learn(t.getSkillTreeEntry(Integration.crimson_raid_component).registeredItem);
+                                d.forceSync();
+                                MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
                             }
                         }
                     }
@@ -266,7 +280,7 @@ public class TCEntityEventHandler {
             if (!player.worldObj.isRemote) {
                 if (!player.capabilities.isCreativeMode && capabilities.ethereal) {
                     if (event.item == null) {
-                        if(player.posY < 0){
+                        if (player.posY < 0) {
                             //player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, is.copy()));
                         }
                         capabilities.fleshAmount++;
@@ -302,7 +316,7 @@ public class TCEntityEventHandler {
         }
         if (Integration.taintedMagic) {
             if (!event.entityPlayer.worldObj.isRemote && event.target != null) {
-                if(PontifexRobe.isFullSet(event.entityPlayer)) {
+                if (PontifexRobe.isFullSet(event.entityPlayer)) {
                     List<EntityCultist> list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityCultist.class, event.entityPlayer.boundingBox.expand(32, 32, 32));
                     if (!list.isEmpty()) {
                         int life = Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(event.entityPlayer.getCommandSenderName(), Aspect.HUNGER);
@@ -340,7 +354,7 @@ public class TCEntityEventHandler {
     @SubscribeEvent
     public void on(EntityJoinWorldEvent event) {
         if (event.entity instanceof EntityBrainyZombie || event.entity instanceof EntityGiantBrainyZombie) {
-            if (event.world.rand.nextInt(100) > TCConfig.madThaumaturgeReplacesBrainyZombieChance) {
+            if (TCConfig.madThaumaturgeReplacesBrainyZombieChance > event.world.rand.nextInt(100)) {
                 if (!event.world.isRemote) {
                     MadThaumaturge madThaumaturge = new MadThaumaturge(event.world);
                     madThaumaturge.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);
@@ -350,8 +364,8 @@ public class TCEntityEventHandler {
                 }
             }
         }
-        if (event.entity instanceof EntityCultistKnight){
-            if (event.world.rand.nextInt(100) > TCConfig.crimsonPaladinReplacesCultistWarriorChance) {
+        if (event.entity instanceof EntityCultistKnight) {
+            if (TCConfig.crimsonPaladinReplacesCultistWarriorChance > event.world.rand.nextInt(100)) {
                 if (!event.world.isRemote) {
                     CrimsonPaladin paladin = new CrimsonPaladin(event.world);
                     paladin.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);

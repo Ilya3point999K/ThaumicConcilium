@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class TCKeyHandler {
     public KeyBinding keyF = new KeyBinding("Choose Shard for Shard Mill", 36, "key.categories.misc");
-    public KeyBinding keyH = new KeyBinding("Toggle Pontifex Robe", 35, "key.categories.misc");
+    public KeyBinding keyH = new KeyBinding("Toggle Pontifex Robe", 38, "key.categories.misc");
 
     private boolean keyPressedF = false;
     private boolean keyPressedH = false;

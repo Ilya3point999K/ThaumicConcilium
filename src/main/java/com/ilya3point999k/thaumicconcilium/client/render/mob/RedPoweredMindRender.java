@@ -10,12 +10,11 @@ import org.lwjgl.opengl.GL11;
 
 public class RedPoweredMindRender extends Render
 {
+
     public RedPoweredMindRender()
     {
         super();
     }
-
-
 
     @Override
     public void doRender(Entity e, double x, double y, double z, float par8, float par9)

@@ -8,8 +8,10 @@ import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.*;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import fox.spiteful.forbidden.DarkAspects;
+import fox.spiteful.forbidden.compat.Compat;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import scala.Int;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -41,6 +43,22 @@ public class TCEntityRegistry {
 		EntityRegistry.registerModEntity(Thaumaturge.class, "Thaumaturge", entityID++, ThaumicConcilium.instance, 64, 3, true);
 		ItemSpawnerEgg.addMapping("Thaumaturge", 0x00FFFF, 0x00008B);
 		ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID+".Thaumaturge", new AspectList().add(Aspect.MAN, 4).add(Aspect.MAGIC, 4).add(Aspect.AURA, 4).add(Aspect.ORDER, 4));
+
+		if(Integration.dyes){
+			EntityRegistry.registerModEntity(CrimsonArcher.class, "CrimsonArcher", entityID++, ThaumicConcilium.instance, 64, 3, true);
+			ItemSpawnerEgg.addMapping("CrimsonArcher", 0x00FFFF, 0x00008B);
+			ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID + ".CrimsonArcher", new AspectList().add(Aspect.MAN, 4).add(Aspect.WEAPON, 4).add(Aspect.LIFE, 4).add(Aspect.ELDRITCH, 4));
+
+			EntityRegistry.registerModEntity(CrimsonRanger.class, "CrimsonRanger", entityID++, ThaumicConcilium.instance, 64, 3, true);
+			ItemSpawnerEgg.addMapping("CrimsonRanger", 0x00FFFF, 0x00008B);
+			ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID + ".CrimsonRanger", new AspectList().add(Aspect.MAN, 4).add(Aspect.TRAVEL, 4).add(Aspect.LIFE, 4).add(Aspect.ELDRITCH, 4));
+		}
+
+		if(Compat.botan){
+			EntityRegistry.registerModEntity(WitheredBotanist.class, "WitheredBotanist", entityID++, ThaumicConcilium.instance, 64, 3, true);
+			ItemSpawnerEgg.addMapping("WitheredBotanist", 0x00FFFF, 0x00008B);
+			ThaumcraftApi.registerEntityTag(ThaumicConcilium.MODID + ".WitheredBotanist", new AspectList().add(Aspect.MAN, 4).add(Aspect.PLANT, 4).add(Aspect.DEATH, 4).add(Aspect.EXCHANGE, 4));
+		}
 
 		if(Integration.horizons) {
 			EntityRegistry.registerModEntity(Overanimated.class, "Overanimated", entityID++, ThaumicConcilium.instance, 64, 3, true);
@@ -120,9 +138,18 @@ public class TCEntityRegistry {
 	public static void postinit(){
 		EntityRegistry.addSpawn(Dissolved.class, TCConfig.dissolvedSpawnChance, 1, 2, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.dissolvedBiomeBlacklist == null || Arrays.stream(TCConfig.dissolvedBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
 		EntityRegistry.addSpawn(QuicksilverElemental.class, TCConfig.quicksilverElementalSpawnChance, 1, 2, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.quicksilverElementalBiomeBlacklist == null || Arrays.stream(TCConfig.quicksilverElementalBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
-		EntityRegistry.addSpawn(Samurai.class, TCConfig.paranoidWarriorSpawnChance, 3, 5, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.paranoidWarriorBiomeBlacklist == null || Arrays.stream(TCConfig.paranoidWarriorBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
-		EntityRegistry.addSpawn(VengefulGolem.class, TCConfig.vengefulGolemSpawnChance, 1, 2, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.vengefulGolemBiomeBlacklist == null || Arrays.stream(TCConfig.vengefulGolemBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
-		EntityRegistry.addSpawn(Overanimated.class, TCConfig.overanimatedSpawnChance, 1, 3, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.overanimatedBiomeBlacklist == null || Arrays.stream(TCConfig.overanimatedBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+		if (Integration.taintedMagic) {
+			EntityRegistry.addSpawn(Samurai.class, TCConfig.paranoidWarriorSpawnChance, 3, 5, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.paranoidWarriorBiomeBlacklist == null || Arrays.stream(TCConfig.paranoidWarriorBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+		}
+		if(Integration.automagy) {
+			EntityRegistry.addSpawn(VengefulGolem.class, TCConfig.vengefulGolemSpawnChance, 1, 2, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.vengefulGolemBiomeBlacklist == null || Arrays.stream(TCConfig.vengefulGolemBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+		}
+		if(Integration.horizons) {
+			EntityRegistry.addSpawn(Overanimated.class, TCConfig.overanimatedSpawnChance, 1, 3, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.overanimatedBiomeBlacklist == null || Arrays.stream(TCConfig.overanimatedBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+		}
+		if (Integration.dyes) {
+			EntityRegistry.addSpawn(CrimsonRanger.class, TCConfig.crimsonRangerSpawnChance, 1, 2, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.crimsonRangerBiomeBlacklist == null || Arrays.stream(TCConfig.crimsonRangerBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+		}
 		EntityRegistry.addSpawn(MadThaumaturge.class, TCConfig.madThaumaturgeSpawnChance, 1, 3, EnumCreatureType.monster, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.madThaumaturgeBiomeBlacklist == null || Arrays.stream(TCConfig.madThaumaturgeBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
 
 		EntityRegistry.addSpawn(Thaumaturge.class, TCConfig.thaumaturgeSpawnChance, 1, 3, EnumCreatureType.creature, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.thaumaturgeBiomeBlacklist == null || Arrays.stream(TCConfig.thaumaturgeBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));

@@ -22,7 +22,7 @@ public class Dissolved extends EntityMob {
     public Dissolved(World w) {
         super(w);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.6D, false));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.4D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.4D));
         this.tasks.addTask(7, new EntityAIWander(this, 0.4D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

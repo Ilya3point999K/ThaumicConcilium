@@ -1,5 +1,15 @@
 package com.ilya3point999k.thaumicconcilium.common.integration;
 
+import am2.api.ArsMagicaApi;
+import am2.api.spell.component.interfaces.ISkillTreeEntry;
+import am2.api.spell.component.interfaces.ISpellComponent;
+import am2.api.spell.enums.SkillPointTypes;
+import am2.api.spell.enums.SkillTrees;
+import am2.lore.ArcaneCompendium;
+import am2.spell.SkillManager;
+import am2.spell.SkillTreeManager;
+import am2.spell.SpellHelper;
+import am2.texture.SpellIconManager;
 import com.emoniph.witchery.infusion.infusions.symbols.StrokeSet;
 import com.emoniph.witchery.infusion.infusions.symbols.SymbolEffect;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
@@ -17,6 +27,7 @@ import com.ilya3point999k.thaumicconcilium.common.items.wands.Bracelets;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
+import com.ilya3point999k.thaumicconcilium.common.spells.CrimsonRaid;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -73,6 +84,7 @@ public class Integration {
     public static boolean gadomancy = false;
     public static boolean horizons = false;
     public static boolean automagy = false;
+    public static boolean dyes = false;
     public static boolean witchery = false;
 
     public static boolean minetweaker = false;
@@ -92,6 +104,16 @@ public class Integration {
     public static Item tobaccoleaves = null;
     public static Item tmMaterial = null;
     public static Item earmuffs = null;
+    public static Item paladinHelm = null;
+    public static Item archerHelm = null;
+    public static Item archerChest = null;
+    public static Item archerLegs = null;
+    public static Item rangerHelm = null;
+    public static Item rangerChest = null;
+    public static Item rangerLegs = null;
+    public static String[] spellNames = new String[]{"Crimson_Raid"};
+
+    public static CrimsonRaid crimson_raid_component;
 
     public static void init() throws Exception {
         thaumicBases = Loader.isModLoaded("thaumicbases");
@@ -99,11 +121,13 @@ public class Integration {
         gadomancy = Loader.isModLoaded("gadomancy");
         horizons = Loader.isModLoaded("ThaumicHorizons");
         automagy = Loader.isModLoaded("Automagy");
+        dyes = Loader.isModLoaded("thaumicdyes");
         witchery = Loader.isModLoaded("witchery");
         minetweaker = Loader.isModLoaded("MineTweaker3");
         if (!ConfigHandler.enableKami){
             throw new Exception("Thaumic Concilium - turning off KAMI module of Thaumic Tinkerer is not supported.");
         }
+
         if (gadomancy) {
             if (horizons) {
                 GadomancyApi.registerAdditionalGolemCore("assistantCore", new AssistantGolemCore());
@@ -276,10 +300,18 @@ public class Integration {
                 }
             }.register(DarkAspects.PRIDE);
         }
+        if (Compat.am2){
+            if(Integration.taintedMagic) {
+                crimson_raid_component = new CrimsonRaid();
+                SkillManager.instance.registerSkillTreeEntry(crimson_raid_component, spellNames[0]);
+                SkillTreeManager.instance.RegisterPart(crimson_raid_component, 64, 64, SkillTrees.None, SkillPointTypes.SILVER);
+            }
+        }
 
     }
 
     public static void postInit() {
+
         if (taintedMagic) {
             ItemStack is = new ItemStack(TCItemRegistry.resource, 1, 3);
             ChestGenHooks.addItem("dungeonChest", new WeightedRandomChestContent(is, 1, 1, 8));
@@ -314,6 +346,19 @@ public class Integration {
             Bracelets.rods[6] = warpwoodRod;
         }
 
+        if(dyes){
+            try {
+                paladinHelm = Compat.getItem("thaumicdyes", "CultistPaladinHelm");
+                archerHelm = Compat.getItem("thaumicdyes", "CultistArcherHelm");
+                archerChest = Compat.getItem("thaumicdyes", "CultistArcherChest");
+                archerLegs = Compat.getItem("thaumicdyes", "CultistArcherLegs");
+                rangerHelm = Compat.getItem("thaumicdyes", "CultistRangerHelm");
+                rangerChest = Compat.getItem("thaumicdyes", "CultistRangerChest");
+                rangerLegs = Compat.getItem("thaumicdyes", "CultistRangerLegs");
+            } catch (Compat.ItemNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         if (horizons) {
             if (thaumicBases){

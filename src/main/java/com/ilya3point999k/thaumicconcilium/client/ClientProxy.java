@@ -1,10 +1,12 @@
 package com.ilya3point999k.thaumicconcilium.client;
 
+import am2.lore.ArcaneCompendium;
 import com.ilya3point999k.thaumicconcilium.client.events.ClientEvents;
 import com.ilya3point999k.thaumicconcilium.client.events.TCKeyHandler;
 import com.ilya3point999k.thaumicconcilium.client.render.*;
 import com.ilya3point999k.thaumicconcilium.client.render.block.*;
 import com.ilya3point999k.thaumicconcilium.client.render.fx.ChainFX;
+import com.ilya3point999k.thaumicconcilium.client.render.fx.LeafFX;
 import com.ilya3point999k.thaumicconcilium.client.render.fx.RuneFlowFX;
 import com.ilya3point999k.thaumicconcilium.client.render.item.*;
 import com.ilya3point999k.thaumicconcilium.client.render.mob.*;
@@ -28,6 +30,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import fox.spiteful.forbidden.compat.Compat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBiped;
@@ -63,12 +66,12 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         ShaderHelper.initShaders();
+
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-
     }
 
     @Override
@@ -79,6 +82,8 @@ public class ClientProxy extends CommonProxy {
         ClientEvents events = new ClientEvents();
         MinecraftForge.EVENT_BUS.register(events);
         FMLCommonHandler.instance().bus().register(events);
+
+
     }
 
     @Override
@@ -122,6 +127,18 @@ public class ClientProxy extends CommonProxy {
            RenderingRegistry.registerEntityRenderingHandler(MaterialPeeler.class, new MaterialPeelerRenderer());
 
         }
+
+        if(Integration.dyes){
+            RenderingRegistry.registerEntityRenderingHandler(CrimsonArcher.class, new CrimsonArcherRenderer(new ModelBiped(),
+                    new ResourceLocation(ThaumicConcilium.MODID + ":textures/entity/crimson_archer.png"), 0.5f));
+            RenderingRegistry.registerEntityRenderingHandler(CrimsonRanger.class, new CrimsonRangerRenderer(new ModelBiped(),
+                    new ResourceLocation("thaumcraft", "textures/models/cultist.png"), 0.5f));
+        }
+
+        if(Compat.botan){
+            RenderingRegistry.registerEntityRenderingHandler(WitheredBotanist.class, new WitheredBotanistRenderer());
+        }
+
         if (Integration.horizons) {
             RenderingRegistry.registerEntityRenderingHandler(Overanimated.class, new ThaumaturgeRenderer(new ModelBiped(),
                     new ResourceLocation(ThaumicConcilium.MODID + ":textures/entity/overanimated.png"), 0.5f));
@@ -308,6 +325,26 @@ public class ClientProxy extends CommonProxy {
         rune.multipleParticleScaleBy(2.0f);
         //MiscHelper.setEntityMotionFromVector(rune, new Vector3(e.posX, e.posY + 1.0f, e.posZ), 0.5f);
         ParticleEngine.instance.addEffect(player.worldObj, rune);
+    }
+
+    @Override
+    public void leaves(Entity e) {
+        for (int i = 0; i < 6; i++) {
+            LeafFX leaf = new LeafFX(e.worldObj,
+                    e.posX + (-2.0 + (4.0 * e.worldObj.rand.nextDouble())),
+                    e.posY,
+                    e.posZ + (-2.0 + (4.0 * e.worldObj.rand.nextDouble())),
+                    e.posX + (2.0 + (4.0 * e.worldObj.rand.nextDouble())),
+                    e.posY + 8.0,
+                    e.posZ + (-2.0 + (4.0 * e.worldObj.rand.nextDouble())),
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    60
+                    );
+            leaf.multipleParticleScaleBy(2.0f);
+            ParticleEngine.instance.addEffect(e.worldObj, leaf);
+        }
     }
 
     @Override

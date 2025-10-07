@@ -39,7 +39,8 @@ dependencies {
 	compile name: 'Thaumcraft-deobf-1.7.10-4.2.3.5'
 	compile name: 'Forbidden+Magic-1.7.10-0.575'
 	compile name: 'ThaumicTinkerer-2.5-1.7.10-164'
-        compile name: 'CraftTweaker-1.7.10-3.0.13-deobf'
+	compile name: 'CraftTweaker-1.7.10-3.0.13-deobf'
+	compile name: 'witchery-1.7.10-0.24.1'
 }
 
 processResources {

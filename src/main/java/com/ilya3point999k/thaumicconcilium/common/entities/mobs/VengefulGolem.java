@@ -122,7 +122,7 @@ public class VengefulGolem extends EntityMob implements IRangedAttackMob {
                 }
             }
             String name = target.getCommandSenderName();
-            if (!muffed && rand.nextInt(10) >= 2) {
+            if (!muffed && (rand.nextInt(10) >= 2) && this.canEntityBeSeen(target)) {
                 this.swingItem();
                 target.worldObj.playSoundAtEntity(target, "random.orb", 0.7F, 1.0F + target.worldObj.rand.nextFloat() * 0.1F);
                 if (rand.nextInt(10) > 5) {

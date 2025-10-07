@@ -23,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.golems.ContainerGolem;
 import thaumcraft.common.entities.golems.EntityGolemBase;
 
@@ -34,10 +35,12 @@ public class CommonProxy implements IGuiHandler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
 		TCEntityRegistry.init();
 		TCConfig.configurate(event.getSuggestedConfigurationFile());
 		TCPacketHandler.init();
-		//GameRegistry.registerWorldGenerator(new ThaumicConciliumWorldGen(), 10);
+
+		GameRegistry.registerWorldGenerator(new ThaumicConciliumWorldGen(), 0);
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -108,7 +111,8 @@ public class CommonProxy implements IGuiHandler {
 	}
 	public void lightbeam(EntityPlayer player, double tx, double ty, double tz, float red, float green, float blue, int age) {}
 	public void runeFlow(EntityPlayer player, Entity e){
-
+	}
+	public void leaves(Entity e){
 	}
 	public void chain(World world, double sx, double sy, double sz, double tx, double ty, double tz){
 

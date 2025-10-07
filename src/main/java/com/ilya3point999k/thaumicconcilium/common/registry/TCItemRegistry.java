@@ -69,6 +69,8 @@ public class TCItemRegistry {
 	public static Item pontifexLegs;
 	public static Item pontifexFeet;
 
+	public static Item spellIcon;
+
 
 	public static void init() {
 
@@ -159,6 +161,12 @@ public class TCItemRegistry {
 		resource = new ItemResource();
 		GameRegistry.registerItem(resource, "ItemResource");
 		ThaumcraftApi.registerObjectTag(new ItemStack(resource, 1, 1), new AspectList().add(Aspect.LIFE, 64));
+
+		if(Compat.am2){
+			spellIcon = new ItemSpellIcon();
+			GameRegistry.registerItem(spellIcon, "ItemSpellIcon");
+		}
+
 		if (Integration.taintedMagic) {
 			ThaumcraftApi.registerObjectTag(new ItemStack(resource, 1, 3), new AspectList().add(Aspect.MIND, 16).add(Aspect.HUNGER, 16).add(Aspect.ELDRITCH, 16).add(Aspect.MAN, 16));
 		}

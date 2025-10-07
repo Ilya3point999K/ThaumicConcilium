@@ -586,7 +586,7 @@ public class RiftEntity extends Entity implements IEntityAdditionalSpawnData {
     }
 
     public static void createRift(World world, Vector3 pos, TileNode tile) {
-        if (world.rand.nextInt(100) > TCConfig.chanceOfRiftOpening) {
+        if (TCConfig.chanceOfRiftOpening > world.rand.nextInt(100)) {
             Vector3 p2 = new Vector3(pos.x, pos.y, pos.z);
             RiftEntity rift = new RiftEntity(world);
             rift.setRiftSeed(world.rand.nextInt());

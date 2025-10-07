@@ -1,19 +1,29 @@
 package com.ilya3point999k.thaumicconcilium.client.events;
 
+import am2.api.ArsMagicaApi;
+import am2.api.events.RegisterSkillTreeIcons;
+import am2.lore.ArcaneCompendium;
+import am2.texture.ResourceManager;
 import com.ilya3point999k.thaumicconcilium.client.render.ShaderHelper;
 import com.ilya3point999k.thaumicconcilium.client.render.projectile.ShardPowderEntityRenderer;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
+import com.ilya3point999k.thaumicconcilium.common.items.BottleOfClearWater;
+import com.ilya3point999k.thaumicconcilium.common.items.ItemEntityIcon;
+import com.ilya3point999k.thaumicconcilium.common.items.ItemSpellIcon;
 import com.ilya3point999k.thaumicconcilium.common.items.ShardMill;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketChangeActiveShard;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketChangeEtherealRange;
+import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fox.spiteful.forbidden.compat.Compat;
 import fox.spiteful.forbidden.items.ForbiddenItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,13 +40,16 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.model.AdvancedModelLoader;
@@ -91,6 +104,8 @@ public class ClientEvents {
     public static ResourceLocation shacklesTexture = new ResourceLocation(ThaumicConcilium.MODID+":textures/models/shackles.png");
     public static ResourceLocation chainTexture = new ResourceLocation(ThaumicConcilium.MODID+":textures/models/Chain.png");
 
+
+
     public static ModelBiped bratva = new ModelBiped();
     public static ResourceLocation skin = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/thaumaturge.png");
     public static ResourceLocation excsi = new ResourceLocation(ThaumicConcilium.MODID+":textures/entity/excsi.png");
@@ -108,6 +123,12 @@ public class ClientEvents {
     public ClientEvents(){
         shacklesModel = AdvancedModelLoader.loadModel(shackles);
         chainModel = AdvancedModelLoader.loadModel(chain);
+        if(Compat.am2 ) {
+            if(Integration.taintedMagic) {
+                ArcaneCompendium.instance.AddCompenidumEntry(Integration.crimson_raid_component, "Crimson_Raid", StatCollector.translateToLocal("am2.spell.crimson_raid"), StatCollector.translateToLocal("am2.entry.crimson_raid"), null, false);
+                //ArcaneCompendium.instance.AddCompenidumEntry(TCItemRegistry.tightBelt, ThaumicConcilium.MODID + ":TightBelt", "Belt", "belt", null, false);
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)
