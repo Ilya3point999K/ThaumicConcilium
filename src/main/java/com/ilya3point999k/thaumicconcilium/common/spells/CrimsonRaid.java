@@ -3,7 +3,6 @@ package com.ilya3point999k.thaumicconcilium.common.spells;
 import am2.api.power.PowerTypes;
 import am2.api.spell.component.interfaces.ISpellComponent;
 import am2.api.spell.enums.Affinity;
-import am2.blocks.BlocksCommonProxy;
 import am2.items.ItemsCommonProxy;
 import am2.playerextensions.ExtendedProperties;
 import am2.spell.SpellHelper;
@@ -25,7 +24,7 @@ import thaumcraft.common.config.ConfigItems;
 import java.util.EnumSet;
 import java.util.Random;
 
-public class CrimsonRaid implements ISpellComponent{
+public class CrimsonRaid implements ISpellComponent {
 
     public LesserPortal summonCreature(ItemStack stack, EntityLivingBase caster, EntityLivingBase target, World world, double x, double y, double z){
         LesserPortal entity = new LesserPortal(world);

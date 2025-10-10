@@ -1,6 +1,5 @@
 package com.ilya3point999k.thaumicconcilium.client;
 
-import am2.lore.ArcaneCompendium;
 import com.ilya3point999k.thaumicconcilium.client.events.ClientEvents;
 import com.ilya3point999k.thaumicconcilium.client.events.TCKeyHandler;
 import com.ilya3point999k.thaumicconcilium.client.render.*;

@@ -96,6 +96,9 @@ entity.ThaumicConcilium.CrimsonOrbEntity.name=Crimson Orb
 entity.ThaumicConcilium.PositiveBurstOrbEntity.name=Positive Burst Orb
 entity.ThaumicConcilium.ShardPowderEntity.name=Shard Powder
 entity.ThaumicConcilium.DopeSquid.name=Doped Squid
+entity.ThaumicConcilium.CrimsonArcher.name=Crimson Archer
+entity.ThaumicConcilium.CrimsonRanger.name=Crimson Ranger
+entity.ThaumicConcilium.WitheredBotanist.name=Withered Botanist
 
 tile.DestabilizedCrystalBlock.name=Destabilized Crystal Cluster
 tile.VisCondenserBlock.name=Vis Condenser

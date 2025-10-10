@@ -115,7 +115,7 @@ public class Integration {
 
     public static CrimsonRaid crimson_raid_component;
 
-    public static void init() throws Exception {
+    public static void preInit() throws Exception {
         thaumicBases = Loader.isModLoaded("thaumicbases");
         taintedMagic = Loader.isModLoaded("TaintedMagic");
         gadomancy = Loader.isModLoaded("gadomancy");
@@ -300,11 +300,23 @@ public class Integration {
                 }
             }.register(DarkAspects.PRIDE);
         }
+
+    }
+
+    public static void init(){
         if (Compat.am2){
             if(Integration.taintedMagic) {
                 crimson_raid_component = new CrimsonRaid();
-                SkillManager.instance.registerSkillTreeEntry(crimson_raid_component, spellNames[0]);
-                SkillTreeManager.instance.RegisterPart(crimson_raid_component, 64, 64, SkillTrees.None, SkillPointTypes.SILVER);
+                ArsMagicaApi.instance.registerSkillTreeEntry(
+                        crimson_raid_component,
+                        spellNames[0],
+                        SkillTrees.None,
+                        25, //x-coord in occulus UI
+                        175,  //y-coord in occulus UI
+                        SkillPointTypes.SILVER
+                );
+                //SkillManager.instance.registerSkillTreeEntry(crimson_raid_component, spellNames[0]);
+                //SkillTreeManager.instance.RegisterPart(crimson_raid_component, 25, 175, SkillTrees.Offense, SkillPointTypes.RED);
             }
         }
 

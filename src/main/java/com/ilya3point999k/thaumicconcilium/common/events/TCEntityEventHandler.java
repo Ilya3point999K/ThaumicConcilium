@@ -3,12 +3,16 @@ package com.ilya3point999k.thaumicconcilium.common.events;
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 import am2.api.ArsMagicaApi;
 import am2.api.events.SkillLearnedEvent;
+import am2.api.spell.component.interfaces.ISpellComponent;
+import am2.api.spell.component.interfaces.ISpellModifier;
+import am2.api.spell.component.interfaces.ISpellShape;
 import am2.lore.ArcaneCompendium;
 import am2.playerextensions.SkillData;
 import am2.spell.SkillManager;
 import am2.spell.SkillTreeManager;
 import baubles.common.lib.PlayerHandler;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
+import com.ilya3point999k.thaumicconcilium.api.event.ThaumcraftResearchCompletedEvent;
 import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
@@ -28,6 +32,7 @@ import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.VisConductorF
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketUpdatePartyStatus;
+import com.ilya3point999k.thaumicconcilium.common.research.ThaumcraftResearchItem;
 import com.ilya3point999k.thaumicconcilium.common.tiles.DestabilizedCrystalTile;
 import com.ilya3point999k.thaumicconcilium.common.tiles.LithographerTile;
 import com.ilya3point999k.thaumicconcilium.common.tiles.RedPoweredMindTile;
@@ -65,6 +70,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
+import org.lwjgl.Sys;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.entities.ITaintedMob;
@@ -88,6 +94,7 @@ import thaumcraft.common.tiles.TilePedestal;
 import vazkii.botania.api.mana.IManaItem;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
@@ -176,48 +183,6 @@ public class TCEntityEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void on(PlayerInteractEvent e) {
         if (!e.world.isRemote) {
-            if (Integration.taintedMagic && Integration.witchery) {
-                if ((e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || e.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) && e.entityPlayer.getHeldItem() != null) {
-
-                    ItemStack stack = e.entityPlayer.getHeldItem();
-                    if (stack.getItem() == ConfigItems.itemResearchNotes) {
-                        ResearchNoteData data = ResearchManager.getData(stack);
-                        if (data != null && data.key != null) {
-                            if (data.key.equals("CRIMSONSPELLS")) {
-                                NBTTagCompound nbtPlayer = null;
-                                try {
-                                    nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);
-                                } catch (IllegalAccessException | InvocationTargetException |
-                                         NoSuchMethodException ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                                if (nbtPlayer != null) {
-                                    if (!nbtPlayer.hasKey("WITCSpellBook")) {
-                                        nbtPlayer.setTag("WITCSpellBook", new NBTTagCompound());
-                                    }
-
-                                    NBTTagCompound nbtSpells = nbtPlayer.getCompoundTag("WITCSpellBook");
-                                    nbtSpells.setBoolean("incarcerous", true);
-                                    nbtSpells.setBoolean("arrowspell", true);
-                                    nbtSpells.setBoolean("spiderspell", true);
-                                    nbtSpells.setBoolean("spellundead", true);
-                                    nbtSpells.setBoolean("conjunctivitis", true);
-
-                                }
-                            } else if(data.key.equals("CRIMSONINITIATION")){
-                                SkillData d = SkillData.For(e.entityPlayer);
-                                SkillTreeManager t = SkillTreeManager.instance;
-                                d.incrementSpellPoints(t.getSkillPointTypeForPart(Integration.crimson_raid_component));
-                                d.learn(t.getSkillTreeEntry(Integration.crimson_raid_component).registeredItem);
-                                d.forceSync();
-                                MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
-                            }
-                        }
-                    }
-                }
-            }
-
-
             TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(e.entityPlayer);
             if (capabilities != null) {
                 if (capabilities.chainedTime != 0) e.setCanceled(true);
@@ -752,5 +717,55 @@ public class TCEntityEventHandler {
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
         GolemChatHandler.messages.remove(event.player.getCommandSenderName());
+    }
+
+    @SubscribeEvent
+    public void onResearch(ThaumcraftResearchCompletedEvent e){
+        if (!e.entityPlayer.worldObj.isRemote) {
+            String research = e.getUnlockedResearch();
+            if (research.equals("CRIMSONINITIATION")) {
+                SkillData d = SkillData.For(e.entityPlayer);
+                try {
+                    SkillTreeManager t = SkillTreeManager.instance;
+                    d.incrementSpellPoints(t.getSkillPointTypeForPart(Integration.crimson_raid_component));
+                    d.learn(t.getSkillTreeEntry(Integration.crimson_raid_component).registeredItem);
+                    d.forceSync();
+                    MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
+                } catch (Exception e1) {
+                    int ID = SkillManager.instance.getShiftedPartID(Integration.crimson_raid_component);
+                    try {
+                        Method m = SkillData.class.getDeclaredMethod("setComponentKnown", int.class);
+                        m.setAccessible(true); // bypass private access
+                        m.invoke(d, ID);
+                        d.forceSync();
+                        MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
+                    } catch (Exception e2) {
+                        e1.printStackTrace();
+                        e2.printStackTrace();
+                    }
+                }
+            } else if (research.equals("CRIMSONSPELLS")){
+                NBTTagCompound nbtPlayer = null;
+                try {
+                    nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);
+                } catch (IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException ex) {
+                    throw new RuntimeException(ex);
+                }
+                if (nbtPlayer != null) {
+                    if (!nbtPlayer.hasKey("WITCSpellBook")) {
+                        nbtPlayer.setTag("WITCSpellBook", new NBTTagCompound());
+                    }
+
+                    NBTTagCompound nbtSpells = nbtPlayer.getCompoundTag("WITCSpellBook");
+                    nbtSpells.setBoolean("incarcerous", true);
+                    nbtSpells.setBoolean("arrowspell", true);
+                    nbtSpells.setBoolean("spiderspell", true);
+                    nbtSpells.setBoolean("spellundead", true);
+                    nbtSpells.setBoolean("conjunctivitis", true);
+                }
+            }
+
+        }
     }
 }

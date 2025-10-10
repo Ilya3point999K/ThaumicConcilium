@@ -2,8 +2,6 @@ package com.ilya3point999k.thaumicconcilium.client.events;
 
 import am2.api.ArsMagicaApi;
 import am2.api.events.RegisterSkillTreeIcons;
-import am2.lore.ArcaneCompendium;
-import am2.texture.ResourceManager;
 import com.ilya3point999k.thaumicconcilium.client.render.ShaderHelper;
 import com.ilya3point999k.thaumicconcilium.client.render.projectile.ShardPowderEntityRenderer;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
@@ -123,9 +121,26 @@ public class ClientEvents {
     public ClientEvents(){
         shacklesModel = AdvancedModelLoader.loadModel(shackles);
         chainModel = AdvancedModelLoader.loadModel(chain);
-        if(Compat.am2 ) {
+        if(Compat.am2) {
             if(Integration.taintedMagic) {
-                ArcaneCompendium.instance.AddCompenidumEntry(Integration.crimson_raid_component, "Crimson_Raid", StatCollector.translateToLocal("am2.spell.crimson_raid"), StatCollector.translateToLocal("am2.entry.crimson_raid"), null, false);
+                try {
+                    Object instance = Class.forName("am2.lore.ArcaneCompendium").getField("instance").get(null);
+                    java.lang.reflect.Method m = Class.forName("am2.lore.ArcaneCompendium").getMethod(
+                            "AddCompenidumEntry",
+                            Object.class, String.class, String.class, String.class, Object.class, boolean.class
+                    );
+                    m.invoke(instance,
+                            Integration.crimson_raid_component,
+                            "Crimson_Raid",
+                            StatCollector.translateToLocal("am2.spell.crimson_raid"),
+                            StatCollector.translateToLocal("am2.entry.crimson_raid"),
+                            null,
+                            false
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //ArcaneCompendium.instance.AddCompenidumEntry(Integration.crimson_raid_component, "Crimson_Raid", StatCollector.translateToLocal("am2.spell.crimson_raid"), StatCollector.translateToLocal("am2.entry.crimson_raid"), null, false);
                 //ArcaneCompendium.instance.AddCompenidumEntry(TCItemRegistry.tightBelt, ThaumicConcilium.MODID + ":TightBelt", "Belt", "belt", null, false);
             }
         }

@@ -31,7 +31,7 @@ public class CommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		try {
-			Integration.init();
+			Integration.preInit();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -44,6 +44,7 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void init(FMLInitializationEvent event) {
+		Integration.init();
 		TCEntityEventHandler entityEventHandler = new TCEntityEventHandler();
 		MinecraftForge.EVENT_BUS.register(entityEventHandler);
 		FMLCommonHandler.instance().bus().register(entityEventHandler);

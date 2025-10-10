@@ -96,6 +96,9 @@ entity.ThaumicConcilium.CrimsonOrbEntity.name=Багровая Сфера
 entity.ThaumicConcilium.PositiveBurstOrbEntity.name=Позитивный Всплеск
 entity.ThaumicConcilium.ShardPowderEntity.name=Пыль Осколка
 entity.ThaumicConcilium.DopeSquid.name=Скрут
+entity.ThaumicConcilium.CrimsonArcher.name=Багровый Лучник
+entity.ThaumicConcilium.CrimsonRanger.name=Багровый Разведчик
+entity.ThaumicConcilium.WitheredBotanist.name=Иссушеный Ботаник
 
 tile.DestabilizedCrystalBlock.name=Дестабилизированный кристальный кластер
 tile.VisCondenserBlock.name=Вис-Конденсатор
