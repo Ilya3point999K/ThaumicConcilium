@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.projectiles;
 
+import net.minecraft.block.BlockFire;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -8,7 +9,6 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import thaumcraft.common.lib.network.PacketHandler;
 
 import java.util.List;
 
@@ -28,6 +28,7 @@ public class BottleOfClearWaterEntity extends EntityThrowable {
     protected float getGravityVelocity() {
         return 0.05F;
     }
+
     protected float func_70182_d() {
         return 0.5F;
     }
@@ -44,6 +45,16 @@ public class BottleOfClearWaterEntity extends EntityThrowable {
                 e.extinguish();
                 if(e instanceof EntityBlaze || e instanceof EntityMagmaCube){
                     e.attackEntityFrom(DamageSource.causeMobDamage(this.getThrower()), 10.0f);
+                }
+            }
+            for (int x = -3; x < 3; x++){
+                for (int z = -3; z < 3; z++){
+                    if (worldObj.getBlock(mop.blockX + x, mop.blockY, mop.blockZ + z) instanceof BlockFire){
+                        worldObj.setBlockToAir(mop.blockX + x, mop.blockY, mop.blockZ + z);
+                    }
+                    if (worldObj.getBlock(mop.blockX + x, mop.blockY + 1, mop.blockZ + z) instanceof BlockFire){
+                        worldObj.setBlockToAir(mop.blockX + x, mop.blockY + 1, mop.blockZ + z);
+                    }
                 }
             }
             this.worldObj.playAuxSFX(2002, (int)Math.round(this.posX), (int)Math.round(this.posY), (int)Math.round(this.posZ), 0);

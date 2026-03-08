@@ -1,8 +1,8 @@
 package com.ilya3point999k.thaumicconcilium.common.events;
 
 import com.ilya3point999k.thaumicconcilium.common.blocks.HexOfPredictabilityBlock;
-import com.ilya3point999k.thaumicconcilium.common.entities.MaterialPeeler;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.MaterialPeeler;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
 import com.ilya3point999k.thaumicconcilium.common.tiles.HexOfPredictabilityTile;
 import com.ilya3point999k.thaumicconcilium.common.tiles.LithographerTile;

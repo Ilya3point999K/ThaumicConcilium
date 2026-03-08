@@ -42,11 +42,20 @@ public class TCConfig {
     public static int paranoidWarriorSpawnChance;
     public static int vengefulGolemSpawnChance;
     public static int crimsonRangerSpawnChance;
+    public static int netherExplorerSpawnRate;
+    public static int witheredBotanistSpawnChance;
+    public static int sloppyAlchemistSpawnChance;
+    public static int burnedWitchSpawnChance;
     public static int madThaumaturgeReplacesBrainyZombieChance;
     public static int crimsonPaladinReplacesCultistWarriorChance;
+
+    public static boolean generateCrimsonAvanposts;
+    public static boolean generateBurningSites;
     public static int crimsonAvanpostGenChance;
+    public static int burningSitesGenChance;
 
     public static int chanceOfRiftOpening;
+    public static int impPactTime;
 
     public static int causalBouillonID;
     public static int[] thaumaturgeBiomeBlacklist;
@@ -57,6 +66,7 @@ public class TCConfig {
     public static int[] paranoidWarriorBiomeBlacklist;
     public static int[] vengefulGolemBiomeBlacklist;
     public static int[] crimsonRangerBiomeBlacklist;
+    public static int[] witheredBotanistBiomeBlacklist;
 
     public static int crimsonRaidID;
 
@@ -87,7 +97,7 @@ public class TCConfig {
             burnoutUpgradeID = conf.getInt("burnoutUpgradeID", "focus", 120, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
             primalEssenceUpgradeID = conf.getInt("primalEssenceUpgradeID", "focus", 121, FocusUpgradeType.types.length+1, Short.MAX_VALUE, "");
 
-            thaumaturgeSpawnChance = conf.getInt("thaumaturgeSpawnChance", "mobs", 10, 0, Integer.MAX_VALUE, "");
+            thaumaturgeSpawnChance = conf.getInt("thaumaturgeSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
             madThaumaturgeSpawnChance = conf.getInt("madThaumaturgeSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
             quicksilverElementalSpawnChance = conf.getInt("quicksilverElementalSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
             dissolvedSpawnChance = conf.getInt("dissolvedSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
@@ -95,6 +105,10 @@ public class TCConfig {
             paranoidWarriorSpawnChance = conf.getInt("paranoidWarriorSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
             vengefulGolemSpawnChance = conf.getInt("vengefulGolemSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
             crimsonRangerSpawnChance = conf.getInt("crimsonRangerSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            witheredBotanistSpawnChance = conf.getInt("witheredBotanistSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            netherExplorerSpawnRate = conf.getInt("netherExplorerSpawnRate", "mobs", 300, 0, Integer.MAX_VALUE, "How often game will attempt to spawn Nether Explorers (in ticks)");
+            sloppyAlchemistSpawnChance = conf.getInt("sloppyAlchemistSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
+            burnedWitchSpawnChance = conf.getInt("burnedWitchSpawnChance", "mobs", 5, 0, Integer.MAX_VALUE, "");
 
             String biomes = conf.getString("thaumaturgeBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
             thaumaturgeBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
@@ -113,12 +127,19 @@ public class TCConfig {
             biomes = conf.getString("crimsonRangerBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
             crimsonRangerBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
 
+            biomes = conf.getString("witheredBotanistBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            witheredBotanistBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+
             madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
             crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
 
-            crimsonAvanpostGenChance = conf.getInt("crimsonAvanpostGenChance", "world", 5, 0, 100, "Chance to generate Crimson Avanpost in the world");
+            generateCrimsonAvanposts = conf.getBoolean("generateCrimsonAvanposts", "world", true, "Generate Crimson Avanposts in the world.");
+            generateBurningSites = conf.getBoolean("generateBurningSites", "world", true, "Generate Burning Sites in villages.");
+            crimsonAvanpostGenChance = conf.getInt("crimsonAvanpostGenChance", "world", 300, 0, Integer.MAX_VALUE, "Chance to generate Crimson Avanpost in the world. The number is approximately: \"generate 1 avanpost every N chunks\"");
+            burningSitesGenChance = conf.getInt("burningSitesGenChance", "world", 10, 0, Integer.MAX_VALUE, "Chance to generate Burning Site in villages. There can be only 1 per village.");
 
             chanceOfRiftOpening = conf.getInt("chanceOfRiftOpening", "balance", 100, 0, 100, "0 - never, 100 - always. Never is not recommended, it will lead to softlock of progress in unmodified survival.");
+            impPactTime = conf.getInt("impPactTime", "balance", 72000, 0, Integer.MAX_VALUE, "Amount of ticks since last deal with Witchery' Flame Imp, during which Chorts wont attack player");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
 

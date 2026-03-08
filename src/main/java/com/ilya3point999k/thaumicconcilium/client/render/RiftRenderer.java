@@ -2,7 +2,7 @@ package com.ilya3point999k.thaumicconcilium.client.render;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.Util;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.sasmaster.glelwjgl.java.CoreGLE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 public class RiftRenderer extends Render
 {
     private final ShaderCallback shaderCallback;
-    private static final ResourceLocation starsTexture;
+    public static final ResourceLocation starsTexture;
     public static final ResourceLocation FLUC_ON = new ResourceLocation(ThaumicConcilium.MODID + ":textures/misc/fluctuation_on.png");
     CoreGLE gle;
 

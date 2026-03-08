@@ -7,11 +7,14 @@ import com.ilya3point999k.thaumicconcilium.common.research.ThaumcraftResearchIte
 import fox.spiteful.forbidden.DarkAspects;
 import fox.spiteful.forbidden.compat.Compat;
 import fox.spiteful.forbidden.items.ForbiddenItems;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
@@ -31,6 +34,14 @@ import java.util.List;
 public class Thaumonomicon {
 	public static final String catName = "CONCILIUM";
 	public static HashMap<String, Object> recipes = new HashMap<String, Object>();
+
+	public static final String visConductorHintTag = "VISCONDUCTOR_HINT";
+	public static final String positiveBurstHintTag = "POSITIVE_BURST_HINT";
+	public static final String impulseHintTag = "IMPULSE_HINT";
+	public static final String reflectionHintTag = "REFLECTION_HINT";
+	public static final String thickTaintHintTag = "THICK_TAINT_HINT";
+	public static final String runicWindingsHintTag = "WINDINGS_HINT";
+	public static final String destCrystalHintTag = "DEST_CRYSTAL_HINT";
 
 	public static void setup() {
 		ResearchCategories.registerCategory(catName, new ResourceLocation(ThaumicConcilium.MODID+":textures/category.png"),
@@ -58,23 +69,6 @@ public class Thaumonomicon {
 				new ItemStack(TCItemRegistry.itemEntityIcon, 1, 0));
 		r.setPages(new ResearchPage("entry.thaumaturges.first"), new ResearchPage("entry.thaumaturges.second"));
 		r = r.setConcealed().setStub().setSecondary().setSpecial().setParents("TCRESEARCHDUPE").registerResearchItem();
-		/*ArrayList<String> siblings = new ArrayList<String>();
-		if (!Integration.gadomancy){
-			siblings.add("NOGADOMANCY");
-		} else siblings.add("TCGADOMANCY");
-		if(!Integration.thaumicBases){
-			siblings.add("NOBASES");
-		} else siblings.add("TCBASES");
-		if(!Integration.horizons){
-			siblings.add("NOHORIZONS");
-		} else siblings.add("TCHORIZONS");
-		if(!Integration.taintedMagic){
-			siblings.add("NOTAINTEDMAGIC");
-		} else siblings.add("TCTAINTEDMAGIC");
-
-		 */
-
-		//r.setSiblings(siblings.toArray(new String[siblings.size()])).registerResearchItem();
 
 		r = new ResearchItem("RIFTS", catName, new AspectList().add(Aspect.VOID, 4).add(Aspect.MAGIC, 4).add(Aspect.ELDRITCH, 4).add(Aspect.ENTROPY, 8),
 				-9, -3, 1, new ResourceLocation(ThaumicConcilium.MODID+":textures/misc/rift_res.png"));
@@ -136,14 +130,28 @@ public class Thaumonomicon {
 				new ResearchPage("TCTAINTEDMAGIC", "entry.thaumicconcilium.samurai1"), new ResearchPage("TCTAINTEDMAGIC", "entry.thaumicconcilium.samurai2"),
 				new ResearchPage("TCTAINTEDMAGIC", "entry.thaumicconcilium.paladin1"), new ResearchPage("TCTAINTEDMAGIC", "entry.thaumicconcilium.paladin2"),
 				new ResearchPage("TCHORIZONS","entry.thaumicconcilium.overanimated1"), new ResearchPage("TCHORIZONS","entry.thaumicconcilium.overanimated2"),
-				new ResearchPage("TCAUTOMAGY","entry.thaumicconcilium.vengefulgolem1"), new ResearchPage("TCAUTOMAGY","entry.thaumicconcilium.vengefulgolem2"));
+				new ResearchPage("TCAUTOMAGY","entry.thaumicconcilium.vengefulgolem1"), new ResearchPage("TCAUTOMAGY","entry.thaumicconcilium.vengefulgolem2"),
+				new ResearchPage("TCWITCHERYBM", "entry.thaumicconcilium.sloppyalchemist1"), new ResearchPage("TCWITCHERYBM", "entry.thaumicconcilium.sloppyalchemist2"),
+				new ResearchPage("TCWITCHERY", "entry.thaumicconcilium.burnedwitch1"), new ResearchPage("TCWITCHERY", "entry.thaumicconcilium.burnedwitch2"),
+				new ResearchPage("TCBOTANIA", "entry.thaumicconcilium.witheredbotanist1"), new ResearchPage("TCBOTANIA", "entry.thaumicconcilium.witheredbotanist2"),
+				new ResearchPage("entry.thaumicconcilium.netherexplorer1"), new ResearchPage("entry.thaumicconcilium.netherexplorer2"),
+				new ResearchPage("TCDYES", "entry.thaumicconcilium.crimsonarcher1"), new ResearchPage("TCDYES", "entry.thaumicconcilium.crimsonarcher2"),
+				new ResearchPage("TCDYES", "entry.thaumicconcilium.crimsonranger1"), new ResearchPage("TCDYES", "entry.thaumicconcilium.crimsonranger2")
+				);
 		r.setLost().setRound().setParents("THAUMATURGES").setConcealed().setEntityTriggers(new String[]{
 						ThaumicConcilium.MODID + ".Overanimated",
 						ThaumicConcilium.MODID + ".VengefulGolem",
 						ThaumicConcilium.MODID + ".Dissolved",
 						ThaumicConcilium.MODID + ".Samurai",
 						ThaumicConcilium.MODID + ".QuicksilverElemental",
-						ThaumicConcilium.MODID + ".CrimsonPaladin"
+						ThaumicConcilium.MODID + ".CrimsonPaladin",
+						ThaumicConcilium.MODID + ".WitheredBotanist",
+						ThaumicConcilium.MODID + ".NetherExplorer",
+						ThaumicConcilium.MODID + ".Chort",
+						ThaumicConcilium.MODID + ".SloppyAlchemist",
+						ThaumicConcilium.MODID + ".CrimsonArcher",
+						ThaumicConcilium.MODID + ".CrimsonRanger",
+						ThaumicConcilium.MODID + ".BurnedWitch"
 				}
 				).registerResearchItem();
 		ThaumcraftApi.addWarpToResearch("THAUMICCONCILIUM", 1);
@@ -309,7 +317,10 @@ public class Thaumonomicon {
 		r.setPages(new ResearchPage("entry.xylography.first"));
 		r.setAutoUnlock().setRound().registerResearchItem();
 
-
+		r = new ResearchItem("NETHER_MEMBRANE", catName, new AspectList().add(Aspect.FLESH, 4).add(DarkAspects.NETHER, 4).add(Aspect.ARMOR, 4).add(Aspect.CLOTH, 4),
+				     3, -2, 0, new ItemStack(TCItemRegistry.resource, 1, 4));
+		r.setPages(new ResearchPage("entry.nether_membrane.first"));
+		r.setSecondary().setLost().setItemTriggers(new ItemStack(TCItemRegistry.resource, 1, 4)).registerResearchItem();
 
 		if(Integration.thaumicBases){
 			if (Compat.botan) {
@@ -430,12 +441,14 @@ public class Thaumonomicon {
 			r.setConcealed().setParents("BRAINLITTERING").setParentsHidden("golemPowder", "GOLEMTHAUMIUM", "GOLEMFETTER").registerResearchItem();
 			ThaumcraftApi.addWarpToResearch("BUFFGOLEM", 5);
 
-			r = new ResearchItem("DRAINAGESYRINGE", catName, new AspectList().add(Aspect.TOOL, 8).add(Aspect.VOID, 8).add(Aspect.SLIME, 8).add(Aspect.HUNGER, 8),
-					9, 0, 2, new ItemStack(TCItemRegistry.drainageSyringe));
-			r.setPages(new ResearchPage("entry.drainagesyringe.first"), new ResearchPage("entry.drainagesyringe.second"), infusionPage("DrainageSyringe"));
-			r.setConcealed().setParents("TCHORIZONS").setParentsHidden(new String[]{"injector", "ESSENTIARESERVOIR"}).registerResearchItem();
-			ThaumcraftApi.addWarpToResearch("DRAINAGESYRINGE", 3);
-			ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.drainageSyringe), 3);
+			if (Compat.botan && Compat.bm) {
+				r = new ResearchItem("DRAINAGESYRINGE", catName, new AspectList().add(Aspect.TOOL, 8).add(Aspect.VOID, 8).add(Aspect.SLIME, 8).add(Aspect.HUNGER, 8),
+						9, 0, 2, new ItemStack(TCItemRegistry.drainageSyringe));
+				r.setPages(new ResearchPage("entry.drainagesyringe.first"), new ResearchPage("entry.drainagesyringe.second"), infusionPage("DrainageSyringe"));
+				r.setConcealed().setParents("TCHORIZONS").setParentsHidden(new String[]{"injector", "ESSENTIARESERVOIR"}).registerResearchItem();
+				ThaumcraftApi.addWarpToResearch("DRAINAGESYRINGE", 3);
+				ThaumcraftApi.addWarpToItem(new ItemStack(TCItemRegistry.drainageSyringe), 3);
+			}
 
 			if (Integration.automagy){
 				r = new ResearchItem("REDPOWEREDMIND", catName, new AspectList().add(Aspect.MIND, 10).add(Aspect.MECHANISM, 10).add(Aspect.CRYSTAL, 10).add(Aspect.SENSES, 10),
@@ -488,12 +501,16 @@ public class Thaumonomicon {
 			r = new ResearchItem("CRIMSONINITIATION", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.LIFE, 8).add(Aspect.EXCHANGE, 8).add(Aspect.MIND, 8),
 					-6, 12, 1, new ResourceLocation(ThaumicConcilium.MODID + ":textures/misc/crimson_initiation.png"));
 			r.setPages(new ResearchPage("entry.crimsonimitiation.first"));
-			r.setRound().setConcealed().setParents("PONTIFEXROBE").setSiblings("CRIMSONRAID").registerResearchItem();
+			r.setRound().setConcealed().setParents("PONTIFEXROBE");
+			if (Compat.am2){
+				r.setSiblings("CRIMSONRAID");
+			}
+			r.registerResearchItem();
 			ThaumcraftApi.addWarpToResearch("CRIMSONINITIATION", 3);
 
 			if(Compat.am2) {
 				r = new ResearchItem("CRIMSONRAID", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.WEAPON, 8).add(Aspect.ELDRITCH, 8).add(Aspect.TRAVEL, 8),
-						-4, 14, 1, new ItemStack(TCItemRegistry.spellIcon, 1, 0));
+						-5, 13, 1, new ItemStack(TCItemRegistry.spellIcon, 1, 0));
 				r.setPages(new ResearchPage("entry.crimsonraid.first"));
 				r.setRound().setConcealed().setParents("CRIMSONINITIATION").registerResearchItem();
 				ThaumcraftApi.addWarpToResearch("CRIMSONRAID", 3);
@@ -518,8 +535,44 @@ public class Thaumonomicon {
 				r.setLost().setParents("CRIMSONPONTIFEX").registerResearchItem();
 				ThaumcraftApi.addWarpToResearch("CRIMSONSPELLS", 1);
 			}
+
+			if (Integration.horizons){
+				r = new ResearchItem("PROTOBODY", catName, new AspectList().add(Aspect.MAN, 8).add(Aspect.VOID, 8).add(Aspect.FLESH, 8).add(Aspect.ELDRITCH, 8).add(Aspect.CRAFT, 8),
+						-8, 13, 3, new ItemStack(TCItemRegistry.protobody));
+				r.setPages(new ResearchPage("entry.protobody.first"), infusionPage("Protobody"), new ResearchPage("entry.protobody.second"));
+				r.setConcealed().setParents("FLESHCRUCIBLE").setParentsHidden("cloneVillager").registerResearchItem();
+				ThaumcraftApi.addWarpToResearch("PROTOBODY", 4);
+
+				r = new ResearchItem("SOLIDVOID", catName, new AspectList().add(Aspect.VOID, 8).add(Aspect.CRYSTAL, 8).add(Aspect.ELDRITCH, 8).add(Aspect.CRAFT, 8),
+						-8, 14, 3, new ItemStack(TCBlockRegistry.SOLID_VOID));
+				r.setPages(new ResearchPage("entry.solidvoid.first"));
+				r.setRound().setLost().setParents("PROTOBODY").registerResearchItem();
+			}
 		}
 
+		if(Integration.dyes){
+			r = new ResearchItem("TCDYES", catName, new AspectList().add(Aspect.SENSES, 8).add(Aspect.MAN, 8),
+					20, 22, 1, new ItemStack(Blocks.dirt));
+			r.setVirtual().setAutoUnlock().registerResearchItem();
+		}
+
+		if(Compat.botan){
+			r = new ResearchItem("TCBOTANIA", catName, new AspectList().add(Aspect.SENSES, 8).add(Aspect.MAN, 8),
+					20, 23, 1, new ItemStack(Blocks.dirt));
+			r.setVirtual().setAutoUnlock().registerResearchItem();
+		}
+
+		if (Integration.witchery){
+			r = new ResearchItem("TCWITCHERY", catName, new AspectList().add(Aspect.MAGIC, 8).add(Aspect.MAN, 8),
+					20, 24, 1, new ItemStack(Blocks.dirt));
+			r.setVirtual().setAutoUnlock().registerResearchItem();
+		}
+		if (Integration.witchery && Compat.bm){
+			r = new ResearchItem("TCWITCHERYBM", catName, new AspectList().add(Aspect.MAGIC, 8).add(Aspect.MAN, 8),
+					20, 25, 1, new ItemStack(Blocks.dirt));
+			r.setVirtual().setAutoUnlock().registerResearchItem();
+
+		}
 		/*
 		r = new ResearchItem("ELDRITCHTRAP", catName, new AspectList().add(Aspect.ELDRITCH, 10).add(Aspect.EARTH, 5).add(Aspect.ENERGY, 20),
 				1, 9, 1, new ItemStack(TCBlockRegistry.ELDRITCH_TRAP_BLOCK));
@@ -567,6 +620,120 @@ public class Thaumonomicon {
 		//page.recipeOutput = recipe.getRecipeOutput();
 		page.type = ResearchPage.PageType.CRUCIBLE_CRAFTING;
 		return page;
+	}
+
+	public static boolean checkThaumaturgeComplete(EntityPlayer player){
+		if (player == null) return false;
+
+		boolean visConductor = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "VISCONDUCTOR");
+		if (!visConductor){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("VISCONDUCTOR")){
+						visConductor = true;
+						break;
+					}
+				}
+			}
+		}
+		boolean positiveBurst = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "POSITIVEBURSTFOCI");
+		if (!positiveBurst){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("POSITIVEBURSTFOCI")){
+						positiveBurst = true;
+						break;
+					}
+				}
+			}
+		}
+		boolean impulseFoci = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "IMPULSEFOCI");
+		if (!impulseFoci){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("IMPULSEFOCI")){
+						impulseFoci = true;
+						break;
+					}
+				}
+			}
+		}
+		return visConductor && positiveBurst && impulseFoci;
+	}
+
+	public static boolean checkMadThaumaturgeComplete(EntityPlayer player){
+		if (player == null) return false;
+
+		boolean reflectionFoci = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "REFLECTIONFOCI");
+		if (!reflectionFoci){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("REFLECTIONFOCI")){
+						reflectionFoci = true;
+						break;
+					}
+				}
+			}
+		}
+
+		boolean thickTaint = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "BOTTLEOFTHICKTAINT");
+		if (!thickTaint){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("BOTTLEOFTHICKTAINT")){
+						thickTaint = true;
+						break;
+					}
+				}
+			}
+		}
+
+		boolean runicWindings = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "RUNICWINDINGS");
+		if (!runicWindings){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("RUNICWINDINGS")){
+						runicWindings = true;
+						break;
+					}
+				}
+			}
+		}
+
+		boolean destCrystal = ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "DESTCRYSTAL");
+		if (!destCrystal){
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				if (stack == null) continue;
+				if (stack.getItem() == ConfigItems.itemResearchNotes && stack.hasTagCompound()){
+					NBTTagCompound tag = stack.getTagCompound();
+					if (tag.getString("key").equals("DESTCRYSTAL")){
+						destCrystal = true;
+						break;
+					}
+				}
+			}
+		}
+
+		return reflectionFoci && thickTaint && runicWindings && destCrystal;
 	}
 
 }

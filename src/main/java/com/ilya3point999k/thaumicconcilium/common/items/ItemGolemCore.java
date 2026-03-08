@@ -19,6 +19,7 @@ public class ItemGolemCore extends Item {
     @SideOnly(Side.CLIENT)
     public IIcon iconAssistance;
     public IIcon iconValet;
+    //public IIcon iconBurlak;
 
     public ItemGolemCore() {
         this.setMaxStackSize(64);
@@ -35,6 +36,7 @@ public class ItemGolemCore extends Item {
     public void registerIcons(final IIconRegister ir) {
         this.iconAssistance = ir.registerIcon(ThaumicConcilium.MODID+":assistance_core");
         this.iconValet = ir.registerIcon(ThaumicConcilium.MODID+":valet_core");
+        //this.iconBurlak = ir.registerIcon(ThaumicConcilium.MODID+":burlak_core");
     }
 
     @Override
@@ -43,6 +45,7 @@ public class ItemGolemCore extends Item {
             lst.add(new ItemStack(item, 1, 0));
         }
         lst.add(new ItemStack(item, 1, 1));
+        //lst.add(new ItemStack(item, 1, 2));
     }
 
     public String getItemStackDisplayName(final ItemStack stack) {
@@ -61,6 +64,9 @@ public class ItemGolemCore extends Item {
             }
             case 1:{
                 return this.iconValet;
+            }
+            case 2:{
+                return this.iconAssistance;
             }
             default: {
                 return this.iconAssistance;

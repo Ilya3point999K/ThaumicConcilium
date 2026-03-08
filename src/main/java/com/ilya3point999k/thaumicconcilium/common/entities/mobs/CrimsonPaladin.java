@@ -1,6 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.CrimsonOrbEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.EtherealShacklesEntity;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
@@ -111,6 +112,7 @@ public class CrimsonPaladin extends EntityCultist implements IRangedAttackMob {
                 CrimsonOrbEntity orb = new CrimsonOrbEntity(worldObj, posX + look.xCoord, posY + this.getEyeHeight(), posZ + look.zCoord, look.xCoord, look.yCoord, look.zCoord, this);
                 this.worldObj.spawnEntityInWorld(orb);
                 this.swingItem();
+
             }
         }
     }

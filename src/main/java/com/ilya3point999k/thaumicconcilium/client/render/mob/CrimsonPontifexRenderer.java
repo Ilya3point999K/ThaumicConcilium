@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render.mob;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonPontifex;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.CrimsonPontifex;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;

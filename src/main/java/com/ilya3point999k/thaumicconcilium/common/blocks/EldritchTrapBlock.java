@@ -1,7 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.blocks;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.tiles.DestabilizedCrystalTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -12,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.tiles.TileEldritchTrap;
 

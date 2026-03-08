@@ -1,7 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.items.equipment;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,23 +10,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import org.lwjgl.Sys;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.codechicken.lib.vec.Vector3;
 import thaumcraft.common.entities.projectile.EntityEmber;
 import thaumcraft.common.entities.projectile.EntityFrostShard;
 import thaumcraft.common.entities.projectile.EntityGolemOrb;
-import thaumcraft.common.items.wands.ItemWandCasting;
-import thaumic.tinkerer.common.ThaumicTinkerer;
 import thaumic.tinkerer.common.core.helper.ProjectileHelper;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

@@ -20,7 +20,6 @@ public class PolishmentDevice extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-
         return stack;
     }
 

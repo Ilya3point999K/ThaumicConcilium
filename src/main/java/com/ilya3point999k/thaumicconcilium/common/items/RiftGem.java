@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.items;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.VisConductorFoci;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;

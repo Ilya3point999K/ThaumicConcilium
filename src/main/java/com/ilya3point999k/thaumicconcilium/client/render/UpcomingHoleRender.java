@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.UpcomingHoleEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.UpcomingHoleEntity;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

@@ -33,16 +33,10 @@ minecraft {
 	replace "@VERSION@", project.version
 }
 
-
 dependencies {
-	compile name: 'Baubles-1.7.10-1.0.1.10-dev'
-	compile name: 'Thaumcraft-deobf-1.7.10-4.2.3.5'
-	compile name: 'Forbidden+Magic-1.7.10-0.575'
-	compile name: 'ThaumicTinkerer-2.5-1.7.10-164'
-	compile name: 'CraftTweaker-1.7.10-3.0.13-deobf'
-	compile name: 'witchery-1.7.10-0.24.1'
-	compile name: '1.7.10_AM2-1.4.0.009'
-	compile name: 'Botania r1.8-249'
+	compile fileTree(dir: 'deps', include: '*.jar')
+	compileOnly files('alfheim/Alfheim-63.jar')
+	compileOnly files('alfheim/1.7.10-ASJCore-1.5.2.2.jar')
 }
 
 processResources {
@@ -74,6 +68,7 @@ task sourcesJar(type: Jar) {
 	from sourceSets.main.allSource
 }
 
+
 artifacts {
 	archives devJar
 	archives sourcesJar
@@ -83,5 +78,11 @@ jar {
 	manifest {
 		attributes 'FMLCorePluginContainsFMLMod': 'true'
 		attributes 'FMLCorePlugin': 'com.ilya3point999k.thaumicconcilium.core.ThaumicConciliumCore'
+	}
+}
+
+gradle.taskGraph.whenReady { graph ->
+	if (graph.hasTask(":runClient")) {
+		runClient.args "--username", "Ilya3000"
 	}
 }

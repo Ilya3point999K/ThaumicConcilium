@@ -2,8 +2,8 @@ package com.ilya3point999k.thaumicconcilium.common.items.wands.foci;
 
 import com.ilya3point999k.thaumicconcilium.client.render.fx.FXColoredLightning;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.MaterialPeeler;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.MaterialPeeler;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.ChargedWispEntity;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;

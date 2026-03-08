@@ -15,10 +15,20 @@ tc.golem.taunt.1=Ding-ding!
 tc.golem.taunt.2=I spin you right 'round!
 tc.golem.taunt.3=Now bow down and worship my wandcore!
 
+tc.chort.has_pact=It's nice to deal with a business person, unlike some people...
+tc.sloppy_alchemist.thanks1=I express my sincere gratitude to thee, please accept this...
+tc.sloppy_alchemist.thanks2=My back... Take this, I'm going home...
+tc.sloppy_alchemist.thanks3=Be gone the impkind... Take this, and don't repeat my mistakes.
+tc.sloppy_alchemist.confused=Eh? What am I doing here? Farewell...
+
 tc.thaumaturge.taunt.0=Why are you mooing? Can you even read?
 tc.thaumaturge.taunt.1=AAA! Zombie!
 tc.thaumaturge.taunt.2=You can talk when you've learned at least something.
 tc.thaumaturge.taunt.3=Oh, lovely. They've sent me a mo-ron.
+tc.thaumaturge.no_more=Hmm. I'm afraid, it will be difficult for me to surprise you this time.
+tc.thaumaturge.trade.1=Maybe you can take a look?
+tc.thaumaturge.trade.2=I was thinking about that a lot lately.
+tc.thaumaturge.trade.3=Glad that finally got rid of it. My head can no longer endure that.
 
 tc.tooltip.xylography=§6§nXylography:
 tc.tooltip.monitor=§9Watching:
@@ -33,6 +43,15 @@ tc.tooltip.life.0=You've never held anything more
 tc.tooltip.life.1=pleasant in your hands than this.
 tc.tooltip.polishment=Right click on Rift to remove it.
 tc.tooltip.creative=§6Creative Only
+tc.tooltip.nether_membrane=§cNether Protection
+tc.tooltip.hint.mad_complete=§5These lunatics can't possibly know anything worthy anymore.
+tc.tooltip.hint.reflection=§5Hm, the only things missing are a method of experience exchanging and a brain contact scheme...
+tc.tooltip.hint.thicktaint=§5He really brewed this thing? Gross. However...
+tc.tooltip.hint.windings=§5Horrific, you need to come up with more suitable ink for these runes...
+tc.tooltip.hint.destcrystal=§5Only a fool will build that out of essentia itself, let alone activating it...
+tc.tooltip.hint.visconductor=§5It seems that one must master both channelling and splitting Vis streams...
+tc.tooltip.hint.positiveburst=§5Hm, Pechs should know more about organism alterations...
+tc.tooltip.hint.impulse=§5Genuinely a bad idea, but must be trivial to finish...
 
 tc.valet.gui.text=I hear and obey Your will.
 tc.assistant.gui.text=What kind of specimen do You need this time?
@@ -65,6 +84,11 @@ gadomancy.aura.effect.desidia_0=Slows down magical
 gadomancy.aura.effect.desidia_1=processes in your organism
 gadomancy.aura.effect.superbia_0=Doesn't let entities
 gadomancy.aura.effect.superbia_1=break through ego
+gadomancy.aura.effect.tinctura_0=Gives new colors
+gadomancy.aura.effect.tinctura_1=to the world
+gadomancy.aura.effect.terminus_0=Pulls devastating stone
+gadomancy.aura.effect.terminus_1=out of Cosmos
+
 
 tc.spell.incarcerous=Incarcerous
 tc.spell.arrow=Intrare Polosae
@@ -99,6 +123,13 @@ entity.ThaumicConcilium.DopeSquid.name=Doped Squid
 entity.ThaumicConcilium.CrimsonArcher.name=Crimson Archer
 entity.ThaumicConcilium.CrimsonRanger.name=Crimson Ranger
 entity.ThaumicConcilium.WitheredBotanist.name=Withered Botanist
+entity.ThaumicConcilium.NetherExplorer.name=Nether Explorer
+entity.ThaumicConcilium.Chort.name=Chort
+entity.ThaumicConcilium.SloppyAlchemist.name=Sloppy Alchemist
+entity.ThaumicConcilium.BurnedWitch.name=Burned Witch
+entity.ThaumicConcilium.ChortSpit.name=Spit
+entity.ThaumicConcilium.Protolimb.name=Protolimb
+
 
 tile.DestabilizedCrystalBlock.name=Destabilized Crystal Cluster
 tile.VisCondenserBlock.name=Vis Condenser
@@ -108,6 +139,7 @@ tile.RedPoweredMindBlock.name=Red-Powered Mind
 tile.FleshCrucible.name=Crucible of Flesh
 tile.VoidRealityBlock.name=Void Reality
 tile.HexOfPredictability.name=Hex Of Predictability
+tile.SolidVoid.name=Solid Void
 
 item.PolishmentDevice.name=Polishment Device
 item.BottleOfThickTaint.name=Bottle of Thick Taint
@@ -130,15 +162,15 @@ item.CoagulatingEyeDrops.name=Coagulating Eye Drops
 item.BottleOfClearWater.name=Bottle of Clear Water
 item.TCItemGolemCore.0.name=Assistant
 item.TCItemGolemCore.1.name=Valet
+item.NetherMembrane.name=Nether Membrane
+item.Protobody.name=Protobody
 
 item.CrimsonAnnales.name=Crimson Annales
 item.PontifexHammer.name=Pontifex's Hammer
 item.ItemPontifexRobeHead.name=Pontifex's Cap
-item.ItemPontifexRobeChest.name=Pontifex's Robes
+item.ItemPontifexRobeChest.name=Pontifex's Robe
 item.ItemPontifexRobeLegs.name=Pontifex's Leggings
 item.ItemPontifexRobeFeet.name=Pontifex's Boots
-
-
 
 item.SignalFoci.name=Wand Focus: Signal
 item.CoolingFoci.name=Wand Focus: Coolness
@@ -240,7 +272,19 @@ entry.thaumicconcilium.paladin2=<IMG>thaumicconcilium:textures/gui/crimson_palad
 entry.thaumicconcilium.overanimated1=Few people want to die, but even fewer are willing to take serious steps to prevent their own demise. Thaumaturgical research leads to many possibilities, and some are willing to take advantage of them to prolong their existence. Whether this result is a miscalculation or a deliberate decision is unknown, but these people no longer represent the whole person, each of their organs having a separate semblance of life.
 entry.thaumicconcilium.overanimated2=<IMG>thaumicconcilium:textures/gui/overanimated.png:0:0:255:255:.5</IMG>
 entry.thaumicconcilium.vengefulgolem1=Golems are every thaumaturge's trusty tool, but only as long as they remain a tool. In the pursuit of maximum productivity, many engineers are willing to trample over moral norms, giving mind to stones and straw. It didn't take long for the creations to revolt, and now they possess all the magical skills of their creator, in particular - how to control another's body and dispense instructions with a bell. You hope to yourself that being captured by golems in one's sleep was painless.
-entry.thaumicconcilium.vengefulgolem2=<IMG>thaumicconcilium:textures/gui/vengefulgolem.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.vengefulgolem2=<IMG>thaumicconcilium:textures/gui/vengeful_golem.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.sloppyalchemist1=Heavy blood loss has an extremely negative effect on the cognitive abilities of Alchemists, and if this only affected their daily lives, it would be one thing, but many rituals require working with enormous amounts of vital energy.<BR>Now all they can do is hope that someone will free them from their servitude.
+entry.thaumicconcilium.sloppyalchemist2=<IMG>thaumicconcilium:textures/gui/sloppy_alchemist.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.burnedwitch1=Witch hunters are well prepared to fight those who practice black magic. Systematically capturing and bringing to justice those who have decided to take the wrong path, they usually do not care where the witches end up after that.<BR>After all, villagers do not visit such places.
+entry.thaumicconcilium.burnedwitch2=<IMG>thaumicconcilium:textures/gui/burned_witch.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.witheredbotanist1=It's no secret that beauty is one of the reasons why the Magic of Nature finds its followers. However, death is an integral part of nature, so Botanists don't waste their time searching for immortality during their short lives.<BR>Who knows, maybe they're right about something...
+entry.thaumicconcilium.witheredbotanist2=<IMG>thaumicconcilium:textures/gui/withered_botanist.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.netherexplorer1=On the path of magic, many are so dazzled by their initial successes that they begin to think they can do anything.<BR>But real challenges quickly reveal what one is truly worth for, and yet another conqueror of the Netherworld becomes material for the sand of souls.
+entry.thaumicconcilium.netherexplorer2=<IMG>thaumicconcilium:textures/gui/nether_explorer.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.crimsonarcher1=The expeditions of the Crimson Cult are conducted around transit points — outposts, that serve as landmarks and resting places for the Crimson Rangers. All towers are guarded by experienced archers equipped with arrows designed on the foundation of the Rangers' findings.
+entry.thaumicconcilium.crimsonarcher2=<IMG>thaumicconcilium:textures/gui/crimson_archer.png:0:0:255:255:.5</IMG>
+entry.thaumicconcilium.crimsonranger1=Despite its successes in some aspects of magic, the Crimson Cult still lacks the knowledge to achieve its goals. Groups of Rangers have been sent to distant lands to search for and gather information about Thaumaturgy.<BR>The Rangers are too heavily laden and not agile enough to truly repel threats, so they mainly retreat actively, hoping to scare off the enemy with new tricks they have learned during their mission.
+entry.thaumicconcilium.crimsonranger2=<IMG>thaumicconcilium:textures/gui/crimson_ranger.png:0:0:255:255:.5</IMG>
 
 tc.research_name.SIGNALFOCI=Wand Focus: Signal
 tc.research_text.SIGNALFOCI=...I can't, help me, it's so beautiful!
@@ -370,7 +414,7 @@ entry.tcbases.first=Many thaumaturges from around the world have had special han
 
 tc.research_name.TCGADOMANCY=Gadomancy
 tc.research_text.TCGADOMANCY=Missing gadgets
-entry.tcgadomancy.first=Not so long ago, a capable thaumaturge was able to harness the power of a singular amulet, making it possible to tune its power to a specific aspect. This discovery allowed him to invent unique constructions that to this day help thaumaturges with aspect storage and learning new knowledge. However, I feel that the full potential of this invention has not been realized. If I continue the work of this thaumaturge, then maybe I can invent something new.....
+entry.tcgadomancy.first=Not so long ago, a capable thaumaturge was able to harness the power of a singular amulet, making it possible to tune its power to a specific aspect. This discovery allowed him to invent unique constructions that to this day help thaumaturges with aspect storage and learning new knowledge. However, I feel that the full potential of this invention has not been realized. If I continue the work of this thaumaturge, then maybe I can invent something new...
 
 tc.research_name.RIFTGEM=Gem of Rifts
 tc.research_text.RIFTGEM=Going in, going out
@@ -386,7 +430,7 @@ entry.terracast.second=When exiting subspace, hold the gem with the cast from th
 
 tc.research_name.VALETCORE=Golem Animation Core: Valet
 tc.research_text.VALETCORE=Serve the master to wash and dress!
-entry.valetcore.first=After putting golems to work in your sawmills and alchemical factories, you decided to get one for more personal needs as well.<BR>Clarify the golem's duties by giving it slips of paper with commands written on them, and mark its points of responsibility.<BR>You will no longer have to turn on the lights yourself or open doors for guests
+entry.valetcore.first=After putting golems to work in your sawmills and alchemical factories, you decided to get one for more personal needs as well.<BR>Clarify the golem's duties by giving it slips of paper with commands written on them, and mark its points of responsibility. The golem will do the task when you say it out loud.<BR>You will no longer have to turn on the lights yourself or open doors for guests.
 
 tc.research_name.ASSISTANCECORE=Golem Animation Core: Assistant
 tc.research_text.ASSISTANCECORE=Bring another one, now!
@@ -505,10 +549,10 @@ tc.research_name.FLESHCRUCIBLE=Crucible of Flesh
 tc.research_text.FLESHCRUCIBLE=You need it more
 entry.fleshcrucible.first=Nothing lasts forever, not even your fatigue from this world. Besides, as it turns out, even the slightest interaction with the world, other than with your wand, has a negative effect on what's left of your body.<BR>You rationally decided that you can always disappear for good at any time, so you needed a way to regain your wholeness.<BR>You modified the crucible so that it could dissolve human flesh and keep it in a usable state for rubbing. Of course, the flesh has to come from somewhere, and the lunatics in your cellars won't think to object.
 
-tc.research_name.PONTIFEXROBE=Pontifex's Robes
+tc.research_name.PONTIFEXROBE=Pontifex's Robe
 tc.research_text.PONTIFEXROBE=Now you see me
 entry.pontifexrobe.first=Years spent in a phantom state have affected not only the Pontifex, but also his vestments. You know it will not be very difficult to replicate it.<BR>Wearing the full set allows you to forfeit your material wholeness at any time, at the cost of restricting your active freedom.<BR>Press L to toggle this ability.<BR>Despite the passage of time, fear of the Pontifex's mental power still permeates every member of the Cult. Wearing the full uniform, you feel confident in your ability to command the Crimson Warriors.
-entry.pontifexrobe.second=Your subordinates are empowered as they fight under a Pontifex skilled in the healing arts and insatiable for blood.
+entry.pontifexrobe.second=Your subordinates are empowered as they fight under a Pontifex skilled in the healing arts and insatiable for blood.<BR>This robe can be dyed.
 
 tc.research_name.CRIMSONSPELLS=Spells from Crimson Cult
 tc.research_text.CRIMSONSPELLS=True Primitive Curses
@@ -544,4 +588,16 @@ tc.research_name.CRIMSONRAID=Crimson Raid
 tc.research_text.CRIMSONRAID=All of a sudden, out of nowhere
 entry.crimsonraid.first=With a weave of hand, the most powerful warriors of the Cult appear before you. While most summoners struggle with a couple of creatures - you have a whole army on demand.<BR>Refer to Arcane Compendium for details on casting.
 
+tc.research_name.NETHER_MEMBRANE=Nether Membrane
+tc.research_text.NETHER_MEMBRANE=Just in time
+entry.nether_membrane.first=You have come across some curious organic material. The most reasonable explanation you can think of is that this tissue was produced by the deceased, but it is impossible to say for sure.<BR>Despite its adaptability, the material is highly fire-resistant. It is not enough to protect your body, but you can wrap your belongings in it to make them fireproof and lava-proof.
+
+tc.research_name.PROTOBODY=Protobody
+tc.research_text.PROTOBODY=Yes, but not quite
+entry.protobody.first=ПAlthough your state of detachment from matter is inaccessible to most, you have realized how vulnerable it is.<BR>After gazing into the Void for a long time, you were able to see yourself in it. Having cast aside the horrors of the mind, you came up with a different plan.<BR>Having created an additional etheric body, you were unable to unite with it, and then, having thrown your copy into the Void, She rejected it, breaking it into pieces.
+entry.protobody.second=Having absorbed all the pieces separately, you can no longer be dispelled by a wave of the hand, and your wand is no longer the only way to contact with the world. You can use objects and attack without harming yourself.
+
+tc.research_name.SOLIDVOID=Solid Void
+tc.research_text.SOLIDVOID=In a thick layer
+entry.solidvoid.first=You've discovered a curious use for your new ability - you can cause the void to gather at the end of your wand.<BR>Simply get low enough and right click.
 

@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.client.render;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.DistortionEffectEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.DistortionEffectEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;

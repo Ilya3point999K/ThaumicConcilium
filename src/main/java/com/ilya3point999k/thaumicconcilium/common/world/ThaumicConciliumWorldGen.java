@@ -14,8 +14,8 @@ public class ThaumicConciliumWorldGen implements IWorldGenerator {
     public void generate(Random random, int x, int z, World world, IChunkProvider iChunkProvider, IChunkProvider iChunkProvider1) {
         if(world.provider.dimensionId != 0)
             return;
-        if (Integration.dyes) {
-            if (TCConfig.crimsonAvanpostGenChance > random.nextInt(100)) {
+        if (Integration.dyes && TCConfig.generateCrimsonAvanposts) {
+            if (random.nextInt(TCConfig.crimsonAvanpostGenChance) == 0) {
                 CultistTowerWorldGen tower = new CultistTowerWorldGen();
                 int randPosX = x * 16 + random.nextInt(16);
                 int randPosZ = z * 16 + random.nextInt(16);

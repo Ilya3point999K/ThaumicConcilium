@@ -14,8 +14,17 @@ import com.ilya3point999k.thaumicconcilium.client.render.model.VengefulGolemMode
 import com.ilya3point999k.thaumicconcilium.client.render.projectile.*;
 import com.ilya3point999k.thaumicconcilium.common.CommonProxy;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.*;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.DistortionEffectEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.UpcomingHoleEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.WrathEffectEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.*;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.BrightestOne;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.CrimsonPontifex;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.corpse.NetherExplorer;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.corpse.Protolimb;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.corpse.WitheredBotanist;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.*;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.*;
 import com.ilya3point999k.thaumicconcilium.common.events.TCGuiEvent;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
@@ -35,6 +44,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelSquid;
 import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -99,7 +109,12 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(TCItemRegistry.burdeningAmulet, transparentItemRenderer);
         MinecraftForgeClient.registerItemRenderer(TCItemRegistry.spotlightFoci, transparentItemRenderer);
         MinecraftForgeClient.registerItemRenderer(TCItemRegistry.thaumaturgeDrum, new ThaumaturgeDrumRenderer());
-        MinecraftForgeClient.registerItemRenderer(TCItemRegistry.pontifexHammer, new PaladinHammerRenderer());
+        if (Integration.taintedMagic) {
+            MinecraftForgeClient.registerItemRenderer(TCItemRegistry.pontifexHammer, new PaladinHammerRenderer());
+            if (Integration.horizons) {
+                MinecraftForgeClient.registerItemRenderer(TCItemRegistry.protobody, new ProtobodyRenderer());
+            }
+        }
         MinecraftForgeClient.registerItemRenderer(TCItemRegistry.shardMill, new ShardMillRenderer());
         MinecraftForgeClient.registerItemRenderer(TCItemRegistry.astralMonitor, new AstralMonitorRenderer());
 
@@ -124,6 +139,7 @@ public class ClientProxy extends CommonProxy {
            RenderingRegistry.registerEntityRenderingHandler(CrimsonOrbEntity.class, new CrimsonOrbEntityRenderer());
            RenderingRegistry.registerEntityRenderingHandler(EtherealShacklesEntity.class, new EtherealShacklesEntityRenderer());
            RenderingRegistry.registerEntityRenderingHandler(MaterialPeeler.class, new MaterialPeelerRenderer());
+           RenderingRegistry.registerEntityRenderingHandler(Protolimb.class, new ProtolimbRenderer());
 
         }
 
@@ -137,6 +153,7 @@ public class ClientProxy extends CommonProxy {
         if(Compat.botan){
             RenderingRegistry.registerEntityRenderingHandler(WitheredBotanist.class, new WitheredBotanistRenderer());
         }
+        RenderingRegistry.registerEntityRenderingHandler(NetherExplorer.class, new NetherExplorerRenderer());
 
         if (Integration.horizons) {
             RenderingRegistry.registerEntityRenderingHandler(Overanimated.class, new ThaumaturgeRenderer(new ModelBiped(),
@@ -167,6 +184,34 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(RiftEntity.class, new RiftRenderer());
         RenderingRegistry.registerEntityRenderingHandler(ShardPowderEntity.class, new ShardPowderEntityRenderer());
         RenderingRegistry.registerEntityRenderingHandler(BrightestOne.class, new BrightestOneRenderer());
+
+        if(Integration.witchery){
+            try {
+                Class burnedWitch = Class.forName("com.ilya3point999k.thaumicconcilium.common.entities.mobs.BurnedWitch");
+                Class burnedWitchRenderer = Class.forName("com.ilya3point999k.thaumicconcilium.client.render.mob.BurnedWitchRenderer");
+
+                RenderingRegistry.registerEntityRenderingHandler((Class<? extends Entity>) burnedWitch, (Render) burnedWitchRenderer.newInstance());
+                if (Compat.bm) {
+                    Class sloppyAlchemist = Class.forName("com.ilya3point999k.thaumicconcilium.common.entities.mobs.SloppyAlchemist");
+                    Class sloppyAlchemistRenderer = Class.forName("com.ilya3point999k.thaumicconcilium.client.render.mob.SloppyAlchemistRenderer");
+
+                    RenderingRegistry.registerEntityRenderingHandler((Class<? extends Entity>) sloppyAlchemist, (Render) sloppyAlchemistRenderer.newInstance());
+
+                    Class chort = Class.forName("com.ilya3point999k.thaumicconcilium.common.entities.mobs.Chort");
+                    Class chortRenderer = Class.forName("com.ilya3point999k.thaumicconcilium.client.render.mob.ChortRenderer");
+
+                    RenderingRegistry.registerEntityRenderingHandler((Class<? extends Entity>) chort, (Render) chortRenderer.newInstance());
+
+                    RenderingRegistry.registerEntityRenderingHandler(ChortSpitEntity.class, new RenderSnowball(Items.slime_ball));
+                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         if (Integration.automagy){
             RenderingRegistry.registerEntityRenderingHandler(RedPoweredMind.class, new RedPoweredMindRender());
@@ -210,7 +255,9 @@ public class ClientProxy extends CommonProxy {
         }
 
         if(Integration.horizons){
-            MinecraftForgeClient.registerItemRenderer(TCItemRegistry.drainageSyringe, new DrainageSyringeRenderer());
+            if (Compat.bm && Compat.botan) {
+                MinecraftForgeClient.registerItemRenderer(TCItemRegistry.drainageSyringe, new DrainageSyringeRenderer());
+            }
             RenderingRegistry.registerEntityRenderingHandler(GolemBydlo.class, new GolemBydloRenderer(new GolemBydloModel(true)));
             if(Integration.automagy){
                 ClientRegistry.bindTileEntitySpecialRenderer(RedPoweredMindTile.class, new RedPoweredMindTileRenderer());

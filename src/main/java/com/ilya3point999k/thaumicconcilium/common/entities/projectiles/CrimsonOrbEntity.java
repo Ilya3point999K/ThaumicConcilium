@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.projectiles;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonPontifex;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.CrimsonPontifex;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;

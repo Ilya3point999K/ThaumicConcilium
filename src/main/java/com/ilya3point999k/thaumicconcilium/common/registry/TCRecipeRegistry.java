@@ -5,6 +5,10 @@ import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.Bracelets;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.TCFociUpgrades;
+import com.ilya3point999k.thaumicconcilium.common.registry.recipe.NetherMembraneRecipe;
+import com.ilya3point999k.thaumicconcilium.common.registry.recipe.PontifexRobeDyeRecipe;
+import com.ilya3point999k.thaumicconcilium.common.registry.recipe.TerraGemRecipe;
+import com.ilya3point999k.thaumicconcilium.common.registry.recipe.WandXylography;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fox.spiteful.forbidden.DarkAspects;
 import fox.spiteful.forbidden.compat.Compat;
@@ -43,6 +47,8 @@ public class TCRecipeRegistry {
         Configuration configuration;
 
         GameRegistry.addRecipe(new WandXylography());
+        GameRegistry.addRecipe(new NetherMembraneRecipe());
+
 
         Thaumonomicon.recipes.put("ClearWater", ThaumcraftApi.addCrucibleRecipe("BOTTLEWATER", new ItemStack(TCItemRegistry.bottleOfClearWater), new ItemStack(ConfigItems.itemEssence), new AspectList().add(Aspect.WATER, 1)));
         Thaumonomicon.recipes.put("BottleOfThickTaint", ThaumcraftApi.addCrucibleRecipe("BOTTLEOFTHICKTAINT", new ItemStack(TCItemRegistry.bottleOfThickTaint), new ItemStack(ConfigItems.itemBottleTaint), new AspectList().add(Aspect.TAINT, 16).add(Aspect.SLIME, 16).add(Aspect.CRYSTAL, 16)));
@@ -315,7 +321,7 @@ public class TCRecipeRegistry {
                         new ItemStack(ConfigItems.itemResource, 1, 12),
                         new ItemStack(TCItemRegistry.bottleOfThickTaint)}));
 
-        Thaumonomicon.recipes.put("BurdeningAmulet", ThaumcraftApi.addInfusionCraftingRecipe("BURDENINGAMULET", new ItemStack(TCItemRegistry.burdeningAmulet), 8, new AspectList().add(Aspect.ARMOR, 96).add(Aspect.SENSES, 64).add(Aspect.DEATH, 96).add(Aspect.ELDRITCH, 128).add(DarkAspects.ENVY, 128),
+        Thaumonomicon.recipes.put("BurdeningAmulet", ThaumcraftApi.addInfusionCraftingRecipe("BURDENINGAMULET", new ItemStack(TCItemRegistry.burdeningAmulet), 8, new AspectList().add(Aspect.ARMOR, 96).add(Aspect.DEATH, 96).add(Aspect.ELDRITCH, 128).add(DarkAspects.ENVY, 128),
                 new ItemStack(ConfigItems.itemAmuletVis, 1, 0), new ItemStack[]{
                         new ItemStack(ConfigItems.itemCompassStone),
                         new ItemStack(ForbiddenItems.deadlyShards, 1, 1),
@@ -498,6 +504,8 @@ public class TCRecipeRegistry {
                 }));
 
         if (Integration.taintedMagic) {
+            GameRegistry.addRecipe(new PontifexRobeDyeRecipe());
+
             Item material;
             Item focus;
             try {
@@ -532,6 +540,35 @@ public class TCRecipeRegistry {
 							new ItemStack(material, 1, 10),
 							new ItemStack(material, 1, 10),
 					}));
+
+            if (Integration.horizons){
+                Item putty;
+                Item corpse;
+                try {
+                    putty = Compat.getItem("ThaumicHorizons", "voidPutty");
+                    corpse = Compat.getItem("ThaumicHorizons", "corpseEffigy");
+                } catch (Compat.ItemNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                ItemStack voidess = new ItemStack(itemEssence, 1, 0);
+                itemEssence.setAspects(voidess, new AspectList().add(Aspect.VOID, 2));
+                ItemStack fleshess = new ItemStack(itemEssence, 1, 0);
+                itemEssence.setAspects(fleshess, new AspectList().add(Aspect.FLESH, 2));
+                ItemStack maness = new ItemStack(itemEssence, 1, 0);
+                itemEssence.setAspects(maness, new AspectList().add(Aspect.MAN, 2));
+
+                Thaumonomicon.recipes.put("Protobody", ThaumcraftApi.addInfusionCraftingRecipe("PROTOBODY", new ItemStack(TCItemRegistry.protobody), 10, new AspectList().add(Aspect.MAN, 128).add(Aspect.VOID, 256).add(Aspect.ELDRITCH, 64).add(Aspect.AURA, 128),
+                        new ItemStack(corpse), new ItemStack[]{
+                                new ItemStack(putty),
+                                voidess,
+                                new ItemStack(putty),
+                                fleshess,
+                                new ItemStack(putty),
+                                auraessence,
+                                new ItemStack(putty),
+                                maness
+                        }));
+            }
         }
 
         if (Integration.thaumicBases) {
@@ -842,6 +879,9 @@ public class TCRecipeRegistry {
             Thaumonomicon.recipes.put("PontifexRobeChest", ThaumicConciliumApi.addChainedRiftRecipe("PONTIFEXROBE", new ItemStack(TCItemRegistry.pontifexChest), new ItemStack(ConfigItems.itemChestCultistRobe), new AspectList().add(Aspect.LIFE, 128).add(Aspect.VOID, 128).add(Aspect.ARMOR, 256).add(Aspect.EXCHANGE, 64).add(Aspect.FLESH, 256)));
             Thaumonomicon.recipes.put("PontifexRobeLegs", ThaumicConciliumApi.addChainedRiftRecipe("PONTIFEXROBE", new ItemStack(TCItemRegistry.pontifexLegs), new ItemStack(ConfigItems.itemLegsCultistRobe), new AspectList().add(Aspect.LIFE, 128).add(Aspect.VOID, 128).add(Aspect.ARMOR, 256).add(Aspect.EXCHANGE, 64).add(Aspect.FLESH, 256)));
             Thaumonomicon.recipes.put("PontifexRobeFeet", ThaumicConciliumApi.addChainedRiftRecipe("PONTIFEXROBE", new ItemStack(TCItemRegistry.pontifexFeet), new ItemStack(ConfigItems.itemBootsCultist), new AspectList().add(Aspect.LIFE, 128).add(Aspect.VOID, 128).add(Aspect.ARMOR, 256).add(Aspect.EXCHANGE, 64).add(Aspect.FLESH, 256)));
+            if (Integration.horizons){
+                ThaumicConciliumApi.addPolishmentRecipe(new ItemStack(TCItemRegistry.protobody), new AspectList().add(Aspect.FLESH, 64));
+            }
         }
     }
 }

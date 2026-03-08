@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.client;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.ContainerThaumaturge;
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.Thaumaturge;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.ContainerThaumaturge;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;

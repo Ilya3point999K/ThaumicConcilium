@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.projectiles;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonPontifex;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.CrimsonPontifex;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.TCFociUpgrades;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.ReflectionHelper;

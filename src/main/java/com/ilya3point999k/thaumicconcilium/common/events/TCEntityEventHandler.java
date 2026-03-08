@@ -1,29 +1,24 @@
 package com.ilya3point999k.thaumicconcilium.common.events;
 
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
-import am2.api.ArsMagicaApi;
-import am2.api.events.SkillLearnedEvent;
-import am2.api.spell.component.interfaces.ISpellComponent;
-import am2.api.spell.component.interfaces.ISpellModifier;
-import am2.api.spell.component.interfaces.ISpellShape;
-import am2.lore.ArcaneCompendium;
-import am2.playerextensions.SkillData;
-import am2.spell.SkillManager;
-import am2.spell.SkillTreeManager;
 import baubles.common.lib.PlayerHandler;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
 import com.ilya3point999k.thaumicconcilium.api.event.ThaumcraftResearchCompletedEvent;
+import com.ilya3point999k.thaumicconcilium.api.event.WitcheryImpDealEvent;
 import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.items.EntityItemFireResistant;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonPaladin;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.Dissolved;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.MadThaumaturge;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.corpse.NetherExplorer;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.ilya3point999k.thaumicconcilium.common.golems.ValetGolemCore;
 import com.ilya3point999k.thaumicconcilium.common.golems.ai.GolemChatHandler;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import com.ilya3point999k.thaumicconcilium.common.items.AstralMonitor;
+import com.ilya3point999k.thaumicconcilium.common.items.ItemResource;
 import com.ilya3point999k.thaumicconcilium.common.items.RiftGem;
 import com.ilya3point999k.thaumicconcilium.common.items.equipment.PontifexRobe;
 import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.TCFociUpgrades;
@@ -32,10 +27,12 @@ import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.VisConductorF
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketFXLightning;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketUpdatePartyStatus;
-import com.ilya3point999k.thaumicconcilium.common.research.ThaumcraftResearchItem;
+import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
+import com.ilya3point999k.thaumicconcilium.common.registry.Thaumonomicon;
 import com.ilya3point999k.thaumicconcilium.common.tiles.DestabilizedCrystalTile;
 import com.ilya3point999k.thaumicconcilium.common.tiles.LithographerTile;
 import com.ilya3point999k.thaumicconcilium.common.tiles.RedPoweredMindTile;
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -44,10 +41,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import fox.spiteful.forbidden.compat.Compat;
 import makeo.gadomancy.api.GadomancyApi;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -58,12 +59,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -81,26 +87,28 @@ import thaumcraft.common.entities.golems.EntityGolemBase;
 import thaumcraft.common.entities.monster.EntityBrainyZombie;
 import thaumcraft.common.entities.monster.EntityCultist;
 import thaumcraft.common.entities.monster.EntityCultistKnight;
-import thaumcraft.common.entities.monster.EntityGiantBrainyZombie;
 import thaumcraft.common.items.ItemWispEssence;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.lib.FakeThaumcraftPlayer;
-import thaumcraft.common.lib.research.ResearchManager;
-import thaumcraft.common.lib.research.ResearchNoteData;
 import thaumcraft.common.lib.research.ScanManager;
 import thaumcraft.common.tiles.TileInfusionMatrix;
 import thaumcraft.common.tiles.TileNode;
 import thaumcraft.common.tiles.TilePedestal;
+import thaumic.tinkerer.common.core.helper.ItemNBTHelper;
 import vazkii.botania.api.mana.IManaItem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class TCEntityEventHandler {
     public static final HashMap<EntityPlayer, Boolean> etherealsClient = new HashMap<>();
     public static final HashMap<EntityPlayer, Boolean> etherealsServer = new HashMap<>();
+    private HashMap<ChunkCoordIntPair, Boolean> lavaChunks = new HashMap<ChunkCoordIntPair, Boolean>();
+    int spawnTime = 0;
 
     @SubscribeEvent
     public void onEntityConstruction(EntityEvent.EntityConstructing event) {
@@ -124,6 +132,20 @@ public class TCEntityEventHandler {
         clone.loadNBTData(compound);
     }
 
+    @SubscribeEvent
+    public void on(LivingHurtEvent event){
+        if (event.entity instanceof EntityItem){
+            EntityItem e = (EntityItem) event.entity;
+            ItemStack stack = e.getEntityItem();
+            if (stack != null){
+                if(ItemNBTHelper.verifyExistance(stack, ItemResource.TAG_MEMBRANE)){
+                    if (event.source.isFireDamage()){
+                        event.setCanceled(true);
+                    }
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public void on(PlayerEvent.PlayerChangedDimensionEvent event) {
@@ -158,6 +180,11 @@ public class TCEntityEventHandler {
 
     @SubscribeEvent
     public void on(ItemTooltipEvent event) {
+        if (event.itemStack == null) return;
+
+        if (ItemNBTHelper.verifyExistance(event.itemStack, ItemResource.TAG_MEMBRANE)){
+            event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.nether_membrane"));
+        }
         if (event.itemStack.getItem() instanceof ItemWandCasting) {
             NBTTagCompound tag = event.itemStack.getTagCompound();
             if (tag != null) {
@@ -166,6 +193,35 @@ public class TCEntityEventHandler {
                     event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.xylography") + " " + name);
                 }
             }
+        }
+        if (event.itemStack.getItem() == ConfigItems.itemResearchNotes){
+           if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.reflectionHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.reflection"));
+               if (Thaumonomicon.checkMadThaumaturgeComplete(event.entityPlayer)){
+                   event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.mad_complete"));
+               }
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.thickTaintHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.thicktaint"));
+               if (Thaumonomicon.checkMadThaumaturgeComplete(event.entityPlayer)){
+                   event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.mad_complete"));
+               }
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.runicWindingsHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.windings"));
+               if (Thaumonomicon.checkMadThaumaturgeComplete(event.entityPlayer)){
+                   event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.mad_complete"));
+               }
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.destCrystalHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.destcrystal"));
+               if (Thaumonomicon.checkMadThaumaturgeComplete(event.entityPlayer)){
+                   event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.mad_complete"));
+               }
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.visConductorHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.visconductor"));
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.positiveBurstHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.positiveburst"));
+           } else if (ItemNBTHelper.verifyExistance(event.itemStack, Thaumonomicon.impulseHintTag)){
+               event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.hint.impulse"));
+           }
         }
     }
 
@@ -183,17 +239,24 @@ public class TCEntityEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void on(PlayerInteractEvent e) {
         if (!e.world.isRemote) {
-            TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(e.entityPlayer);
+            if (e.entityPlayer == null) return;
+            EntityPlayer player = e.entityPlayer;
+            TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(player);
             if (capabilities != null) {
                 if (capabilities.chainedTime != 0) e.setCanceled(true);
+            } else {
+                return;
             }
-            ItemStack i = e.entityPlayer.getHeldItem();
+            ItemStack i = player.getHeldItem();
             boolean wand = false;
 
             if (i != null) {
                 if ((i.getItem() instanceof ItemWandCasting)) {
                     if (e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-                        WandHandler.handleWandInteract(e.world, e.x, e.y, e.z, e.entityPlayer, i);
+                        WandHandler.handleWandInteract(e.world, e.x, e.y, e.z, player, i);
+                    } else if (e.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR && player.posY < -1 && capabilities.protolimbs >= 6){
+                        player.inventory.addItemStackToInventory(new ItemStack(TCBlockRegistry.SOLID_VOID));
+                        player.worldObj.playSoundAtEntity(player, "random.pop", 0.5F, 1F);
                     }
                     wand = true;
                 }
@@ -201,10 +264,11 @@ public class TCEntityEventHandler {
                     wand = true;
                 }
             }
-            if (!e.entityPlayer.capabilities.isCreativeMode && capabilities != null && capabilities.ethereal && !wand) {
+            if (!player.capabilities.isCreativeMode && capabilities != null && capabilities.ethereal && !wand && capabilities.protolimbs < 6) {
                 capabilities.fleshAmount++;
                 capabilities.sync();
             }
+
         }
     }
 
@@ -245,12 +309,11 @@ public class TCEntityEventHandler {
             if (!player.worldObj.isRemote) {
                 if (!player.capabilities.isCreativeMode && capabilities.ethereal) {
                     if (event.item == null) {
-                        if (player.posY < 0) {
-                            //player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, is.copy()));
+                        if (capabilities.protolimbs < 6) {
+                            capabilities.fleshAmount++;
+                            capabilities.sync();
                         }
-                        capabilities.fleshAmount++;
-                        capabilities.sync();
-                    } else if (!(event.item.getItem() instanceof ItemWandCasting)) {
+                    } else if (!(event.item.getItem() instanceof ItemWandCasting) && capabilities.protolimbs < 6) {
                         capabilities.fleshAmount++;
                         capabilities.sync();
                     }
@@ -269,10 +332,10 @@ public class TCEntityEventHandler {
             if (!event.entityPlayer.worldObj.isRemote) {
                 if (!event.entityPlayer.capabilities.isCreativeMode && capabilities.ethereal) {
                     ItemStack stack = event.entityPlayer.getHeldItem();
-                    if (stack == null) {
+                    if (stack == null && capabilities.protolimbs < 6) {
                         capabilities.fleshAmount++;
                         capabilities.sync();
-                    } else if (!(stack.getItem() instanceof ItemWandCasting)) {
+                    } else if (stack != null && !(stack.getItem() instanceof ItemWandCasting) && capabilities.protolimbs < 6) {
                         capabilities.fleshAmount++;
                         capabilities.sync();
                     }
@@ -312,35 +375,59 @@ public class TCEntityEventHandler {
             }
             capabilities.pontifexRobeToggle = false;
             capabilities.ethereal = false;
+            capabilities.protolimbs = 0;
             capabilities.sync(event.player);
         }
     }
 
     @SubscribeEvent
     public void on(EntityJoinWorldEvent event) {
-        if (event.entity instanceof EntityBrainyZombie || event.entity instanceof EntityGiantBrainyZombie) {
+        if (event.entity instanceof EntityBrainyZombie) {
             if (TCConfig.madThaumaturgeReplacesBrainyZombieChance > event.world.rand.nextInt(100)) {
                 if (!event.world.isRemote) {
                     MadThaumaturge madThaumaturge = new MadThaumaturge(event.world);
                     madThaumaturge.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);
+                    event.setCanceled(true);
                     event.entity.setDead();
                     event.world.spawnEntityInWorld(madThaumaturge);
                     madThaumaturge.addEquipment();
                 }
             }
         }
-        if (event.entity instanceof EntityCultistKnight) {
+        else if (event.entity instanceof EntityCultistKnight) {
             if (TCConfig.crimsonPaladinReplacesCultistWarriorChance > event.world.rand.nextInt(100)) {
                 if (!event.world.isRemote) {
                     CrimsonPaladin paladin = new CrimsonPaladin(event.world);
                     paladin.setLocationAndAngles(event.entity.posX, event.entity.posY, event.entity.posZ, event.world.rand.nextFloat() * 360.0F, 0.0F);
+                    event.setCanceled(true);
                     event.entity.setDead();
                     event.world.spawnEntityInWorld(paladin);
                     paladin.addEquipment();
+
+                }
+            }
+        } else if(event.entity instanceof EntityItem && event.entity.getClass() != EntityItemFireResistant.class){
+            if (!event.entity.worldObj.isRemote) {
+                EntityItem entityItem = (EntityItem) event.entity;
+                if (entityItem.isDead) return;
+                ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+                if (stack == null) return;
+                if (stack.stackSize < 1) return;
+                if (ItemNBTHelper.getBoolean(stack, ItemResource.TAG_MEMBRANE, false)) {
+                    EntityItemFireResistant f = new EntityItemFireResistant(event.world, entityItem.posX, entityItem.posY, entityItem.posZ, stack);
+                    f.delayBeforeCanPickup = 40;
+                    f.motionX = entityItem.motionX;
+                    f.motionY = entityItem.motionY;
+                    f.motionZ = entityItem.motionZ;
+                    event.world.spawnEntityInWorld(f);
+                    event.setCanceled(true);
+                    event.entity.setDead();
                 }
             }
         }
+
     }
+
 
     @SubscribeEvent
     public void on(PlayerEvent.PlayerLoggedInEvent event) {
@@ -354,14 +441,19 @@ public class TCEntityEventHandler {
         TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(player);
         if (capabilities != null) {
             if (!player.worldObj.isRemote) {
+                boolean shouldSync = false;
                 if (capabilities.pontifexRobeToggle && !PontifexRobe.isFullSet(player)) {
                     capabilities.ethereal = false;
                     capabilities.pontifexRobeToggle = false;
-                    capabilities.sync();
+                    shouldSync = true;
                 }
                 if (capabilities.chainedTime > 0) {
                     capabilities.chainedTime--;
-                    capabilities.sync();
+                    shouldSync = true;
+                }
+                if (capabilities.impDealTime > 0){
+                    capabilities.impDealTime--;
+                    shouldSync = true;
                 }
                 float maxHealth = player.getMaxHealth() - capabilities.fleshAmount;
                 if (player.getHealth() > maxHealth) {
@@ -562,6 +654,7 @@ public class TCEntityEventHandler {
                         TCPacketHandler.INSTANCE.sendTo(new PacketUpdatePartyStatus(party), (EntityPlayerMP) player);
                     }
                 }
+                if (shouldSync) capabilities.sync();
             }
             HashMap<EntityPlayer, Boolean> ethereals = event.side == Side.SERVER ? etherealsServer : etherealsClient;
 
@@ -618,6 +711,86 @@ public class TCEntityEventHandler {
                                 event.entity.entityDropItem(wispyEssence, 0.2f);
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void on(TickEvent.WorldTickEvent event) {
+        if (event.phase == TickEvent.Phase.START && event.world instanceof WorldServer && event.world.provider.dimensionId == -1) {
+            WorldServer world = (WorldServer) event.world;
+            if (++this.spawnTime < TCConfig.netherExplorerSpawnRate) {
+                return;
+            }
+            this.spawnTime = 0;
+            lavaChunks.clear();
+            for (Object p : world.playerEntities) {
+                EntityPlayer player = (EntityPlayer) p;
+                int chunkX = MathHelper.floor_double(player.posX / 16.0D);
+                int chunkZ = MathHelper.floor_double(player.posZ / 16.0D);
+                byte spawnRange = 8;
+                for (int x = -spawnRange; x <= spawnRange; x++) {
+                    for (int z = -spawnRange; z <= spawnRange; z++) {
+                        boolean isEdge = (x == -spawnRange || x == spawnRange || z == -spawnRange || z == spawnRange);
+                        ChunkCoordIntPair chunkCoord = new ChunkCoordIntPair(x + chunkX, z + chunkZ);
+                        if (!isEdge) {
+                            lavaChunks.put(chunkCoord, Boolean.valueOf(false));
+                        } else if (!lavaChunks.containsKey(chunkCoord)) {
+                            lavaChunks.put(chunkCoord, Boolean.valueOf(true));
+                        }
+                    }
+                }
+            }
+            ChunkCoordinates spawnCoords = world.getSpawnPoint();
+            if (world.countEntities(NetherExplorer.class) <= 3) {
+                ArrayList<ChunkCoordIntPair> chunks = new ArrayList<ChunkCoordIntPair>(lavaChunks.keySet());
+                Collections.shuffle(chunks);
+                for (ChunkCoordIntPair chunkCoord : chunks) {
+                    if (!((Boolean) lavaChunks.get(chunkCoord)).booleanValue()) {
+                        Chunk chunk = world.getChunkFromChunkCoords(chunkCoord.chunkXPos, chunkCoord.chunkZPos);
+                        int cx = (chunkCoord.chunkXPos << 4) + world.rand.nextInt(16);
+                        int cz = (chunkCoord.chunkZPos << 4) + world.rand.nextInt(16);
+                        int cy = world.rand.nextInt((chunk == null) ? world.getActualHeight() : (chunk.getTopFilledSegment() + 16 - 1));
+                        ChunkPosition chunkPos = new ChunkPosition(cx, cy, cz);
+                        int x = chunkPos.chunkPosX;
+                        int y = chunkPos.chunkPosY;
+                        int z = chunkPos.chunkPosZ;
+                        if (world.isBlockNormalCubeDefault(x, y, z, true))
+                            continue;
+                        byte groupRadius = 6;
+                        int X = x;
+                        int Y = y;
+                        int Z = z;
+                        for (int spawnAttempt = 4; spawnAttempt-- > 0; ) {
+                            X += world.rand.nextInt(groupRadius) - world.rand.nextInt(groupRadius);
+                            Y += world.rand.nextInt(1) - world.rand.nextInt(1);
+                            Z += world.rand.nextInt(groupRadius) - world.rand.nextInt(groupRadius);
+                            if (world.getBlock(X, Y, Z).getMaterial() == Material.lava) {
+                                float posX = X + 0.5F;
+                                float posY = Y;
+                                float posZ = Z + 0.5F;
+                                if (world.getClosestPlayer(posX, posY, posZ, 24.0D) == null) {
+                                    float spawnX = posX - spawnCoords.posX;
+                                    float spawnY = posY - spawnCoords.posY;
+                                    float spawnZ = posZ - spawnCoords.posZ;
+                                    float spawnDist = spawnX * spawnX + spawnY * spawnY + spawnZ * spawnZ;
+                                    if (spawnDist >= 576.0F) {
+                                        NetherExplorer explorer = new NetherExplorer((World) world);
+                                        explorer.setLocationAndAngles(posX, posY, posZ, world.rand.nextFloat() * 360.0F, 0.0F);
+                                        Event.Result canSpawn = ForgeEventFactory.canEntitySpawn((EntityLiving) explorer, (World) world, posX, posY, posZ);
+                                        if (canSpawn == Event.Result.ALLOW || (canSpawn == Event.Result.DEFAULT && explorer.getCanSpawnHere())) {
+                                            world.spawnEntityInWorld((Entity) explorer);
+                                            if (!ForgeEventFactory.doSpecialSpawn((EntityLiving) explorer, (World) world, posX, posY, posZ))
+                                                explorer.onSpawnWithEgg((IEntityLivingData) null);
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
@@ -720,31 +893,23 @@ public class TCEntityEventHandler {
     }
 
     @SubscribeEvent
-    public void onResearch(ThaumcraftResearchCompletedEvent e){
+    public void onResearch(ThaumcraftResearchCompletedEvent e) {
+        if (e.entityPlayer == null) return;
         if (!e.entityPlayer.worldObj.isRemote) {
             String research = e.getUnlockedResearch();
-            if (research.equals("CRIMSONINITIATION")) {
-                SkillData d = SkillData.For(e.entityPlayer);
-                try {
-                    SkillTreeManager t = SkillTreeManager.instance;
-                    d.incrementSpellPoints(t.getSkillPointTypeForPart(Integration.crimson_raid_component));
-                    d.learn(t.getSkillTreeEntry(Integration.crimson_raid_component).registeredItem);
-                    d.forceSync();
-                    MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
-                } catch (Exception e1) {
-                    int ID = SkillManager.instance.getShiftedPartID(Integration.crimson_raid_component);
-                    try {
-                        Method m = SkillData.class.getDeclaredMethod("setComponentKnown", int.class);
-                        m.setAccessible(true); // bypass private access
-                        m.invoke(d, ID);
-                        d.forceSync();
-                        MinecraftForge.EVENT_BUS.post(new SkillLearnedEvent(e.entityPlayer, Integration.crimson_raid_component));
-                    } catch (Exception e2) {
-                        e1.printStackTrace();
-                        e2.printStackTrace();
+            if (research.equals("CRIMSONRAID")) {
+                if (Compat.am2) {
+                    if (Integration.taintedMagic) {
+                        try {
+                            Class<?> clazz = Class.forName("com.ilya3point999k.thaumicconcilium.common.integration.AM2Integration");
+                            Method m = clazz.getMethod("unlockCrimsonRaid", EntityPlayer.class);
+                            m.invoke(null, e.entityPlayer);
+                        } catch (Throwable t) {
+                            System.err.println("[ThaumicConcilium] Failed to unlock Crimson Raid spell component: " + t);
+                        }
                     }
                 }
-            } else if (research.equals("CRIMSONSPELLS")){
+            } else if (research.equals("CRIMSONSPELLS")) {
                 NBTTagCompound nbtPlayer = null;
                 try {
                     nbtPlayer = (NBTTagCompound) Integration.witcheryInfusionClass.getMethod("getNBT", Entity.class).invoke(null, e.entityPlayer);
@@ -765,7 +930,16 @@ public class TCEntityEventHandler {
                     nbtSpells.setBoolean("conjunctivitis", true);
                 }
             }
+        }
+    }
 
+    @SubscribeEvent
+    public void on(WitcheryImpDealEvent event){
+        if (event.impOwner == null) return;
+        if (!event.impOwner.worldObj.isRemote) {
+            TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(event.impOwner);
+            capabilities.impDealTime = 72000;
+            capabilities.sync();
         }
     }
 }

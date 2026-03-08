@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.items.wands.foci;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.WrathEffectEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.WrathEffectEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -68,6 +68,7 @@ public class TCItemRegistry {
 	public static Item pontifexChest;
 	public static Item pontifexLegs;
 	public static Item pontifexFeet;
+	public static Item protobody;
 
 	public static Item spellIcon;
 
@@ -87,9 +88,6 @@ public class TCItemRegistry {
 		runicLegsWindings = new RunicWindings(0, 2);
 		runicLegsWindings.setUnlocalizedName("RunicLegsWindings");
 		GameRegistry.registerItem(runicLegsWindings, "RunicLegsWindings");
-
-		//visCapsule = new VisCapsule(null);
-		//GameRegistry.registerItem(visCapsule, "VisCapsule");
 
 		bottleOfThickTaint = new BottleOfThickTaint(null);
 		GameRegistry.registerItem(bottleOfThickTaint, "BottleOfThickTaint");
@@ -161,6 +159,7 @@ public class TCItemRegistry {
 		resource = new ItemResource();
 		GameRegistry.registerItem(resource, "ItemResource");
 		ThaumcraftApi.registerObjectTag(new ItemStack(resource, 1, 1), new AspectList().add(Aspect.LIFE, 64));
+		ThaumcraftApi.registerObjectTag(new ItemStack(resource, 1, 4), new AspectList().add(Aspect.FLESH, 4).add(DarkAspects.NETHER, 4).add(Aspect.ARMOR, 4).add(Aspect.CLOTH, 4));
 
 		if(Compat.am2){
 			spellIcon = new ItemSpellIcon();
@@ -201,9 +200,14 @@ public class TCItemRegistry {
 			GameRegistry.registerItem(golemCores, "ItemGolemCore");
 		}
 
-		if(Integration.horizons){
-			drainageSyringe = new DrainageSyringe();
-			GameRegistry.registerItem(drainageSyringe, "DrainageSyringe");
+		if(Integration.horizons && Compat.botan && Compat.bm){
+			try {
+				Class<?> clazz = Class.forName("com.ilya3point999k.thaumicconcilium.common.items.DrainageSyringe");
+				drainageSyringe = (Item) clazz.newInstance();
+				GameRegistry.registerItem(drainageSyringe, "DrainageSyringe");
+			} catch (Throwable t) {
+				System.err.println("[ThaumicConcilium] Failed to register Thaumic Horizons integration item Drainage Syringe: " + t);
+			}
 		}
 
 		if (Integration.automagy){
@@ -228,6 +232,12 @@ public class TCItemRegistry {
 			ThaumcraftApi.registerObjectTag(new ItemStack(pontifexChest), new AspectList().add(Aspect.MIND, 16).add(Aspect.CLOTH, 16).add(Aspect.ARMOR, 16).add(Aspect.HUNGER, 16).add(DarkAspects.PRIDE, 16));
 			ThaumcraftApi.registerObjectTag(new ItemStack(pontifexLegs), new AspectList().add(Aspect.MIND, 16).add(Aspect.CLOTH, 16).add(Aspect.ARMOR, 16).add(Aspect.HUNGER, 16).add(DarkAspects.PRIDE, 16));
 			ThaumcraftApi.registerObjectTag(new ItemStack(pontifexFeet), new AspectList().add(Aspect.MIND, 16).add(Aspect.CLOTH, 16).add(Aspect.ARMOR, 16).add(Aspect.HUNGER, 16).add(DarkAspects.PRIDE, 16));
+
+			if (Integration.horizons){
+				protobody = new Protobody();
+				GameRegistry.registerItem(protobody, "Protobody");
+				ThaumcraftApi.registerObjectTag(new ItemStack(protobody), new AspectList().add(Aspect.MAN, 4).add(Aspect.VOID, 4).add(Aspect.ELDRITCH, 4).add(Aspect.ENTROPY, 4));
+			}
 
 		}
 	}

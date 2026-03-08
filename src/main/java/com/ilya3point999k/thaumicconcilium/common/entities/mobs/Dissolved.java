@@ -1,6 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.UpcomingHoleEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.UpcomingHoleEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -21,6 +22,7 @@ import thaumcraft.common.items.wands.foci.ItemFocusPortableHole;
 public class Dissolved extends EntityMob {
     public Dissolved(World w) {
         super(w);
+        super.isImmuneToFire = true;
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.4D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.4D));

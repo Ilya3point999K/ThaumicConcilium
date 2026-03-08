@@ -1,8 +1,8 @@
 package com.ilya3point999k.thaumicconcilium.client.render.mob;
 
-import com.ilya3point999k.thaumicconcilium.client.render.block.RedPoweredMindTileRenderer;
 import com.ilya3point999k.thaumicconcilium.client.render.model.WitheredBotanistModel;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.corpse.WitheredBotanist;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -21,10 +21,10 @@ public class WitheredBotanistRenderer extends Render {
     @Override
     public void doRender(Entity e, double x, double y, double z, float par8, float par9)
     {
-
+        WitheredBotanist botanist = (WitheredBotanist) e;
         GL11.glPushMatrix();
-
         GL11.glTranslated(x, y + 0.1, z);
+        GL11.glRotated(botanist.rotationYaw, 0.0, 1.0, 0.0);
         GL11.glRotated(90.0, 1.0, 0.0, 0.0);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
         model.render(e, 0F, 0F, 0F, 0F, 0F, 0.0625F);
@@ -34,6 +34,6 @@ public class WitheredBotanistRenderer extends Render {
 
     @Override
     protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-        return RedPoweredMindTileRenderer.texture;
+        return texture;
     }
 }

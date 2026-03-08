@@ -1,20 +1,16 @@
 package com.ilya3point999k.thaumicconcilium.client.events;
 
-import am2.api.ArsMagicaApi;
-import am2.api.events.RegisterSkillTreeIcons;
 import com.ilya3point999k.thaumicconcilium.client.render.ShaderHelper;
+import com.ilya3point999k.thaumicconcilium.client.render.block.SolidVoidBlockRenderer;
 import com.ilya3point999k.thaumicconcilium.client.render.projectile.ShardPowderEntityRenderer;
 import com.ilya3point999k.thaumicconcilium.common.TCPlayerCapabilities;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
-import com.ilya3point999k.thaumicconcilium.common.items.BottleOfClearWater;
-import com.ilya3point999k.thaumicconcilium.common.items.ItemEntityIcon;
-import com.ilya3point999k.thaumicconcilium.common.items.ItemSpellIcon;
 import com.ilya3point999k.thaumicconcilium.common.items.ShardMill;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketChangeActiveShard;
 import com.ilya3point999k.thaumicconcilium.common.network.packets.PacketChangeEtherealRange;
-import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
+import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -34,30 +30,30 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
+import thaumcraft.api.BlockCoordinates;
 import thaumcraft.client.lib.UtilsFX;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigItems;
@@ -66,9 +62,11 @@ import thaumic.tinkerer.client.lib.LibResources;
 import thaumic.tinkerer.client.model.kami.ModelWings;
 
 import java.awt.*;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class ClientEvents {
@@ -124,21 +122,11 @@ public class ClientEvents {
         if(Compat.am2) {
             if(Integration.taintedMagic) {
                 try {
-                    Object instance = Class.forName("am2.lore.ArcaneCompendium").getField("instance").get(null);
-                    java.lang.reflect.Method m = Class.forName("am2.lore.ArcaneCompendium").getMethod(
-                            "AddCompenidumEntry",
-                            Object.class, String.class, String.class, String.class, Object.class, boolean.class
-                    );
-                    m.invoke(instance,
-                            Integration.crimson_raid_component,
-                            "Crimson_Raid",
-                            StatCollector.translateToLocal("am2.spell.crimson_raid"),
-                            StatCollector.translateToLocal("am2.entry.crimson_raid"),
-                            null,
-                            false
-                    );
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    Class<?> clazz = Class.forName("com.ilya3point999k.thaumicconcilium.common.integration.AM2Integration");
+                    Method m = clazz.getMethod("registerClient");
+                    m.invoke(null);
+                } catch (Throwable t) {
+                    System.err.println("[ThaumicConcilium] Failed to register AM2 client code: " + t);
                 }
                 //ArcaneCompendium.instance.AddCompenidumEntry(Integration.crimson_raid_component, "Crimson_Raid", StatCollector.translateToLocal("am2.spell.crimson_raid"), StatCollector.translateToLocal("am2.entry.crimson_raid"), null, false);
                 //ArcaneCompendium.instance.AddCompenidumEntry(TCItemRegistry.tightBelt, ThaumicConcilium.MODID + ":TightBelt", "Belt", "belt", null, false);
@@ -930,8 +918,6 @@ public class ClientEvents {
         }
     }
 
-
-    
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void renderPlayer(RenderPlayerEvent.Specials.Post event){
@@ -1031,3 +1017,5 @@ public class ClientEvents {
         }
     }
 }
+
+

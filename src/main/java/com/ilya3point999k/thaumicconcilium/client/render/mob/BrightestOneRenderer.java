@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render.mob;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.BrightestOne;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.boss.BrightestOne;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.Tessellator;

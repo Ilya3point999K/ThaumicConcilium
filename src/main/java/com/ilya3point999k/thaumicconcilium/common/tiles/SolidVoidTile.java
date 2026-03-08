@@ -6,5 +6,4 @@ public class SolidVoidTile extends TileEntity {
     public boolean canUpdate() {
         return false;
     }
-
 }

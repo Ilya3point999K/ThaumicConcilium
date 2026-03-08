@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render.mob;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.LesserPortal;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.LesserPortal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ActiveRenderInfo;

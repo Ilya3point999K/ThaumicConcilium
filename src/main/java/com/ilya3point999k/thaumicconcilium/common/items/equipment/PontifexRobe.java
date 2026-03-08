@@ -14,6 +14,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -26,11 +27,13 @@ import thaumcraft.api.nodes.IRevealer;
 import java.util.List;
 
 public class PontifexRobe extends ItemArmor implements IRunicArmor, IRepairable, IGoggles, IRevealer, IVisDiscountGear, IWarpingGear {
-    public IIcon[] icons = new IIcon[4];
-    final static ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial("TCPONTIFEXROBE", 30, new int[]{4, 8, 7, 4}, 25);
+    private IIcon[] icons = new IIcon[4];
+    private IIcon[] iconsOver = new IIcon[4];
+
+    public static String base = ThaumicConcilium.MODID + ":textures/models/armor/pontifex_robe.png";
+    public static String overlay = ThaumicConcilium.MODID + ":textures/models/armor/pontifex_robe_overlay.png";
+    public final static ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial("TCPONTIFEXROBE", 30, new int[]{4, 8, 7, 4}, 25);
     static PontifexRobeModel model = null;
-    
-    public static String chest = ThaumicConcilium.MODID + ":textures/models/armor/pontifex_robe.png";
 
     public PontifexRobe(int j, int k) {
         super(MATERIAL, j, k);
@@ -40,7 +43,8 @@ public class PontifexRobe extends ItemArmor implements IRunicArmor, IRepairable,
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister ir) {
         for (int i = 0; i < 4; i++){
-            this.icons[i] = ir.registerIcon(ThaumicConcilium.MODID+":pontifex"+i);
+            this.icons[i] = ir.registerIcon(ThaumicConcilium.MODID+":pontifex_base"+i);
+            this.iconsOver[i] = ir.registerIcon(ThaumicConcilium.MODID+":pontifex_overlay"+i);
         }
     }
 
@@ -77,10 +81,81 @@ public class PontifexRobe extends ItemArmor implements IRunicArmor, IRepairable,
         }
         return null;
     }
+    @Override
+    public boolean hasColor(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getColor(ItemStack par1ItemStack)
+    {
+        NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
+        if (nbttagcompound == null) {
+            return 0xA01818;
+        }
+        NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
+        return nbttagcompound1.hasKey("color") ? nbttagcompound1.getInteger("color") : nbttagcompound1 == null ? 0xA01818 : 0xA01818;
+    }
+
+    public void removeColor(ItemStack par1ItemStack)
+    {
+        NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
+        if (nbttagcompound != null)
+        {
+            NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
+            if (nbttagcompound1.hasKey("color")) {
+                nbttagcompound1.removeTag("color");
+            }
+        }
+    }
+
+
+    public void func_82813_b(ItemStack par1ItemStack, int par2) {
+        NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
+        if(nbttagcompound == null) {
+            nbttagcompound = new NBTTagCompound();
+            par1ItemStack.setTagCompound(nbttagcompound);
+        }
+
+        NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
+        if(!nbttagcompound.hasKey("display")) {
+            nbttagcompound.setTag("display", nbttagcompound1);
+        }
+
+        nbttagcompound1.setInteger("color", par2);
+    }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return chest;
+        return type == null ? base : overlay;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean requiresMultipleRenderPasses()
+    {
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int par1) {
+        return this.itemIcon;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamageForRenderPass(int par1, int pass) {
+        if (super.armorType == 0){
+            return pass == 0 ? icons[0] : iconsOver[0];
+        }
+        if (super.armorType == 1){
+            return pass == 0 ? icons[1] : iconsOver[1];
+        }
+        if (super.armorType == 2){
+            return pass == 0 ? icons[2] : iconsOver[2];
+        }
+        if (super.armorType == 3){
+            return pass == 0 ? icons[3] : iconsOver[3];
+        }
+        return icons[0];
     }
 
     public static boolean isFullSet(EntityPlayer player){
@@ -88,11 +163,6 @@ public class PontifexRobe extends ItemArmor implements IRunicArmor, IRepairable,
                 player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() instanceof PontifexRobe &&
                 player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() instanceof PontifexRobe &&
                 player.inventory.armorItemInSlot(3) != null && player.inventory.armorItemInSlot(3).getItem() instanceof PontifexRobe;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int par1) {
-        return icons[this.armorType];
     }
 
     public EnumRarity getRarity(ItemStack itemstack) {

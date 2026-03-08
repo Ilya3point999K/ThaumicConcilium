@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.WrathEffectEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.WrathEffectEntity;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityLavaFX;

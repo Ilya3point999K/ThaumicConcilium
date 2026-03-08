@@ -2,6 +2,7 @@ package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.ai.SamuraiAttackAI;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -25,8 +26,7 @@ public class Samurai extends EntityMob {
     public Samurai(World w) {
         super(w);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        //this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.6D, false));
-        this.tasks.addTask(2, new SamuraiAttackAI(this, EntityLivingBase.class, 0.8D, false));
+        this.tasks.addTask(2, new SamuraiAttackAI(this, 0.25D, 40, 20.0F));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1D));
         this.tasks.addTask(7, new EntityAIWander(this, 1D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -36,7 +36,7 @@ public class Samurai extends EntityMob {
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Thaumaturge.class, 0, true));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCultist.class, 0, true));
 
-        this.setSize(1.0F, 2.0F);
+        this.setSize(1.0F, 1.8F);
 
     }
 
@@ -204,9 +204,6 @@ public class Samurai extends EntityMob {
 
     @Override
     public void onUpdate() {
-        if (getAnger() > 0) {
-            this.setAnger(this.getAnger() - 1);
-        }
         super.onUpdate();
     }
 

@@ -3,8 +3,16 @@ package com.ilya3point999k.thaumicconcilium.common.events;
 import com.ilya3point999k.thaumicconcilium.api.ChainedRiftRecipe;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
 import com.ilya3point999k.thaumicconcilium.client.PolishedInfusionGUI;
+import com.ilya3point999k.thaumicconcilium.client.ThaumaturgeGUI;
 import com.ilya3point999k.thaumicconcilium.common.Injector;
+import com.ilya3point999k.thaumicconcilium.common.registry.Thaumonomicon;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
@@ -13,7 +21,8 @@ import thaumcraft.client.gui.GuiResearchRecipe;
 public class TCGuiEvent {
     @SubscribeEvent
     public void guiOpen(GuiOpenEvent event) {
-        if (event.gui != null && event.gui instanceof GuiResearchRecipe) {
+        if (event.gui == null) return;
+        if (event.gui instanceof GuiResearchRecipe) {
             GuiResearchRecipe gui = (GuiResearchRecipe) event.gui;
             Injector inj = new Injector(gui, GuiResearchRecipe.class);
             ResearchItem research = inj.getField("research");
@@ -49,6 +58,13 @@ public class TCGuiEvent {
                     break;
                 }
             }
+        } else if (event.gui instanceof ThaumaturgeGUI){
+            Minecraft mc = Minecraft.getMinecraft();
+            EntityPlayer player = mc.thePlayer;
+            if (Thaumonomicon.checkThaumaturgeComplete(player)){
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tc.thaumaturge.no_more")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));
+            }
         }
     }
+
 }

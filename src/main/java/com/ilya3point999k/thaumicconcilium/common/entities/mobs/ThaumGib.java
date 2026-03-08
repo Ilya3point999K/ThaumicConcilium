@@ -1,6 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -63,8 +64,10 @@ public class ThaumGib extends EntityMob {
             }
 
         }
-        setLocationAndAngles(parent.posX, parent.boundingBox.minY + f, parent.posZ, parent.rotationYaw, parent.rotationPitch);
-        MiscHelper.setEntityMotionFromVector(this, new Vector3(this.posX + (-0.5 + world.rand.nextGaussian()) * 2.0, this.posY, this.posZ + (-0.5 + world.rand.nextGaussian()) * 2.0), 0.5f);
+        if (parent != null) {
+            setLocationAndAngles(parent.posX, parent.boundingBox.minY + f, parent.posZ, parent.rotationYaw, parent.rotationPitch);
+            MiscHelper.setEntityMotionFromVector(this, new Vector3(this.posX + (-0.5 + world.rand.nextGaussian()) * 2.0, this.posY, this.posZ + (-0.5 + world.rand.nextGaussian()) * 2.0), 0.5f);
+        }
     }
 
     public byte getType() {

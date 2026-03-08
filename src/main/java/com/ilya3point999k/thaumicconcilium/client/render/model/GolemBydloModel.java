@@ -1,13 +1,11 @@
 package com.ilya3point999k.thaumicconcilium.client.render.model;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.GolemBydlo;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.GolemBydlo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-import thaumcraft.common.entities.golems.EntityGolemBase;
 
 public class GolemBydloModel extends ModelBase {
     public ModelRenderer golemHead;

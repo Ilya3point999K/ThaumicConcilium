@@ -68,6 +68,18 @@ public class ShardPowderEntity extends Entity implements IEntityAdditionalSpawnD
         this.iteration = 0;
     }
 
+    public ShardPowderEntity(EntityLivingBase caster, double x, double y, double z, int type, int age) {
+        super(caster.worldObj);
+        this.setSize(0.125F, 0.125F);
+        this.yOffset = this.height / 2.0F;
+        this.setPosition(x, y, z);
+        this.caster = caster;
+        this.rotationYaw = (float)(Math.random() * 360.0);
+        this.type = type;
+        this.iteration = 0;
+        this.orbAge = age;
+    }
+
     public ShardPowderEntity(EntityLivingBase caster, int iteration, double x, double y, double z) {
         super(caster.worldObj);
         this.setSize(0.125F, 0.125F);

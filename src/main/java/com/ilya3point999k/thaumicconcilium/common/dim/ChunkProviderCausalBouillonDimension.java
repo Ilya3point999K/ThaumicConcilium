@@ -14,7 +14,8 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.FlatGeneratorInfo;
 import net.minecraft.world.gen.FlatLayerInfo;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 public class ChunkProviderCausalBouillonDimension implements IChunkProvider {
 

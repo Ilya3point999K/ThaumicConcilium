@@ -1,8 +1,10 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import com.ilya3point999k.thaumicconcilium.common.items.equipment.PontifexRobe;
+import com.ilya3point999k.thaumicconcilium.common.registry.Thaumonomicon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,7 +20,6 @@ import thaumcraft.common.entities.monster.EntityCultistKnight;
 import thaumcraft.common.lib.research.ResearchManager;
 
 public class MadThaumaturge extends EntityMob {
-
     public MadThaumaturge(World w) {
         super(w);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -172,13 +173,21 @@ public class MadThaumaturge extends EntityMob {
         if (d > 7) {
             int r = this.rand.nextInt(10);
             if (r <= 3) {
-                this.entityDropItem(ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "REFLECTIONFOCI", this.worldObj), 1.5f);
+                ItemStack scroll = ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "REFLECTIONFOCI", this.worldObj);
+                scroll.getTagCompound().setBoolean(Thaumonomicon.reflectionHintTag, true);
+                this.entityDropItem(scroll, 1.5f);
             } else if (r <= 5) {
-                this.entityDropItem(ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "BOTTLEOFTHICKTAINT", this.worldObj), 1.5f);
+                ItemStack scroll = ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "BOTTLEOFTHICKTAINT", this.worldObj);
+                scroll.getTagCompound().setBoolean(Thaumonomicon.thickTaintHintTag, true);
+                this.entityDropItem(scroll, 1.5f);
             } else if (r <= 7) {
-                this.entityDropItem(ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "RUNICWINDINGS", this.worldObj), 1.5f);
+                ItemStack scroll = ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "RUNICWINDINGS", this.worldObj);
+                scroll.getTagCompound().setBoolean(Thaumonomicon.runicWindingsHintTag, true);
+                this.entityDropItem(scroll, 1.5f);
             } else {
-                this.entityDropItem(ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "DESTCRYSTAL", this.worldObj), 1.5f);
+                ItemStack scroll = ResearchManager.createNote(new ItemStack(ConfigItems.itemResearchNotes), "DESTCRYSTAL", this.worldObj);
+                scroll.getTagCompound().setBoolean(Thaumonomicon.destCrystalHintTag, true);
+                this.entityDropItem(scroll, 1.5f);
             }
         } else {
             int r = this.rand.nextInt(2);

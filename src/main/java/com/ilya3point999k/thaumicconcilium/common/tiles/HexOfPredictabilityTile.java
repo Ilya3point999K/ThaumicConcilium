@@ -4,7 +4,7 @@ import com.ilya3point999k.thaumicconcilium.api.ChainedRiftRecipe;
 import com.ilya3point999k.thaumicconcilium.api.ThaumicConciliumApi;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.blocks.HexOfPredictabilityBlock;
-import com.ilya3point999k.thaumicconcilium.common.entities.RiftEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.item.EntityItem;

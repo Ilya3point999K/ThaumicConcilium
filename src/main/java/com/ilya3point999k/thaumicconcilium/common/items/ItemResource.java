@@ -1,13 +1,13 @@
 package com.ilya3point999k.thaumicconcilium.common.items;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.mobs.*;
+import com.ilya3point999k.thaumicconcilium.common.entities.items.EntityItemFireResistant;
 import com.ilya3point999k.thaumicconcilium.common.integration.Integration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumRarity;
@@ -24,11 +24,13 @@ import java.util.List;
 
 public class ItemResource extends Item {
     @SideOnly(Side.CLIENT)
-    public IIcon iconSummonDevice;
+    public IIcon iconBlank;
     public IIcon iconPrimordialLife;
     public IIcon iconVoidSlag;
     public IIcon iconCrimsonAnnales;
+    public IIcon iconNetherMembrane;
 
+    public static String TAG_MEMBRANE = "Nether_Membrane_Tag";
 
     public ItemResource() {
         this.setCreativeTab(ThaumicConcilium.tabTC);
@@ -39,10 +41,8 @@ public class ItemResource extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote) {
-
             switch (stack.getItemDamage()) {
                 case 0: {
-                    spawnThaumaturges(player);
                     stack.stackSize--;
                     break;
                 }
@@ -66,12 +66,13 @@ public class ItemResource extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(final IIconRegister ir) {
-        this.iconSummonDevice = ir.registerIcon(ThaumicConcilium.MODID+":iconThaumaturge");
+        this.iconBlank = ir.registerIcon(ThaumicConcilium.MODID+":iconThaumaturge");
         this.iconPrimordialLife = ir.registerIcon(ThaumicConcilium.MODID+":primordial_life");
         this.iconVoidSlag = ir.registerIcon(ThaumicConcilium.MODID+":void_slag");
         if (Integration.taintedMagic) {
             this.iconCrimsonAnnales = ir.registerIcon(ThaumicConcilium.MODID + ":crimson_annales");
         }
+        this.iconNetherMembrane = ir.registerIcon(ThaumicConcilium.MODID+":nether_membrane");
     }
 
     @Override
@@ -91,6 +92,7 @@ public class ItemResource extends Item {
         if (Integration.taintedMagic){
             lst.add(new ItemStack(item, 1, 3));
         }
+        lst.add(new ItemStack(item, 1, 4));
     }
 
     @Override
@@ -100,13 +102,17 @@ public class ItemResource extends Item {
             case 1:{
                 return EnumRarity.epic;
             }
-            case 2:{
+            case 2:
+            {
                 return EnumRarity.common;
             }
             case 3:{
                 if (Integration.taintedMagic) {
                     return EnumRarity.uncommon;
-                }
+                } else return EnumRarity.common;
+            }
+            case 4:{
+                return EnumRarity.uncommon;
             }
             default: {
                 return EnumRarity.common;
@@ -127,8 +133,11 @@ public class ItemResource extends Item {
                 if (Integration.taintedMagic) {
                     return StatCollector.translateToLocal("item.CrimsonAnnales.name");
                 }
+                return "";
             }
-
+            case 4:{
+                return StatCollector.translateToLocal("item.NetherMembrane.name");
+            }
             default: {
                 return "";
             }
@@ -139,7 +148,7 @@ public class ItemResource extends Item {
     public IIcon getIconFromDamage(final int md) {
         switch (md) {
             case 0: {
-                return this.iconSummonDevice;
+                return this.iconBlank;
             }
             case 1:{
                 return this.iconPrimordialLife;
@@ -151,9 +160,13 @@ public class ItemResource extends Item {
                 if (Integration.taintedMagic) {
                     return this.iconCrimsonAnnales;
                 }
+                return this.iconBlank;
+            }
+            case 4:{
+                return this.iconNetherMembrane;
             }
             default: {
-                return this.iconSummonDevice;
+                return this.iconBlank;
             }
         }
     }
@@ -177,55 +190,43 @@ public class ItemResource extends Item {
 
     }
 
-    private static void spawnThaumaturges(EntityPlayer player) {
-        int amount = player.worldObj.rand.nextInt(6) + 6;
-        for (int n = 0; n < amount; n++) {
-            EntityMob mob;
-            int roll = player.worldObj.rand.nextInt(5);
-            switch (roll){
-                case 0:{
-                    mob = new Dissolved(player.worldObj);
-                    break;
-                }
-                case 1:{
-                    mob = new Overanimated(player.worldObj);
-                    break;
-                }
-                case 2:{
-                    mob = new QuicksilverElemental(player.worldObj);
-                    break;
-                }
+    @Override
+    public Entity createEntity(World world, Entity location, ItemStack itemstack) {
+        if (itemstack != null){
+            switch (itemstack.getItemDamage()){
+                case 0:
+                case 1:
+                case 2:
                 case 3:{
-                    mob = new Samurai(player.worldObj);
-                    break;
+                    return super.createEntity(world, location, itemstack);
                 }
                 case 4:{
-                    mob = new VengefulGolem(player.worldObj);
-                    break;
-                }
-                default:{
-                    mob = new Samurai(player.worldObj);
-                }
-            }
-            int i = MathHelper.floor_double(player.posX);
-            int j = MathHelper.floor_double(player.posY);
-            int k = MathHelper.floor_double(player.posZ);
-
-            for (int l = 0; l < 50; ++l) {
-                int i1 = i + MathHelper.getRandomIntegerInRange(player.worldObj.rand, 7, 24) * MathHelper.getRandomIntegerInRange(player.worldObj.rand, -1, 1);
-                int j1 = j + MathHelper.getRandomIntegerInRange(player.worldObj.rand, 7, 24) * MathHelper.getRandomIntegerInRange(player.worldObj.rand, -1, 1);
-                int k1 = k + MathHelper.getRandomIntegerInRange(player.worldObj.rand, 7, 24) * MathHelper.getRandomIntegerInRange(player.worldObj.rand, -1, 1);
-                if (World.doesBlockHaveSolidTopSurface(player.worldObj, i1, j1 - 1, k1)) {
-                    mob.setPosition((double) i1, (double) j1, (double) k1);
-                    if (player.worldObj.checkNoEntityCollision(mob.boundingBox) && player.worldObj.getCollidingBoundingBoxes(mob, mob.boundingBox).isEmpty() && !player.worldObj.isAnyLiquid(mob.boundingBox)) {
-                        mob.setTarget(player);
-                        mob.setAttackTarget(player);
-                        player.worldObj.spawnEntityInWorld(mob);
-                        break;
-                    }
+                    EntityItemFireResistant item = new EntityItemFireResistant(world, location.posX, location.posY, location.posZ, itemstack);
+                    item.motionX = location.motionX;
+                    item.motionY = location.motionY;
+                    item.motionZ = location.motionZ;
+                    item.delayBeforeCanPickup = 40;
+                    return item;
                 }
             }
         }
+        return super.createEntity(world, location, itemstack);
     }
 
+    @Override
+    public boolean hasCustomEntity(ItemStack stack) {
+        if (stack == null) return false;
+        switch (stack.getItemDamage()){
+            case 0:
+            case 1:
+            case 2:
+            case 3:{
+                return false;
+            }
+            case 4:{
+                return true;
+            }
+        }
+        return false;
+    }
 }

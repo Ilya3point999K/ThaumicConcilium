@@ -30,7 +30,6 @@ import thaumcraft.client.lib.UtilsFX;
 import thaumcraft.common.config.Config;
 
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.Random;
 
 public class AstralMonitorRenderer implements IItemRenderer {

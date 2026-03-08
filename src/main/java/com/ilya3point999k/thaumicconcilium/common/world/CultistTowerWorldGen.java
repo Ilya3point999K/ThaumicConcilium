@@ -1,7 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.world;
 
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonArcher;
-import com.ilya3point999k.thaumicconcilium.common.registry.TCItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -12,11 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
-import thaumcraft.common.entities.monster.EntityCultist;
-import thaumcraft.common.entities.monster.EntityCultistCleric;
-import thaumcraft.common.entities.monster.EntityCultistKnight;
 import thaumcraft.common.tiles.TileBanner;
-import thaumcraft.common.tiles.TileLifter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,20 +221,24 @@ public class CultistTowerWorldGen extends WorldGenerator {
                 }
 
             CrimsonArcher archer = new CrimsonArcher(world);
+            archer.func_110163_bv();
             archer.setLocationAndAngles(x + 3, y + 11, z - 3, 0, 0);
             archer.onSpawnWithEgg(null);
             world.spawnEntityInWorld(archer);
             archer = new CrimsonArcher(world);
+            archer.func_110163_bv();
             archer.setLocationAndAngles(x + 5, y + 11, z - 3, 0, 0);
             archer.onSpawnWithEgg(null);
             world.spawnEntityInWorld(archer);
             archer = new CrimsonArcher(world);
+            archer.func_110163_bv();
             archer.setLocationAndAngles(x + 3, y + 11, z, 0, 0);
             archer.onSpawnWithEgg(null);
             world.spawnEntityInWorld(archer);
             int randknights = random.nextInt(5);
             for(int it = 0; it < randknights; it++) {
                 archer = new CrimsonArcher(world);
+                archer.func_110163_bv();
                 int xx = x - 8 + random.nextInt(16);
                 int zz = z - 8 + random.nextInt(16);
                 archer.setLocationAndAngles(xx, world.getHeightValue(xx, zz), zz, 0, 0);

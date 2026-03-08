@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.core;
 
+import com.ilya3point999k.thaumicconcilium.core.transformers.ImpDealTransformer;
 import com.ilya3point999k.thaumicconcilium.core.transformers.ThaumcraftResearchManagerTransformer;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
@@ -16,6 +17,7 @@ public class ThaumicConciliumMainTransformer implements IClassTransformer {
 
     public ThaumicConciliumMainTransformer() {
         register(new ThaumcraftResearchManagerTransformer());
+        register(new ImpDealTransformer());
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 public class VoidRealityBlock extends Block {
     public VoidRealityBlock() {
         super(Material.cloth);
-        this.setResistance(6000000);
+        this.setResistance(6000.0F);
         this.setBlockUnbreakable();
         this.setStepSound(soundTypeCloth);
         this.setBlockTextureName(ThaumicConcilium.MODID + ":void");

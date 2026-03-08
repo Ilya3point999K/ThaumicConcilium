@@ -21,6 +21,9 @@ public class TCPlayerCapabilities implements IExtendedEntityProperties {
     public int chainedTime;
     public boolean ethereal;
     public int fleshAmount;
+    public int impDealTime;
+    public int protolimbs;
+
     public TCPlayerCapabilities(EntityPlayer player)
     {
         if(!(player instanceof FakePlayer) && !(player instanceof FakeThaumcraftPlayer))
@@ -36,6 +39,8 @@ public class TCPlayerCapabilities implements IExtendedEntityProperties {
         fleshAmount = 0;
         pontifexRobeToggle = false;
         monitored = new String[4];
+        impDealTime = 0;
+        protolimbs = 0;
     }
 
     public static final void register(EntityPlayer player)
@@ -64,6 +69,8 @@ public class TCPlayerCapabilities implements IExtendedEntityProperties {
         properties.setBoolean("ethereal", ethereal);
         properties.setBoolean("pontifexRobeToggle", pontifexRobeToggle);
         properties.setInteger("fleshAmount", fleshAmount);
+        properties.setInteger("impDealTime", impDealTime);
+        properties.setInteger("protolimbs", protolimbs);
         compound.setTag(EXT_PROP_NAME, properties);
     }
 
@@ -79,6 +86,8 @@ public class TCPlayerCapabilities implements IExtendedEntityProperties {
         ethereal = properties.getBoolean("ethereal");
         pontifexRobeToggle = properties.getBoolean("pontifexRobeToggle");
         fleshAmount = properties.getInteger("fleshAmount");
+        impDealTime = properties.getInteger("impDealTime");
+        protolimbs = properties.getInteger("protolimbs");
     }
 
     @Override

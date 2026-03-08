@@ -2,7 +2,7 @@ package com.ilya3point999k.thaumicconcilium.common.items.wands.foci;
 
 import baubles.api.BaublesApi;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.DistortionEffectEntity;
+import com.ilya3point999k.thaumicconcilium.common.entities.cosmetic.DistortionEffectEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.BottleOfClearWaterEntity;
 import com.ilya3point999k.thaumicconcilium.common.entities.projectiles.BottleOfThickTaintEntity;
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;

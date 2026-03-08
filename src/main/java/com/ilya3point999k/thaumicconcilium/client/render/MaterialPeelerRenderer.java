@@ -1,6 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.client.render;
 
-import com.ilya3point999k.thaumicconcilium.common.entities.MaterialPeeler;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.MaterialPeeler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

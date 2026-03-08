@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.client.render.mob;
 
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
-import com.ilya3point999k.thaumicconcilium.common.entities.DopeSquid;
+import com.ilya3point999k.thaumicconcilium.common.entities.other.DopeSquid;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;

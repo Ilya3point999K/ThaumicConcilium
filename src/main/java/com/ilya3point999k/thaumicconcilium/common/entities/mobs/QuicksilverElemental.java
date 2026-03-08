@@ -1,7 +1,7 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
-import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
+import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
 import com.ilya3point999k.thaumicconcilium.common.tiles.QuicksilverCrucibleTile;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -137,9 +137,11 @@ public class QuicksilverElemental extends EntityMob {
             if (((EntityLivingBase) e).getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
                 this.swingItem();
                 float f = (float) ((EntityLivingBase) e).getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+                this.attackTime = 20;
                 return e.attackEntityFrom(DamageSource.anvil, f);
             } else {
                 this.swingItem();
+                this.attackTime = 20;
                 return e.attackEntityFrom(DamageSource.anvil, (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
             }
         }
