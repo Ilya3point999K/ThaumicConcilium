@@ -81,20 +81,22 @@ public class Protolimb extends EntityFlying implements IMob {
     @Override
     public void onCollideWithPlayer(EntityPlayer player) {
         if (player == null) return;
-        if (worldObj.isRemote) return;
-        TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(player);
-        capabilities.protolimbs++;
-        capabilities.sync();
-        if (capabilities.protolimbs == 6) {
-            if (!ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "SOLIDVOID")) {
-                Thaumcraft.proxy.getResearchManager().completeResearch(player, "SOLIDVOID");
-                PacketHandler.INSTANCE.sendTo(new PacketResearchComplete("SOLIDVOID"), (EntityPlayerMP) player);
-                player.worldObj.playSoundAtEntity(player, "thaumcraft:heartbeat", 1.0F, 1.0F);
+        if (!worldObj.isRemote) {
+            TCPlayerCapabilities capabilities = TCPlayerCapabilities.get(player);
+            capabilities.protolimbs++;
+            capabilities.sync();
+            player.worldObj.playSoundAtEntity(player, "thaumcraft:craftfail", 1.0F, 1.0F);
+            if (capabilities.protolimbs == 6) {
+                if (!ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "SOLIDVOID")) {
+                    Thaumcraft.proxy.getResearchManager().completeResearch(player, "SOLIDVOID");
+                    PacketHandler.INSTANCE.sendTo(new PacketResearchComplete("SOLIDVOID"), (EntityPlayerMP) player);
+                    player.worldObj.playSoundAtEntity(player, "thaumcraft:heartbeat", 1.0F, 1.0F);
+                }
             }
+            this.setDead();
+        } else {
+            Thaumcraft.proxy.burst(this.worldObj, this.posX, this.posY, this.posZ, 2.0F);
         }
-        Thaumcraft.proxy.burst(this.worldObj, this.posX, this.posY, this.posZ, 2.0F);
-        this.playSound("thaumcraft:craftfail", 1.0F, 1.0F);
-        this.setDead();
     }
 
     public byte getType() {
