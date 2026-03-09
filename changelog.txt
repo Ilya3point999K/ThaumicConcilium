@@ -1,0 +1,51 @@
+- !!!BREAKING, READ BEFORE UPDATING!!!
+  -  Config values for mob replacement and rift spawn chances are now defined in a sane way (lesser number - lesser chance). Reverse them in your configs accordingly.
+
+- NEW:
+  - Thaumic Concilium:
+    - Remains of Nether Explorers can now be found in the lava lakes of the Nether.
+  - Witchery:
+    - Burned Witches can be found flying in the Nether.
+    - Burning Sites can be found in villages.
+      - Blood Magic:
+        - Chorts can be found galloping in the Nether.
+  - Thaumic Dyes:
+    - Crimson Paladins may spawn with Crimson Paladin Helm.
+    - Crimson Cult' avanposts, guarded by Crimson Archers.
+    - Crimson Rangers now roam the world, looking for eldritch secrets.
+  - Botania & Alfheim:
+    - Remains of Withered Botanists can now be found in the Overworld and Alfheim.
+  - Ars Magica 2 & Tainted Magic:
+    - Crimson Raid spell component can now be learned.
+  - Thaumic Horizons & Tainted Magic:
+    - Method to improve capabilities of ethereal state.
+  - Gadomancy:
+    - Alfheim:
+      - Tinctura effect for Aura Pylon.
+    - Avaritia:
+      - Terminus effect for Aura Pylon. 
+
+- FIXES:
+  - Fixed mob spawn with biome adding modifications (now configurable).
+  - Fixed Rift Gem teleportation to/from End.
+  - Pontifex Robe now can be dyed.
+  - Added hints on traded Thaumaturge's researches and on researches dropped from Mad Thaumaturges.
+  - Learning Curses from Crimson Cult research now automatically gives Witchery knowledge as well. Ask admin to type /concilium witcheryRepair Player if it doesn't.
+  - Vengeful Golem now actually dings with a bell.
+  - Vengeful Golem now can't affect player wearing Earmuffs from Witchery.
+  - Vengeful Golem now only attacks those who he can see.
+  - Void Reality blocks can no longer be exploded or replaced.
+  - Vis Conductor focus can now be enchanted with Potency, that speeds up consuming vis from Destabilized Crystal Clusters. 
+  - Quicksilver Elemental now applies non-contagious version of Vis Exhaust.
+  - Quicksilver Elemental now becomes vulnerable when under slowness effect. Removed "Quicksilver immortality" config option.
+  - Tight Belt now updates only once in 3 seconds.
+  - Crimson Pontifex' AoE lifesteal attack now causes mob damage instead of magic damage.
+  - Added warp to some researches.
+  - Dissolved now moves slower.
+  - Decreased movement speed and attack power of Paranoid Warriors. Changed damage divisors for shadow/void/thaumium variants from 25/20/15 to 10/5/3.5, improved their AI a bit.
+  - Default mob spawn chances are lowered a bit.
+  - Lowered Alive Gibs' damage.
+  - Changed default special key for Pontifex Robe from H to L.
+  - Bottle Of Clear Water now extinguishes blocks of fire as well.
+  - Burdening Amulet infusion recipe no longer requires Sensus in infusion process.
+  - Maybe something else I forgor to record.
