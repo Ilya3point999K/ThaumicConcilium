@@ -1,3 +1,12 @@
+# Thaumic Concilium 1.1.1
+- FIXES:
+  - Empty NBT tag no longer applied to dropped blocks and items.
+  - Added black list support for Sloppy Alchemist and Burned Witch.
+  - Correct handling of missing required mods instead of crash.
+  - Explicit floor generation for Burning Site.
+  - Crimson Avanpost' chest is now a legit loot table, modify "ThaumicConcilium:cultist_tower" with your loot editor of choice.
+
+# Thaumic Concilium 1.1.0
 - !!!BREAKING, READ BEFORE UPDATING!!!
   -  Config values for mob replacement and rift spawn chances are now defined in a sane way (lesser number - lesser chance). Reverse them in your configs accordingly.
 

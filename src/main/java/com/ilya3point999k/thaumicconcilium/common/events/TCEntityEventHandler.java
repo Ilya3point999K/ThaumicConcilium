@@ -182,7 +182,7 @@ public class TCEntityEventHandler {
     public void on(ItemTooltipEvent event) {
         if (event.itemStack == null) return;
 
-        if (ItemNBTHelper.verifyExistance(event.itemStack, ItemResource.TAG_MEMBRANE)){
+        if (event.itemStack.hasTagCompound() && event.itemStack.getTagCompound().hasKey(ItemResource.TAG_MEMBRANE)){
             event.toolTip.add(StatCollector.translateToLocal("tc.tooltip.nether_membrane"));
         }
         if (event.itemStack.getItem() instanceof ItemWandCasting) {
@@ -413,7 +413,7 @@ public class TCEntityEventHandler {
                 ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
                 if (stack == null) return;
                 if (stack.stackSize < 1) return;
-                if (ItemNBTHelper.getBoolean(stack, ItemResource.TAG_MEMBRANE, false)) {
+                if (stack.hasTagCompound() && stack.getTagCompound().hasKey(ItemResource.TAG_MEMBRANE)) {
                     EntityItemFireResistant f = new EntityItemFireResistant(event.world, entityItem.posX, entityItem.posY, entityItem.posZ, stack);
                     f.delayBeforeCanPickup = 40;
                     f.motionX = entityItem.motionX;

@@ -67,6 +67,8 @@ public class TCConfig {
     public static int[] vengefulGolemBiomeBlacklist;
     public static int[] crimsonRangerBiomeBlacklist;
     public static int[] witheredBotanistBiomeBlacklist;
+    public static int[] sloppyAlchemistBiomeBlacklist;
+    public static int[] burnedWitchBiomeBlacklist;
 
     public static int crimsonRaidID;
 
@@ -127,8 +129,10 @@ public class TCConfig {
             biomes = conf.getString("crimsonRangerBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
             crimsonRangerBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
 
-            biomes = conf.getString("witheredBotanistBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
-            witheredBotanistBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("sloppyAlchemistBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            sloppyAlchemistBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
+            biomes = conf.getString("burnedWitchBiomeBlacklist","mobs", "", "Comma separated IDs of biomes where spawn is not allowed");
+            burnedWitchBiomeBlacklist = biomes.isEmpty() ? null : Arrays.stream(biomes.split(",")).mapToInt(Integer::parseInt).toArray();
 
             madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
             crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");

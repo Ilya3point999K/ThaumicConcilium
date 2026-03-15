@@ -13,7 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ThaumicConcilium.MODID, name = ThaumicConcilium.NAME, version = ThaumicConcilium.VERSION, dependencies = "after:Thaumcraft;after:ForbiddenMagic;after:ThaumicTinkerer;after:gadomancy;after:thaumicbases;after:Automagy;after:TaintedMagic;after:ThaumicHorizons;after:witchery;after:arsmagica2;after:BloodArsenal;after:alfheim;after:Avaritia")
+@Mod(modid = ThaumicConcilium.MODID, name = ThaumicConcilium.NAME, version = ThaumicConcilium.VERSION, dependencies = "required-after:Thaumcraft;required-after:ForbiddenMagic;required-after:ThaumicTinkerer;after:gadomancy;after:thaumicbases;after:Automagy;after:TaintedMagic;after:ThaumicHorizons;after:witchery;after:arsmagica2;after:BloodArsenal;after:alfheim;after:Avaritia")
 public class ThaumicConcilium
 {
     public static final String MODID = "ThaumicConcilium";

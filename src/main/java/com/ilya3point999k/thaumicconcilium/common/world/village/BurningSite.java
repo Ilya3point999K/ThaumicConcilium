@@ -75,6 +75,12 @@ public class BurningSite extends StructureVillagePieces.Village {
                 Blocks.gravel,
                 Blocks.gravel,
                 false);
+        this.fillWithBlocks(world, box,
+                0, -1, 0,
+                8, -1, 8,
+                Blocks.dirt,
+                Blocks.dirt,
+                false);
 
         for (int x = 3; x <= 5; x++) {
             for (int z = 3; z <= 5; z++) {

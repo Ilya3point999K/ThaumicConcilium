@@ -23,6 +23,7 @@ import fox.spiteful.forbidden.DarkAspects;
 import fox.spiteful.forbidden.compat.Compat;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -209,9 +210,9 @@ public class TCEntityRegistry {
 			EntityRegistry.addSpawn(WitheredBotanist.class, TCConfig.witheredBotanistSpawnChance, 1, 1, EnumCreatureType.creature, (BiomeGenBase[]) Arrays.stream(BiomeGenBase.getBiomeGenArray()).filter(x -> x != null && (TCConfig.witheredBotanistBiomeBlacklist == null || Arrays.stream(TCConfig.witheredBotanistBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
 		}
 
-		if (Integration.witchery){
-			EntityRegistry.addSpawn(SloppyAlchemist.class, TCConfig.sloppyAlchemistSpawnChance, 1, 1, EnumCreatureType.monster, BiomeGenBase.hell);
-			EntityRegistry.addSpawn(BurnedWitch.class, TCConfig.burnedWitchSpawnChance, 1, 1, EnumCreatureType.monster, BiomeGenBase.hell);
+		if (Integration.witchery && Compat.bm){
+			EntityRegistry.addSpawn(SloppyAlchemist.class, TCConfig.sloppyAlchemistSpawnChance, 1, 1, EnumCreatureType.monster, Arrays.stream(BiomeDictionary.getBiomesForType(BiomeDictionary.Type.NETHER)).filter(x -> x != null && (TCConfig.sloppyAlchemistBiomeBlacklist == null || Arrays.stream(TCConfig.sloppyAlchemistBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
+			EntityRegistry.addSpawn(BurnedWitch.class, TCConfig.burnedWitchSpawnChance, 1, 1, EnumCreatureType.monster, Arrays.stream(BiomeDictionary.getBiomesForType(BiomeDictionary.Type.NETHER)).filter(x -> x != null && (TCConfig.burnedWitchBiomeBlacklist == null || Arrays.stream(TCConfig.burnedWitchBiomeBlacklist).noneMatch(y -> y == x.biomeID))).toArray(BiomeGenBase[]::new));
 		}
 
 	}

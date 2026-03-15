@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.world;
 
+import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.CrimsonArcher;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -7,8 +8,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ChestGenHooks;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.tiles.TileBanner;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 public class CultistTowerWorldGen extends WorldGenerator {
+    public static final String CULTIST_TOWER_LOOT = ThaumicConcilium.MODID+":cultist_tower";
 
     public static final List<Block> validTerrainList = new ArrayList<Block>(){{
         add(Blocks.dirt);
@@ -201,24 +205,14 @@ public class CultistTowerWorldGen extends WorldGenerator {
 
             world.setBlock(x + 5, y + 10, z - 2, Blocks.chest);
             TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 5, y + 10, z - 2);
-                ItemStack[] lootTable = new ItemStack[]{
-                        new ItemStack(ConfigItems.itemNugget, random.nextInt(3) + 1, 7),
-                        new ItemStack(ConfigItems.itemEldritchObject, 1, 1),
-                        new ItemStack(Items.bow),
-                        new ItemStack(Items.arrow, random.nextInt(16) + 1),
-                        new ItemStack(ConfigItems.itemTripleMeatTreat, random.nextInt(3) + 1),
-                        new ItemStack(ConfigItems.itemResource, random.nextInt(3) + 1, 9)
-                };
+            ChestGenHooks info = ChestGenHooks.getInfo(CULTIST_TOWER_LOOT);
 
-                int itemsToAdd = random.nextInt(8) + 2;
-                for (int i = 0; i < itemsToAdd; i++) {
-                    int slot = random.nextInt(chest.getSizeInventory());
-                    ItemStack loot = lootTable[random.nextInt(lootTable.length)].copy();
-
-                    if (chest.getStackInSlot(slot) == null) {
-                        chest.setInventorySlotContents(slot, loot);
-                    }
-                }
+            WeightedRandomChestContent.generateChestContents(
+                    world.rand,
+                    info.getItems(world.rand),
+                    chest,
+                    info.getCount(world.rand)
+            );
 
             CrimsonArcher archer = new CrimsonArcher(world);
             archer.func_110163_bv();

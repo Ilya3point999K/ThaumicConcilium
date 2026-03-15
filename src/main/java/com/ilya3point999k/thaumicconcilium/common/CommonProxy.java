@@ -10,6 +10,7 @@ import com.ilya3point999k.thaumicconcilium.common.items.wands.foci.TCFociUpgrade
 import com.ilya3point999k.thaumicconcilium.common.network.TCPacketHandler;
 import com.ilya3point999k.thaumicconcilium.common.registry.*;
 import com.ilya3point999k.thaumicconcilium.common.tiles.LithographerTile;
+import com.ilya3point999k.thaumicconcilium.common.world.CultistTowerWorldGen;
 import com.ilya3point999k.thaumicconcilium.common.world.ThaumicConciliumWorldGen;
 import com.ilya3point999k.thaumicconcilium.common.world.village.BurningSite;
 import com.ilya3point999k.thaumicconcilium.common.world.village.BurningSiteHandler;
@@ -23,10 +24,15 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
+import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.entities.golems.ContainerGolem;
 import thaumcraft.common.entities.golems.EntityGolemBase;
 
@@ -42,12 +48,12 @@ public class CommonProxy implements IGuiHandler {
 		TCEntityRegistry.init();
 		TCConfig.configurate(event.getSuggestedConfigurationFile());
 		TCPacketHandler.init();
-
 		GameRegistry.registerWorldGenerator(new ThaumicConciliumWorldGen(), 0);
 	}
 
 	public void init(FMLInitializationEvent event) {
 		Integration.init();
+
 		TCEntityEventHandler entityEventHandler = new TCEntityEventHandler();
 		MinecraftForge.EVENT_BUS.register(entityEventHandler);
 		FMLCommonHandler.instance().bus().register(entityEventHandler);
@@ -56,6 +62,44 @@ public class CommonProxy implements IGuiHandler {
 			VillagerRegistry.instance().registerVillageCreationHandler(new BurningSiteHandler());
 			MapGenStructureIO.func_143031_a(BurningSite.class, "BurningSite");
 		}
+		if (Integration.dyes){
+			ChestGenHooks chest = ChestGenHooks.getInfo(CultistTowerWorldGen.CULTIST_TOWER_LOOT);
+
+			chest.setMin(2);
+			chest.setMax(8);
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(ConfigItems.itemNugget, 1, 7),
+					1, 3,
+					10));
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(ConfigItems.itemEldritchObject, 1, 1),
+					1, 1,
+					6));
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(Items.bow),
+					1, 1,
+					8));
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(Items.arrow),
+					1, 16,
+					15));
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(ConfigItems.itemTripleMeatTreat),
+					1, 3,
+					10));
+
+			chest.addItem(new WeightedRandomChestContent(
+					new ItemStack(ConfigItems.itemResource, 1, 9),
+					1, 3,
+					12));
+
+		}
+
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
