@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.entities.mobs;
 
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.ThaumicConcilium;
 import com.ilya3point999k.thaumicconcilium.common.entities.ai.SamuraiAttackAI;
 import com.ilya3point999k.thaumicconcilium.common.entities.mobs.thaumaturge.Thaumaturge;
@@ -51,7 +52,21 @@ public class Samurai extends EntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(13, new Byte((byte) rand.nextInt(3)));
+        int total =
+                TCConfig.thaumicParanoidWarriorSpawnWeight +
+                TCConfig.voidParanoidWarriorSpawnWeight +
+                TCConfig.shadowParanoidWarriorSpawnWeight;
+
+        int randomValue = rand.nextInt(total);
+        int result = 0;
+        if (randomValue < TCConfig.thaumicParanoidWarriorSpawnWeight) {
+            result = 0;
+        } else if (randomValue < TCConfig.thaumicParanoidWarriorSpawnWeight + TCConfig.voidParanoidWarriorSpawnWeight) {
+            result = 1;
+        } else {
+            result = 2;
+        }
+        this.dataWatcher.addObject(13, new Byte((byte) result));
         this.dataWatcher.addObject(14, new Short((short) 0));
     }
 

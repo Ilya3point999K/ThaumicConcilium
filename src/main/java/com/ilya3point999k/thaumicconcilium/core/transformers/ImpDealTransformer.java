@@ -21,7 +21,7 @@ public class ImpDealTransformer extends SubTransformer {
         MethodNode mn = AsmHelper.getMethodNodeByDescriptor(
                 node,
                 "interact",
-                "interact",
+                "func_70085_c",
                 "(Lnet/minecraft/entity/player/EntityPlayer;)Z"
         );
 

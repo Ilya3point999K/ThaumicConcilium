@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
@@ -49,6 +50,10 @@ public class TCConfig {
     public static int madThaumaturgeReplacesBrainyZombieChance;
     public static int crimsonPaladinReplacesCultistWarriorChance;
 
+    public static int thaumicParanoidWarriorSpawnWeight;
+    public static int voidParanoidWarriorSpawnWeight;
+    public static int shadowParanoidWarriorSpawnWeight;
+
     public static boolean generateCrimsonAvanposts;
     public static boolean generateBurningSites;
     public static int crimsonAvanpostGenChance;
@@ -69,6 +74,9 @@ public class TCConfig {
     public static int[] witheredBotanistBiomeBlacklist;
     public static int[] sloppyAlchemistBiomeBlacklist;
     public static int[] burnedWitchBiomeBlacklist;
+
+    public static Block hexCentralBlock;
+    public static int hexCentralMeta;
 
     public static int crimsonRaidID;
 
@@ -137,6 +145,10 @@ public class TCConfig {
             madThaumaturgeReplacesBrainyZombieChance = conf.getInt("madThaumaturgeReplacesBrainyZombieChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
             crimsonPaladinReplacesCultistWarriorChance = conf.getInt("crimsonPaladinReplacesCultistWarriorChance", "mobs", 20, 0, 100, "0 - never, 100 - always.");
 
+            thaumicParanoidWarriorSpawnWeight = conf.getInt("thaumicParanoidWarriorSpawnWeight", "mobs", 50, 0, 100, "Weight for spawn of thaumic warrior");
+            voidParanoidWarriorSpawnWeight = conf.getInt("voidParanoidWarriorSpawnWeight", "mobs", 40, 0, 100, "Weight for spawn of void warrior");
+            shadowParanoidWarriorSpawnWeight = conf.getInt("shadowParanoidWarriorSpawnWeight", "mobs", 10, 0, 100, "Weight for spawn of shadow warrior");
+
             generateCrimsonAvanposts = conf.getBoolean("generateCrimsonAvanposts", "world", true, "Generate Crimson Avanposts in the world.");
             generateBurningSites = conf.getBoolean("generateBurningSites", "world", true, "Generate Burning Sites in villages.");
             crimsonAvanpostGenChance = conf.getInt("crimsonAvanpostGenChance", "world", 300, 0, Integer.MAX_VALUE, "Chance to generate Crimson Avanpost in the world. The number is approximately: \"generate 1 avanpost every N chunks\"");
@@ -146,6 +158,13 @@ public class TCConfig {
             impPactTime = conf.getInt("impPactTime", "balance", 72000, 0, Integer.MAX_VALUE, "Amount of ticks since last deal with Witchery' Flame Imp, during which Chorts wont attack player");
 
             causalBouillonID = conf.get("causalBouillonID", "dim", 33).getInt();
+
+            String configString = conf.getString("hexCentralBlock", "optional", "minecraft:bedrock:0", "Block used as central in Hex of Predictability structure");
+            String[] parts = configString.split(":");
+            String blockName = parts[0] + ":" + parts[1];
+            hexCentralMeta = Integer.parseInt(parts[2]);
+
+            hexCentralBlock = Block.getBlockFromName(blockName);
 
             crimsonRaidID = conf.get("crimsonRaidID", "am2", 555).getInt();
         } catch (Exception e){

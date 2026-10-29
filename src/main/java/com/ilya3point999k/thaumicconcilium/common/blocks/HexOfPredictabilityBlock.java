@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.blocks;
 
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.registry.TCBlockRegistry;
 import com.ilya3point999k.thaumicconcilium.common.tiles.HexOfPredictabilityTile;
 import cpw.mods.fml.relauncher.Side;
@@ -94,7 +95,7 @@ public class HexOfPredictabilityBlock extends Block implements ITileEntityProvid
         TileEntity tile = w.getTileEntity(x, y, z);
         if (tile instanceof HexOfPredictabilityTile) {
             if (!w.isRemote && ((HexOfPredictabilityTile) tile).isMaster) {
-                w.setBlock(x, y, z, Blocks.bedrock);
+                w.setBlock(x, y, z, TCConfig.hexCentralBlock, TCConfig.hexCentralMeta, 3);
             }
         }
 

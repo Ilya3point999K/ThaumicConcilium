@@ -1,5 +1,6 @@
 package com.ilya3point999k.thaumicconcilium.common.events;
 
+import com.ilya3point999k.thaumicconcilium.common.TCConfig;
 import com.ilya3point999k.thaumicconcilium.common.blocks.HexOfPredictabilityBlock;
 import com.ilya3point999k.thaumicconcilium.common.entities.other.MaterialPeeler;
 import com.ilya3point999k.thaumicconcilium.common.entities.other.RiftEntity;
@@ -29,7 +30,7 @@ public class WandHandler {
     public static void handleWandInteract(World world, int x, int y, int z, EntityPlayer player, ItemStack i) {
         ItemWandCasting wand = (ItemWandCasting) i.getItem();
         if (!world.isRemote){
-            if (world.getBlock(x, y, z) == Blocks.bedrock){
+            if (world.getBlock(x, y, z) == TCConfig.hexCentralBlock && world.getBlockMetadata(x, y, z) == TCConfig.hexCentralMeta){
                 if (!ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "HEXOFPREDICTABILITY") || !HexOfPredictabilityBlock.checkStructure(world, x, y, z) || !wand.consumeAllVisCrafting(i, player, (new AspectList()).add(Aspect.ORDER, 100).add(Aspect.EARTH, 100), true)) return;
                 for (int xx = -1; xx <= 1; ++xx) {
                     for (int zz = -1; zz <= 1; ++zz) {

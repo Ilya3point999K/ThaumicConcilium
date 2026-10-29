@@ -204,7 +204,7 @@ public class BurnedWitch extends EntityFlying implements IMob {
     }
 
     private void throwPotion(ItemStack potion){
-        EntityBrew brew = new EntityBrew(worldObj, this, potion, false);
+        EntityBrew brew = new EntityBrew(worldObj, this, potion.copy(), false);
         double bdx = this.targetedEntity.posX - this.posX;
         double bdz = this.targetedEntity.posZ - this.posZ;
         double bdy = this.targetedEntity.posY + this.targetedEntity.getEyeHeight() - 1.1D - brew.posY;
@@ -518,9 +518,7 @@ public class BurnedWitch extends EntityFlying implements IMob {
         list.appendTag(itemtag);
 
         itemtag = new NBTTagCompound();
-        //new ItemStack(Witchery.Items.GENERIC, 1, 111).writeToNBT(itemtag);
         new ItemStack(Witchery.Items.GENERIC, 1, 24).writeToNBT(itemtag);
-        //new ItemStack(Items.gunpowder).writeToNBT(itemtag);
         list.appendTag(itemtag);
         tag.setTag("Items", list);
 
@@ -566,7 +564,6 @@ public class BurnedWitch extends EntityFlying implements IMob {
         new ItemStack(Witchery.Items.GENERIC, 1, 11).writeToNBT(itemtag);
         list.appendTag(itemtag);
 
-        itemtag = new NBTTagCompound();
         itemtag = new NBTTagCompound();
         new ItemStack(Witchery.Blocks.BRAMBLE, 1, 1).writeToNBT(itemtag);
         list.appendTag(itemtag);
@@ -615,7 +612,6 @@ public class BurnedWitch extends EntityFlying implements IMob {
         new ItemStack(Items.gunpowder).writeToNBT(itemtag);
         list.appendTag(itemtag);
 
-        list.appendTag(itemtag);
         tag.setTag("Items", list);
 
         brewIllFitting.setTagCompound(tag);
